@@ -8,23 +8,36 @@ import { ref } from 'vue';
 let colorDay = ref('.neutral');
 let count = 0;
 
-function toggleColor() {
+let week = ref({
+  monday: {
+    state: 'neutral'
+  },
+  tuesday: {
+    state: 'neutral'
+  },
+  wednesday: {
+    state: 'neutral'
+  },
+  thursday: {
+    state: 'neutral'
+  },
+  friday: {
+    state: 'neutral'
+  },
+  saturday: {
+    state: 'parent1'
+  },
+  sunday: {
+    state: 'parent2'
+  }, 
+});
 
-  let colors = ['neutral', 'parent1', 'parent2'];
 
-  function cycleArray(){
-    let index = count % colors.length;
-    console.log("index " + index);
-    colorDay.value = colors[index];
-
-    count++;
-
-    console.log(colorDay.value);
-    console.log("count"+ count);
-  }
-  cycleArray();
+let updateDayState = (day) => {
+  console.log(day.state+"sdf");
 };
 
+//listen to la valeur du day
 
 </script>
 
@@ -32,9 +45,15 @@ function toggleColor() {
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
   <h1>Calendrier</h1>
-    <template v-for="(day, index) in 31">
-      <Day :day-number="index+1"/>
-    </template>
+    <div class="month">
+      <template v-for="(day, index) in week">
+        <div @click="updateDayState(day)">
+          <Day :day-number="index" />
+        </div>
+      </template>
+    </div>
+
+    <p>{{week.friday.state}}</p>
 
 </template>
 
@@ -48,6 +67,10 @@ function toggleColor() {
   margin-top: 60px;
 }
 
+.month {
+  display: flex;
+  flex-direction: row;
+}
 
 
 </style>

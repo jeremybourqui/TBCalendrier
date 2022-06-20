@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 
 defineProps({
-  dayNumber: Number
+  dayNumber: String
 })
 
 let colorDay = ref('.neutral');
@@ -14,13 +14,15 @@ function toggleColor() {
 
   function cycleArray(){
     let index = count % colors.length;
-    console.log("index " + index);
+    // console.log("index " + index);
     colorDay.value = colors[index];
+
+    //emit la valeur
 
     count++;
 
-    console.log(colorDay.value);
-    console.log("count"+ count);
+    // console.log(colorDay.value);
+    // console.log("count"+ count);
   }
   cycleArray();
 };
@@ -30,7 +32,7 @@ function toggleColor() {
 
 <template>
  
-    <div :class="colorDay" class="day" @click="toggleColor">
+    <div :class="colorDay" class="day" @click="toggleColor()">
       <p>{{ dayNumber }}</p>
    </div>
 
