@@ -2,6 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
+import Day from './components/Day.vue'
 import { ref } from 'vue';
 
 let colorDay = ref('.neutral');
@@ -31,13 +32,10 @@ function toggleColor() {
   <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
   <h1>Calendrier</h1>
+    <template v-for="(day, index) in 31">
+      <Day :day-number="index+1"/>
+    </template>
 
-
-  <div v-for="day in 31" >
-    <div :class="colorDay" class="day" @click="toggleColor">
-      <p>1</p>
-   </div>
-  </div>
 </template>
 
 <style>
@@ -50,23 +48,6 @@ function toggleColor() {
   margin-top: 60px;
 }
 
-.day {
-  height: 100px;
-  width: 100px;
-  border: 1px solid black;
-}
-
-.neutral {
-  background-color: white;
-}
-
-.parent1 {
-  background-color: green;
-}
-
-.parent2 {
-  background-color: blue;
-}
 
 
 </style>
