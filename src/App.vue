@@ -2,11 +2,42 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue';
+
+let colorDay = ref('.neutral');
+let count = 0;
+
+function toggleColor() {
+
+  let colors = ['neutral', 'parent1', 'parent2'];
+
+  function cycleArray(){
+    let index = count % colors.length;
+    console.log("index " + index);
+    colorDay.value = colors[index];
+
+    count++;
+
+    console.log(colorDay.value);
+    console.log("count"+ count);
+  }
+  cycleArray();
+};
+
+
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+  <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
+  <h1>Calendrier</h1>
+
+
+  <div v-for="day in 31" >
+    <div :class="colorDay" class="day" @click="toggleColor">
+      <p>1</p>
+   </div>
+  </div>
 </template>
 
 <style>
@@ -18,4 +49,24 @@ import HelloWorld from './components/HelloWorld.vue'
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.day {
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+.neutral {
+  background-color: white;
+}
+
+.parent1 {
+  background-color: green;
+}
+
+.parent2 {
+  background-color: blue;
+}
+
+
 </style>
