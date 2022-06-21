@@ -32,43 +32,67 @@ let week = {
   }, 
 };
 
-// let dayClicked = ref();
-
-// let updateDayClicked = (index) => {
-//   dayClicked = index;
-//   console.log(index);
-// };
+let neutralDay = ref();
+let parent1Day = ref();
+let parent2Day = ref();
 
 let updateDayState = (newState, dayClicked) => {
   let day = dayClicked.value;
   
-  console.log(newState +""+ dayClicked.value);
-  console.log(week[day]);
+  console.log(newState +" "+ dayClicked.value);
+  // console.log(week[day]);
   week[day].state = newState;
 
+  watchDayState();
 
 };
 
-// let log = (n) => console.log('testevent : '+ n);
-//listen to la valeur du day
+let watchDayState = () => {
+
+    let countValuesInObj = function(obj, value) {
+      let count = 0;
+      for ( const property in obj ) {
+     
+        if( typeof obj[property] === 'object') {
+          count = count + countValuesInObj(obj[property], value);
+        } 
+     
+        if(obj[property] === value ) {
+          return 1; // count = count + 1; // count++;
+        }
+      }
+      return count;
+    };
+
+    console.log(countValuesInObj(week, 'neutral'));
+    neutralDay = countValuesInObj(week, 'neutral');
+
+    console.log(countValuesInObj(week, 'parent1')); 
+    parent1Day = countValuesInObj(week, 'parent1');
+
+    console.log(countValuesInObj(week, 'parent2'));
+    parent2Day = countValuesInObj(week, 'parent2');
+}
+
 
 </script>
 
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <HelloWorld msg="Hello Vue 3 + Vite" /> -->
+
   <h1>Calendrier</h1>
     <div class="month">
       <template v-for="(day, index) in week">
-        <!-- <div @click=" updateDayClicked(index)"> -->
         <div>
           <Day :day-number="index" @state-change="updateDayState"/>
         </div>
       </template>
     </div>
 
+    <div>
+      <p> {{ neutralDay }}</p>
+    </div>
 
-    <p>{{week.friday.state}}</p>
+
 
 </template>
 
