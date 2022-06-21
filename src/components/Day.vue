@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, toRefs } from 'vue';
 
-defineProps({
+const props = defineProps({
   dayNumber: String
-})
+});
+
+const { dayNumber } = toRefs(props);
 
 let colorDay = ref('.neutral');
 let count = 0;

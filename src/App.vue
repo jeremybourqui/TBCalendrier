@@ -8,7 +8,7 @@ import { ref } from 'vue';
 let colorDay = ref('.neutral');
 let count = 0;
 
-let week = ref({
+let week = {
   monday: {
     state: 'neutral'
   },
@@ -30,7 +30,7 @@ let week = ref({
   sunday: {
     state: 'parent2'
   }, 
-});
+};
 
 // let dayClicked = ref();
 
@@ -39,11 +39,13 @@ let week = ref({
 //   console.log(index);
 // };
 
-let updateDayState = (day, dayClicked) => {
-  console.log(day +""+ dayClicked);
-  // console.log(dayClicked);
+let updateDayState = (newState, dayClicked) => {
+  let day = dayClicked.value;
+  
+  console.log(newState +""+ dayClicked.value);
+  console.log(week[day]);
+  week[day].state = newState;
 
-  // week.
 
 };
 
