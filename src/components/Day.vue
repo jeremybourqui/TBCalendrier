@@ -8,9 +8,15 @@ defineProps({
 let colorDay = ref('.neutral');
 let count = 0;
 
+const emit = defineEmits(['stateChange']);
+
+// function someEvent() {
+//   emit('submit')
+// }
+
 function toggleColor() {
 
-  let colors = ['neutral', 'parent1', 'parent2'];
+  let colors = ['parent1', 'parent2', 'neutral'];
 
   function cycleArray(){
     let index = count % colors.length;
@@ -18,6 +24,7 @@ function toggleColor() {
     colorDay.value = colors[index];
 
     //emit la valeur
+    emit('stateChange', colors[index], dayNumber);
 
     count++;
 
@@ -26,6 +33,7 @@ function toggleColor() {
   }
   cycleArray();
 };
+
 
 
 </script>

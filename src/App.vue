@@ -32,11 +32,22 @@ let week = ref({
   }, 
 });
 
+// let dayClicked = ref();
 
-let updateDayState = (day) => {
-  console.log(day.state+"sdf");
+// let updateDayClicked = (index) => {
+//   dayClicked = index;
+//   console.log(index);
+// };
+
+let updateDayState = (day, dayClicked) => {
+  console.log(day +""+ dayClicked);
+  // console.log(dayClicked);
+
+  // week.
+
 };
 
+// let log = (n) => console.log('testevent : '+ n);
 //listen to la valeur du day
 
 </script>
@@ -47,11 +58,13 @@ let updateDayState = (day) => {
   <h1>Calendrier</h1>
     <div class="month">
       <template v-for="(day, index) in week">
-        <div @click="updateDayState(day)">
-          <Day :day-number="index" />
+        <!-- <div @click=" updateDayClicked(index)"> -->
+        <div>
+          <Day :day-number="index" @state-change="updateDayState"/>
         </div>
       </template>
     </div>
+
 
     <p>{{week.friday.state}}</p>
 
