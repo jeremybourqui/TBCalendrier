@@ -49,31 +49,34 @@ let updateDayState = (newState, dayClicked) => {
 
 let watchDayState = () => {
 
-    let countValuesInObj = function(obj, value) {
-      let count = 0;
-      for ( const property in obj ) {
-     
-        if( typeof obj[property] === 'object') {
-          count = count + countValuesInObj(obj[property], value);
-        } 
-     
-        if(obj[property] === value ) {
-          return 1; // count = count + 1; // count++;
-        }
-      }
-      return count;
+    let countValuesInObj = (obj, value) => {
+    let count = 0;
+    for (const property in obj) {
+
+    if (typeof obj[property] === 'object') {
+    count = count + countValuesInObj(obj[property], value);
+    }
+
+    if (obj[property] === value) {
+    return 1; // count = count + 1; // count++;
+    }
+    }
+    return count;
     };
 
-    console.log(countValuesInObj(week, 'neutral'));
-    neutralDay = countValuesInObj(week, 'neutral');
+    // console.log(countValuesInObj(week, 'neutral'));
+    neutralDay.value = countValuesInObj(week, 'neutral');
+    console.log(neutralDay);
 
-    console.log(countValuesInObj(week, 'parent1')); 
-    parent1Day = countValuesInObj(week, 'parent1');
+    // console.log(countValuesInObj(week, 'parent1')); 
+    parent1Day.value = countValuesInObj(week, 'parent1');
+    console.log(parent1Day);
 
-    console.log(countValuesInObj(week, 'parent2'));
-    parent2Day = countValuesInObj(week, 'parent2');
+    // console.log(countValuesInObj(week, 'parent2'));
+    parent2Day.value = countValuesInObj(week, 'parent2');
+    console.log(parent2Day);
+
 }
-
 
 </script>
 
@@ -89,7 +92,9 @@ let watchDayState = () => {
     </div>
 
     <div>
-      <p> {{ neutralDay }}</p>
+      <p>Jour non attribué : {{ neutralDay }}</p>
+      <p>Jour parent 1 : {{ parent1Day }}</p>
+      <p>Jour parent 2 : {{ parent2Day }}</p>
     </div>
 
 
