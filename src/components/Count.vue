@@ -34,11 +34,12 @@ defineProps({
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 10px 0 10px 0;
   }
 
   .count-item {
-    width: 20px;
-    height: 10px;
+    width: 15px;
+    height: 30px;
   }
 
   .green {

@@ -165,7 +165,14 @@ let watchDayState = () => {
 <template>
 
   <h1>Calendrier</h1>
-  <button class="print" @click="print()"> Imprimer</button>
+      <div class="header">
+        <p>Jour non attribué : {{ neutralDay }} </p>
+        <p class="parent1"> Jour parent 1 : {{ parent1Day }} </p>
+        <p class="parent2"> Jour parent 2 : {{ parent2Day }} </p>
+        <p> Conflit : {{ conflict }} </p>
+      <button class="print" @click="print()"> Imprimer</button>
+      </div>
+      <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict"/>
     <div class="month">
       <template v-for="(day, index) in week">
         <div>
@@ -174,14 +181,7 @@ let watchDayState = () => {
       </template>
     </div>
 
-    <div>
-      <p>Jour non attribué : {{ neutralDay }}</p>
-      <p>Jour parent 1 : {{ parent1Day }}</p>
-      <p>Jour parent 2 : {{ parent2Day }}</p>
-      <p>Conflit : {{ conflict }}</p>
-    </div>
 
-    <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict"/>
 
 
 
@@ -201,6 +201,20 @@ let watchDayState = () => {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.parent1 {
+  background-color: #26D882;
+}
+
+.parent2 {
+  background-color: #2698D8;
 }
 
 @media print {
