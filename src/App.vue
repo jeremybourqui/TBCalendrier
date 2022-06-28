@@ -4,37 +4,114 @@
 import HelloWorld from './components/HelloWorld.vue'
 import Day from './components/Day.vue'
 import { ref } from 'vue';
+import Count from './components/Count.vue';
 
 let colorDay = ref('.neutral');
 let count = 0;
 
 let week = {
-  monday: {
+  1: {
     state: 'neutral'
   },
-  tuesday: {
+  2: {
     state: 'neutral'
   },
-  wednesday: {
+  3: {
     state: 'neutral'
   },
-  thursday: {
+  4: {
     state: 'neutral'
   },
-  friday: {
+  5: {
     state: 'neutral'
   },
-  saturday: {
-    state: 'parent1'
+  6: {
+    state: 'neutral'
   },
-  sunday: {
-    state: 'parent2'
+  7: {
+    state: 'neutral'
   }, 
+  8: {
+    state: 'neutral'
+  }, 
+  9: {
+    state: 'neutral'
+  },
+  10: {
+    state: 'neutral'
+  },
+  11: {
+    state: 'neutral'
+  },
+  12: {
+    state: 'neutral'
+  },
+  13: {
+    state: 'neutral'
+  },
+  14: {
+    state: 'neutral'
+  },
+  15: {
+    state: 'neutral'
+  },
+  16: {
+    state: 'neutral'
+  },
+  17: {
+    state: 'neutral'
+  },
+  18: {
+    state: 'neutral'
+  },
+  19: {
+    state: 'neutral'
+  },
+  20: {
+    state: 'neutral'
+  },
+  21: {
+    state: 'neutral'
+  },
+  22: {
+    state: 'neutral'
+  },
+  23: {
+    state: 'neutral'
+  },
+  24: {
+    state: 'neutral'
+  },
+  25: {
+    state: 'neutral'
+  },
+  26: {
+    state: 'neutral'
+  },
+  27: {
+    state: 'neutral'
+  },
+  28: {
+    state: 'neutral'
+  },
+  29: {
+    state: 'neutral'
+  },
+  30: {
+    state: 'neutral'
+  },
+  31: {
+    state: 'neutral'
+  },
 };
 
-let neutralDay = ref();
-let parent1Day = ref();
-let parent2Day = ref();
+let neutralDay = ref(31);
+let parent1Day = ref(0);
+let parent2Day = ref(0);
+
+function print() {
+    window.print();
+}
 
 let updateDayState = (newState, dayClicked) => {
   let day = dayClicked.value;
@@ -83,6 +160,7 @@ let watchDayState = () => {
 <template>
 
   <h1>Calendrier</h1>
+  <button class="print" @click="print()"> Inprimer</button>
     <div class="month">
       <template v-for="(day, index) in week">
         <div>
@@ -96,6 +174,8 @@ let watchDayState = () => {
       <p>Jour parent 1 : {{ parent1Day }}</p>
       <p>Jour parent 2 : {{ parent2Day }}</p>
     </div>
+
+    <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day"/>
 
 
 
@@ -114,6 +194,15 @@ let watchDayState = () => {
 .month {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media print {
+
+.print{
+  visibility: hidden;
+}
+
 }
 
 
