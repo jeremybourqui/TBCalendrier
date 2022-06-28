@@ -5,17 +5,21 @@ defineProps({
   neutralDay: Number,
   parent1Day: Number,
   parent2Day: Number,
+  conflict: Number,
 })
 
 </script>
 
 <template>
   <div class="count">
+      <template v-for="(n, i) in parent1Day" :key="i">
+          <div class="count-item green"></div>
+      </template>
         <template v-for="(n, i) in neutralDay" :key="i">
-            <div class="count-item red"></div>
+            <div class="count-item grey"></div>
         </template>
-        <template v-for="(n, i) in parent1Day" :key="i">
-            <div class="count-item black"></div>
+        <template v-for="(n, i) in conflict" :key="i">
+            <div class="count-item red"></div>
         </template>
         <template v-for="(n, i) in parent2Day" :key="i">
             <div class="count-item blue"></div>
@@ -35,20 +39,21 @@ defineProps({
   .count-item {
     width: 20px;
     height: 10px;
-    border-radius: 4px;
-    margin-right: 15px;
   }
 
-  .red {
-    background-color:#da291c;
+  .green {
+    background-color:#26D882;
   }
 
-  .black {
+  .grey {
     background-color:#DADADA;
   }
 
   .blue {
-    background-color: blue;
+    background-color: #2698D8;
+  }
+  .red {
+    background-color: #D82626;
   }
 </style>
 

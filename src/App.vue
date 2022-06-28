@@ -6,8 +6,8 @@ import Day from './components/Day.vue'
 import { ref } from 'vue';
 import Count from './components/Count.vue';
 
-let colorDay = ref('.neutral');
-let count = 0;
+// let colorDay = ref('.neutral');
+// let count = 0;
 
 let week = {
   1: {
@@ -108,6 +108,7 @@ let week = {
 let neutralDay = ref(31);
 let parent1Day = ref(0);
 let parent2Day = ref(0);
+let conflict = ref(0);
 
 function print() {
     window.print();
@@ -153,6 +154,10 @@ let watchDayState = () => {
     parent2Day.value = countValuesInObj(week, 'parent2');
     console.log(parent2Day);
 
+    // console.log(countValuesInObj(week, 'parent2'));
+    conflict.value = countValuesInObj(week, 'conflict');
+    console.log(conflict);
+
 }
 
 </script>
@@ -160,7 +165,7 @@ let watchDayState = () => {
 <template>
 
   <h1>Calendrier</h1>
-  <button class="print" @click="print()"> Inprimer</button>
+  <button class="print" @click="print()"> Imprimer</button>
     <div class="month">
       <template v-for="(day, index) in week">
         <div>
@@ -173,9 +178,10 @@ let watchDayState = () => {
       <p>Jour non attribué : {{ neutralDay }}</p>
       <p>Jour parent 1 : {{ parent1Day }}</p>
       <p>Jour parent 2 : {{ parent2Day }}</p>
+      <p>Conflit : {{ conflict }}</p>
     </div>
 
-    <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day"/>
+    <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict"/>
 
 
 
@@ -198,6 +204,12 @@ let watchDayState = () => {
 }
 
 @media print {
+
+  * {
+        color-adjust: exact!important;  
+        -webkit-print-color-adjust: exact!important; 
+         print-color-adjust: exact!important;
+      }
 
 .print{
   visibility: hidden;

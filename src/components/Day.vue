@@ -18,7 +18,7 @@ const emit = defineEmits(['stateChange']);
 
 function toggleColor() {
 
-  let colors = ['parent1', 'parent2', 'neutral'];
+  let colors = ['parent1', 'parent2', 'conflict', 'neutral'];
 
   function cycleArray(){
     let index = count % colors.length;
@@ -53,17 +53,24 @@ function toggleColor() {
   height: 100px;
   width: 100px;
   border: 1px solid black;
+  background-color: #DADADA;
+
 }
 
 .neutral {
-  background-color: white;
+  background-color: #DADADA;
 }
 
 .parent1 {
-  background-color: green;
+  background-color: #26D882;
 }
 
 .parent2 {
-  background-color: blue;
+  background-color: #2698D8;
 }
+
+.conflict {
+  background-color: #D82626;
+}
+
 </style>
