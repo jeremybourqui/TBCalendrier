@@ -4,102 +4,9 @@
   } from 'vue';
   import Count from './components/Count.vue';
   import DayShortcut from './components/DayShortcut.vue';
+  import { week as month} from './assets/year.js';
 
-  let week = {
-    1: {
-      state: 'neutral'
-    },
-    2: {
-      state: 'neutral'
-    },
-    3: {
-      state: 'neutral'
-    },
-    4: {
-      state: 'neutral'
-    },
-    5: {
-      state: 'neutral'
-    },
-    6: {
-      state: 'neutral'
-    },
-    7: {
-      state: 'neutral'
-    },
-    8: {
-      state: 'neutral'
-    },
-    9: {
-      state: 'neutral'
-    },
-    10: {
-      state: 'neutral'
-    },
-    11: {
-      state: 'neutral'
-    },
-    12: {
-      state: 'neutral'
-    },
-    13: {
-      state: 'neutral'
-    },
-    14: {
-      state: 'neutral'
-    },
-    15: {
-      state: 'neutral'
-    },
-    16: {
-      state: 'neutral'
-    },
-    17: {
-      state: 'neutral'
-    },
-    18: {
-      state: 'neutral'
-    },
-    19: {
-      state: 'neutral'
-    },
-    20: {
-      state: 'neutral'
-    },
-    21: {
-      state: 'neutral'
-    },
-    22: {
-      state: 'neutral'
-    },
-    23: {
-      state: 'neutral'
-    },
-    24: {
-      state: 'neutral'
-    },
-    25: {
-      state: 'neutral'
-    },
-    26: {
-      state: 'neutral'
-    },
-    27: {
-      state: 'neutral'
-    },
-    28: {
-      state: 'neutral'
-    },
-    29: {
-      state: 'neutral'
-    },
-    30: {
-      state: 'neutral'
-    },
-    31: {
-      state: 'neutral'
-    },
-  };
+  let week = month;
 
   let selectedParent = ref(1);
 
@@ -147,6 +54,7 @@
     }
   });
   
+  
 </script>
 <template>
     <div class="header">
@@ -157,6 +65,8 @@
       <button class="print" @click="print()"> Imprimer</button>
     </div>
     <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
+
+  <!-- <template v-for="(month, index) in week"> -->
     <div class="month">
       <template v-for="(day, index) in week">
         <div>
@@ -164,6 +74,7 @@
         </div>
       </template>
     </div>
+  <!-- </template> -->
 </template>
 
 <style>
@@ -196,8 +107,6 @@
   .parent2 {
     background-color: #D82626;
   }
-
-
 
   @media print {
 
