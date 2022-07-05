@@ -1,12 +1,9 @@
 <script setup>
-  // This starter template is using Vue 3 <script setup> SFCs
-  // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-  import HelloWorld from './components/HelloWorld.vue'
-  import Day from './components/Day.vue'
   import {
     ref
   } from 'vue';
   import Count from './components/Count.vue';
+  import DayShortcut from './components/DayShortcut.vue';
 
   let week = {
     1: {
@@ -104,6 +101,9 @@
     },
   };
 
+  let selectedParent = ref(1);
+
+
   let neutralDay = ref(31);
   let parent1Day = ref(0);
   let parent2Day = ref(0);
@@ -115,58 +115,55 @@
 
   let updateDayState = (newState, dayClicked) => {
     let day = dayClicked.value;
-
-    console.log(newState + " " + dayClicked.value);
-    // console.log(week[day]);
     week[day].state = newState;
-
     watchDayState();
-
   };
 
   let watchDayState = () => {
-
     let countValuesInObj = (obj, value) => {
       let count = 0;
       for (const property in obj) {
-
         if (typeof obj[property] === 'object') {
           count = count + countValuesInObj(obj[property], value);
         }
-
         if (obj[property] === value) {
           return 1; // count = count + 1; // count++;
         }
       }
       return count;
     };
-
     neutralDay.value = countValuesInObj(week, 'neutral');
     parent1Day.value = countValuesInObj(week, 'parent1');
     parent2Day.value = countValuesInObj(week, 'parent2');
     conflict.value = countValuesInObj(week, 'conflict');
-
   }
+
+  // listen to keyboard input and update selected parent if its 1 or 2
+  window.addEventListener('keydown', function (e) {
+    if (e.code === 'Digit1') {
+      selectedParent.value = 1;
+    } else if (e.code === 'Digit2') {
+      selectedParent.value = 2;
+    }
+  });
+  
 </script>
-
 <template>
-
-  <div class="header">
-    <p>Jour non attribué : {{ neutralDay }} </p>
-    <p class="parent1"> Jour parent 1 : {{ parent1Day }} </p>
-    <p class="parent2"> Jour parent 2 : {{ parent2Day }} </p>
-    <p> Conflit : {{ conflict }} </p>
-    <button class="print" @click="print()"> Imprimer</button>
-  </div>
-  <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
-  <div class="month">
-    <template v-for="(day, index) in week">
-      <div>
-        <Day :day-number="index" @state-change="updateDayState" />
-      </div>
-    </template>
-  </div>
-
+    <div class="header">
+      <p>Jour non attribué : {{ neutralDay }} </p>
+      <p class="parent1" @click="selectParent(1)"> Jour parent 1 : {{ parent1Day }} </p>
+      <p class="parent2" @click="selectParent(2)"> Jour parent 2 : {{ parent2Day }} </p>
+      <p> Conflit : {{ conflict }} </p>
+      <button class="print" @click="print()"> Imprimer</button>
+    </div>
+    <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
+    <div class="month">
+      <template v-for="(day, index) in week">
+        <div>
+          <DayShortcut :day-number="index" :selected-parent="selectedParent" @state-change="updateDayState" />
+        </div>
+      </template>
+    </div>
 </template>
 
 <style>
@@ -191,13 +188,16 @@
     justify-content: space-evenly;
   }
 
+
   .parent1 {
-    background-color: #26D882;
+    background-color: #2698D8;
   }
 
   .parent2 {
-    background-color: #2698D8;
+    background-color: #D82626;
   }
+
+
 
   @media print {
 
