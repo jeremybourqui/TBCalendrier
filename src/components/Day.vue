@@ -12,26 +12,18 @@ let count = 0;
 
 const emit = defineEmits(['stateChange']);
 
-// function someEvent() {
-//   emit('submit')
-// }
-
 function toggleColor() {
 
   let colors = ['parent1', 'parent2', 'conflict', 'neutral'];
 
   function cycleArray(){
     let index = count % colors.length;
-    // console.log("index " + index);
+
     colorDay.value = colors[index];
 
-    //emit la valeur
     emit('stateChange', colors[index], dayNumber);
 
     count++;
-
-    // console.log(colorDay.value);
-    // console.log("count"+ count);
   }
   cycleArray();
 };
