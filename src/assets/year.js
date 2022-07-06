@@ -598,11 +598,6 @@ export let year = {
             holiday: 'false',
             activity: 'false',
           },
-          31: {
-            state: 'neutral',
-            holiday: 'false',
-            activity: 'false',
-          },
         },
       },
       4: {
@@ -1059,11 +1054,6 @@ export let year = {
             activity: 'false',
           },
           30: {
-            state: 'neutral',
-            holiday: 'false',
-            activity: 'false',
-          },
-          31: {
             state: 'neutral',
             holiday: 'false',
             activity: 'false',
@@ -1528,11 +1518,6 @@ export let year = {
             holiday: 'false',
             activity: 'false',
           },
-          31: {
-            state: 'neutral',
-            holiday: 'false',
-            activity: 'false',
-          },
         },
       },
       9: {
@@ -1834,11 +1819,6 @@ export let year = {
             activity: 'false',
           },
           30: {
-            state: 'neutral',
-            holiday: 'false',
-            activity: 'false',
-          },
-          31: {
             state: 'neutral',
             holiday: 'false',
             activity: 'false',

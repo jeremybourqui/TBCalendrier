@@ -6,8 +6,9 @@
   import DayShortcut from './components/DayShortcut.vue';
   import { year } from './assets/year.js';
 
-  let selectedParent = ref(1);
+  console.log(year);
 
+  let selectedParent = ref(1);
 
   let neutralDay = ref(31);
   let parent1Day = ref(0);
@@ -18,10 +19,11 @@
     window.print();
   }
 
-  let updateDayState = (newState, dayClicked) => {
-    // let day = dayClicked.value;
-    // year[day].state = newState;
-    // watchDayState();
+  let updateDayState = (newState, dayClicked, monthNumber) => {
+    let day = dayClicked.value;
+    let month = monthNumber.value;
+    year.months[month].days[day].state = newState;
+    watchDayState();
   };
 
   let watchDayState = () => {
@@ -67,9 +69,9 @@
   <template v-for="(month, indexMonth) in year.months">
     <div class="month">
       <p> {{ year.months[indexMonth].name }}</p>
-      <template v-for="(day, indexDay) in year.months[0].days">
+      <template v-for="(day, indexDay) in year.months[indexMonth].days">
         <div>
-          <DayShortcut :day-number="indexDay" :selected-parent="selectedParent" @state-change="updateDayState" />
+          <DayShortcut :day-number="indexDay" :month-number="indexMonth" :selected-parent="selectedParent" @state-change="updateDayState" />
         </div>
       </template>
     </div>
