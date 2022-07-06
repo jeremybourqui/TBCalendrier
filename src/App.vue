@@ -4,9 +4,7 @@
   } from 'vue';
   import Count from './components/Count.vue';
   import DayShortcut from './components/DayShortcut.vue';
-  import { week as month} from './assets/year.js';
-
-  let week = month;
+  import { year } from './assets/year.js';
 
   let selectedParent = ref(1);
 
@@ -21,9 +19,9 @@
   }
 
   let updateDayState = (newState, dayClicked) => {
-    let day = dayClicked.value;
-    week[day].state = newState;
-    watchDayState();
+    // let day = dayClicked.value;
+    // year[day].state = newState;
+    // watchDayState();
   };
 
   let watchDayState = () => {
@@ -39,10 +37,10 @@
       }
       return count;
     };
-    neutralDay.value = countValuesInObj(week, 'neutral');
-    parent1Day.value = countValuesInObj(week, 'parent1');
-    parent2Day.value = countValuesInObj(week, 'parent2');
-    conflict.value = countValuesInObj(week, 'conflict');
+    neutralDay.value = countValuesInObj(year, 'neutral');
+    parent1Day.value = countValuesInObj(year, 'parent1');
+    parent2Day.value = countValuesInObj(year, 'parent2');
+    conflict.value = countValuesInObj(year, 'conflict');
   }
 
   // listen to keyboard input and update selected parent if its 1 or 2
@@ -66,15 +64,16 @@
     </div>
     <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
 
-  <!-- <template v-for="(month, index) in week"> -->
+  <template v-for="(month, indexMonth) in year.months">
     <div class="month">
-      <template v-for="(day, index) in week">
+      <p> {{ year.months[indexMonth].name }}</p>
+      <template v-for="(day, indexDay) in year.months[0].days">
         <div>
-          <DayShortcut :day-number="index" :selected-parent="selectedParent" @state-change="updateDayState" />
+          <DayShortcut :day-number="indexDay" :selected-parent="selectedParent" @state-change="updateDayState" />
         </div>
       </template>
     </div>
-  <!-- </template> -->
+  </template>
 </template>
 
 <style>
