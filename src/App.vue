@@ -5,19 +5,21 @@
   import Count from './components/Count.vue';
   import DayShortcut from './components/DayShortcut.vue';
   import { year } from './assets/year.js';
-
-  console.log(year);
+  import { year_fr_enfantine_primaire_co } from './assets/year_fr_enfantine_primaire_co.js';
 
   let selectedParent = ref(1);
+  let selectedYear = ref(year);
+  console.log(selectedYear.value);
 
   let neutralDay = ref(31);
   let parent1Day = ref(0);
   let parent2Day = ref(0);
   let conflict = ref(0);
 
-  function print() {
-    window.print();
-  }
+
+
+  let print = () => window.print();
+  
 
   let updateDayState = (newState, dayClicked, monthNumber) => {
     let day = dayClicked.value;
@@ -45,7 +47,6 @@
     conflict.value = countValuesInObj(year, 'conflict');
   }
 
-  // listen to keyboard input and update selected parent if its 1 or 2
   window.addEventListener('keydown', function (e) {
     if (e.code === 'Digit1') {
       selectedParent.value = 1;
@@ -53,25 +54,27 @@
       selectedParent.value = 2;
     }
   });
-  
-  
 </script>
+
 <template>
     <div class="header">
+      <select v-model="selectedYear">
+        <option :value="year">Aucune</option>
+        <option :value="year_fr_enfantine_primaire_co">Enfantine, primaire, CO</option>
+      </select>
       <p>Jour non attribué : {{ neutralDay }} </p>
       <p class="parent1" @click="selectParent(1)"> Jour parent 1 : {{ parent1Day }} </p>
       <p class="parent2" @click="selectParent(2)"> Jour parent 2 : {{ parent2Day }} </p>
       <p> Conflit : {{ conflict }} </p>
-      <button class="print" @click="print()"> Imprimer</button>
+      <button class="print" @click="print()">Imprimer</button>
     </div>
     <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
-
-  <template v-for="(month, indexMonth) in year.months">
+  <template v-for="(month, indexMonth) in selectedYear.months">
     <div class="month">
-      <p> {{ year.months[indexMonth].name }}</p>
-      <template v-for="(day, indexDay) in year.months[indexMonth].days">
+      <p> {{ selectedYear.months[indexMonth].name }}</p>
+      <template v-for="(day, indexDay) in selectedYear.months[indexMonth].days">
         <div>
-          <DayShortcut :day-number="indexDay" :month-number="indexMonth" :selected-parent="selectedParent" @state-change="updateDayState" />
+          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(indexMonth)" :selected-parent="selectedParent" @state-change="updateDayState" />
         </div>
       </template>
     </div>
@@ -99,7 +102,6 @@
     flex-direction: row;
     justify-content: space-evenly;
   }
-
 
   .parent1 {
     background-color: #2698D8;

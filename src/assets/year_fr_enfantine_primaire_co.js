@@ -1,7 +1,7 @@
-export let year = {
+export let year_fr_enfantine_primaire_co = {
     months: {
       0: {
-        name: 'janvier',
+        name: 'janviertest',
         days: {
           1: {
             state: 'neutral',
@@ -15,27 +15,27 @@ export let year = {
           },
           3: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           4: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           5: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           6: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           7: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           8: {
@@ -290,7 +290,7 @@ export let year = {
           },
           28: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
         },
@@ -300,22 +300,22 @@ export let year = {
         days: {
           1: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           2: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           3: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           4: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           5: {
@@ -530,67 +530,67 @@ export let year = {
           },
           16: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           17: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           18: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           19: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           21: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           22: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           23: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           24: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           25: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           26: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           27: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           28: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           29: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           30: {
@@ -730,7 +730,7 @@ export let year = {
           },
           27: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           28: {
@@ -785,7 +785,7 @@ export let year = {
           },
           6: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           7: {
@@ -960,102 +960,102 @@ export let year = {
           },
           11: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           12: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           13: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           14: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           15: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           16: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           17: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           18: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           19: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           21: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           22: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           23: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           24: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           25: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           26: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           27: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           28: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           29: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           30: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           31: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
         },
@@ -1070,67 +1070,67 @@ export let year = {
           },
           2: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           3: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           4: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           5: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           6: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           7: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           8: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           9: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           10: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           11: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           12: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           13: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           14: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           15: {
@@ -1140,42 +1140,42 @@ export let year = {
           },
           16: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           17: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           18: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           19: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           21: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           22: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           23: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           24: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           25: {
@@ -1450,57 +1450,57 @@ export let year = {
           },
           17: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           18: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           19: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           21: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           22: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           23: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           24: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           25: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           26: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           27: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           28: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           29: {
@@ -1560,7 +1560,7 @@ export let year = {
           },
           8: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           9: {
@@ -1795,32 +1795,32 @@ export let year = {
           },
           26: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           27: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           28: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           29: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           30: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
           31: {
             state: 'neutral',
-            holiday: 'false',
+            holiday: 'true',
             activity: 'false',
           },
         },

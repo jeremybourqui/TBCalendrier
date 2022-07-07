@@ -1,13 +1,10 @@
 <script setup>
-import { ref } from 'vue'
-
 defineProps({
   neutralDay: Number,
   parent1Day: Number,
   parent2Day: Number,
   conflict: Number,
-})
-
+});
 </script>
 
 <template>
@@ -25,8 +22,6 @@ defineProps({
             <div class="count-item parent2"></div>
         </template>
     </div>
-
-
 </template>
 
 <style scoped>

@@ -5,8 +5,8 @@
   } from 'vue';
 
   const props = defineProps({
-    dayNumber: String,
-    monthNumber: String,
+    dayNumber: Number,
+    monthNumber: Number,
     selectedParent: Number
   });
 
@@ -20,10 +20,6 @@
 
   function toggleColor() {
 
-    console.log(`initial parent ${selectedParent.value}`);
-    console.log(`initial color ${colorDay.value}`);
-
-    //si neutre, conflit= parent selectionné
     if (colorDay.value === 'neutral') {
       if (selectedParent.value === 1) {
         colorDay.value = 'parent1';
