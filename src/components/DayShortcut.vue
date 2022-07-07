@@ -7,12 +7,14 @@
   const props = defineProps({
     dayNumber: Number,
     monthNumber: Number,
-    selectedParent: Number
+    selectedParent: Number,
+    isHoliday: Boolean
   });
 
   const { dayNumber } = toRefs(props);
   const { monthNumber } = toRefs(props);
   let { selectedParent } = toRefs(props);
+  let { isHoliday } = toRefs(props);
 
   let colorDay = ref('neutral');
 
@@ -43,10 +45,16 @@
 </script>
 
 <template>
-
-  <div :class="colorDay" class="day" @click="toggleColor()">
-    <p>{{ dayNumber }}</p>
-  </div>
+  <template v-if="isHoliday">
+    <div :class="colorDay" class="day holiday" @click="toggleColor()">
+      <p>{{ dayNumber }}</p>
+    </div>
+  </template>
+  <template v-else>
+    <div :class="colorDay" class="day" @click="toggleColor()">
+      <p>{{ dayNumber }}</p>
+    </div>
+  </template>
 
 </template>
 
@@ -73,5 +81,10 @@
 
   .conflict {
     background-color: #ebfc30;
+  }
+
+  .holiday {
+    border-color: #47115a;
+    border-width: 5px;
   }
 </style>

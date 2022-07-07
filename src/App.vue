@@ -9,7 +9,6 @@
 
   let selectedParent = ref(1);
   let selectedYear = ref(year);
-  console.log(selectedYear.value);
 
   let neutralDay = ref(31);
   let parent1Day = ref(0);
@@ -74,7 +73,7 @@
       <p> {{ selectedYear.months[indexMonth].name }}</p>
       <template v-for="(day, indexDay) in selectedYear.months[indexMonth].days">
         <div>
-          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(indexMonth)" :selected-parent="selectedParent" @state-change="updateDayState" />
+          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(indexMonth)" :selected-parent="selectedParent" :is-holiday="selectedYear.months[indexMonth].days[indexDay].holiday" @state-change="updateDayState" />
         </div>
       </template>
     </div>
