@@ -4,8 +4,9 @@
   } from 'vue';
   import Count from './components/Count.vue';
   import DayShortcut from './components/DayShortcut.vue';
-  import { year } from './assets/year.js';
+  import { year } from './assets/year_copy.js';
   import { year_fr_enfantine_primaire_co } from './assets/year_fr_enfantine_primaire_co.js';
+import Modal from './components/Modal.vue';
 
   let selectedParent = ref(1);
   let selectedYear = ref(year);
@@ -15,12 +16,17 @@
   let parent2Day = ref(0);
   let conflict = ref(0);
 
+  const showModal = ref(false);
+
 
 
   let print = () => window.print();
   
 
   let updateDayState = (newState, dayClicked, monthNumber) => {
+    console.log(newState);
+    console.log(dayClicked.value);
+    console.log(monthNumber.value);
     let day = dayClicked.value;
     let month = monthNumber.value;
     year.months[month].days[day].state = newState;
@@ -68,16 +74,27 @@
       <button class="print" @click="print()">Imprimer</button>
     </div>
     <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
-  <template v-for="(month, indexMonth) in selectedYear.months">
+  <template v-for="month in selectedYear.months" :key="selectedYear.months.id">
+    <!-- {{selectedYear.months[key].name}} -->
+  <!-- {{ index }}. {{ key }}: {{ month.name }}
+  {{month.id}}
+
+  <button id="show-modal" @click="showModal = true">Show Modal</button>
+  <Modal :month-name="month.name" :show="showModal" @close="showModal = false">
+  {{ index }}. {{ key }}: {{ month.name }}
+  </Modal> -->
     <div class="month">
-      <p> {{ selectedYear.months[indexMonth].name }}</p>
-      <template v-for="(day, indexDay) in selectedYear.months[indexMonth].days">
+      <p> {{ month.name }}</p>
+      <template v-for="(day, indexDay) in month.days">
         <div>
-          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(indexMonth)" :selected-parent="selectedParent" :is-holiday="selectedYear.months[indexMonth].days[indexDay].holiday" @state-change="updateDayState" />
+          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(month.id)" :selected-parent="selectedParent" :is-holiday="month.days[indexDay].holiday" @state-change="updateDayState" />
         </div>
       </template>
     </div>
   </template>
+
+  
+
 </template>
 
 <style>
