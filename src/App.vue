@@ -4,9 +4,13 @@
   } from 'vue';
   import Count from './components/Count.vue';
   import DayShortcut from './components/DayShortcut.vue';
-  import { year } from './assets/year_copy.js';
-  import { year_fr_enfantine_primaire_co } from './assets/year_fr_enfantine_primaire_co.js';
-import Modal from './components/Modal.vue';
+  import {
+    year
+  } from './assets/year_copy.js';
+  import {
+    year_fr_enfantine_primaire_co
+  } from './assets/year_fr_enfantine_primaire_co.js';
+  import Modal from './components/Modal.vue';
 
   let selectedParent = ref(1);
   let selectedYear = ref(year);
@@ -16,17 +20,14 @@ import Modal from './components/Modal.vue';
   let parent2Day = ref(0);
   let conflict = ref(0);
 
-  const showModal = ref(false);
+  const isModalVisible = ref("");
 
 
 
   let print = () => window.print();
-  
+
 
   let updateDayState = (newState, dayClicked, monthNumber) => {
-    console.log(newState);
-    console.log(dayClicked.value);
-    console.log(monthNumber.value);
     let day = dayClicked.value;
     let month = monthNumber.value;
     year.months[month].days[day].state = newState;
@@ -62,38 +63,36 @@ import Modal from './components/Modal.vue';
 </script>
 
 <template>
-    <div class="header">
-      <select v-model="selectedYear">
-        <option :value="year">Aucune</option>
-        <option :value="year_fr_enfantine_primaire_co">Enfantine, primaire, CO</option>
-      </select>
-      <p>Jour non attribué : {{ neutralDay }} </p>
-      <p class="parent1" @click="selectParent(1)"> Jour parent 1 : {{ parent1Day }} </p>
-      <p class="parent2" @click="selectParent(2)"> Jour parent 2 : {{ parent2Day }} </p>
-      <p> Conflit : {{ conflict }} </p>
-      <button class="print" @click="print()">Imprimer</button>
-    </div>
-    <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
-  <template v-for="month in selectedYear.months" :key="selectedYear.months.id">
-    <!-- {{selectedYear.months[key].name}} -->
-  <!-- {{ index }}. {{ key }}: {{ month.name }}
-  {{month.id}}
-
-  <button id="show-modal" @click="showModal = true">Show Modal</button>
-  <Modal :month-name="month.name" :show="showModal" @close="showModal = false">
-  {{ index }}. {{ key }}: {{ month.name }}
-  </Modal> -->
+  <div class="header">
+    <select v-model="selectedYear">
+      <option :value="year">Aucune</option>
+      <option :value="year_fr_enfantine_primaire_co">Enfantine, primaire, CO</option>
+    </select>
+    <p>Jour non attribué : {{ neutralDay }} </p>
+    <p class="parent1" @click="selectParent(1)"> Jour parent 1 : {{ parent1Day }} </p>
+    <p class="parent2" @click="selectParent(2)"> Jour parent 2 : {{ parent2Day }} </p>
+    <p> Conflit : {{ conflict }} </p>
+    <button class="print" @click="print()">Imprimer</button>
+  </div>
+  <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
+  <template v-for="month in selectedYear.months">
+    <template v-if="isModalVisible == month.name">
+      <Modal :month-name="month.name" :show="isModalVisible" @close="isModalVisible = false">
+      </Modal>
+    </template>
     <div class="month">
-      <p> {{ month.name }}</p>
+      <p class="button-modal" @click="isModalVisible = month.name"> {{ month.name }}</p>
       <template v-for="(day, indexDay) in month.days">
         <div>
-          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(month.id)" :selected-parent="selectedParent" :is-holiday="month.days[indexDay].holiday" @state-change="updateDayState" />
+          <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(month.id)"
+            :selected-parent="selectedParent" :is-holiday="month.days[indexDay].holiday"
+            @state-change="updateDayState" />
         </div>
       </template>
     </div>
   </template>
 
-  
+
 
 </template>
 
@@ -125,6 +124,10 @@ import Modal from './components/Modal.vue';
 
   .parent2 {
     background-color: #D82626;
+  }
+
+  .button-modal {
+    cursor: pointer;
   }
 
   @media print {
