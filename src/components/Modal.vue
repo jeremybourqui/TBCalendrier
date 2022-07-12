@@ -5,7 +5,7 @@
     } from 'vue';
 
     const props = defineProps({
-        show: String,
+        show: [String, Boolean],
         monthName: String
     });
 
@@ -16,15 +16,20 @@
 <template>
     <div v-if="show" class="modal">
         <div class="modal-content">
-
+            
             <p> {{ monthName }} </p>
 
-            <button class="modal-default-button" @click="$emit('close')">OK</button>
+            <button class="modal-default-button" @click="$emit('close')">Retour</button>
+
+            <div class="month">
+                <slot></slot>
+            </div>
+
         </div>
     </div>
 </template>
 
-<style>
+<style scoped>
     .modal {
         position: fixed;
         z-index: 9998;

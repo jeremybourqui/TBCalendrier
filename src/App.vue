@@ -1,6 +1,7 @@
 <script setup>
   import {
-    ref
+    ref,
+    watchEffect
   } from 'vue';
   import Count from './components/Count.vue';
   import DayShortcut from './components/DayShortcut.vue';
@@ -22,6 +23,9 @@
 
   const isModalVisible = ref("");
 
+   watchEffect(() => {
+    selectedYear.value = year;
+});
 
 
   let print = () => window.print();
@@ -31,10 +35,10 @@
     let day = dayClicked.value;
     let month = monthNumber.value;
     year.months[month].days[day].state = newState;
-    watchDayState();
+    countDayState();
   };
 
-  let watchDayState = () => {
+  let countDayState = () => {
     let countValuesInObj = (obj, value) => {
       let count = 0;
       for (const property in obj) {
@@ -76,10 +80,17 @@
   </div>
   <Count :neutral-day="neutralDay" :parent1-day="parent1Day" :parent2-day="parent2Day" :conflict="conflict" />
   <template v-for="month in selectedYear.months">
-    <template v-if="isModalVisible == month.name">
+    <div v-show="isModalVisible == month.name">
       <Modal :month-name="month.name" :show="isModalVisible" @close="isModalVisible = false">
+        <template v-for="(day, indexDay) in month.days">
+          <div class="month">
+            <DayShortcut :day-number="parseInt(indexDay)" :month-number="parseInt(month.id)"
+              :selected-parent="selectedParent" :is-holiday="month.days[indexDay].holiday"
+              @state-change="updateDayState" />
+          </div>
+        </template>
       </Modal>
-    </template>
+    </div>
     <div class="month">
       <p class="button-modal" @click="isModalVisible = month.name"> {{ month.name }}</p>
       <template v-for="(day, indexDay) in month.days">
@@ -91,7 +102,6 @@
       </template>
     </div>
   </template>
-
 
 
 </template>
