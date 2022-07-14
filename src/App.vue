@@ -68,15 +68,13 @@ window.addEventListener("keydown", function (e) {
       <option value="de">de</option>
     </select>
   </form>
-  <p>{{ t('hello') }}</p>
-
 
 
   <div class="header">
     <select v-model="selectedYear">
-      <option :value="year">Aucune</option>
+      <option :value="year">{{ t('none') }}</option>
       <option :value="year_fr_enfantine_primaire_co">
-        Enfantine, primaire, CO
+        {{ t('school') }}
       </option>
     </select>
     <p>{{ t('day not assigned') }} : {{ neutralDay }}</p>
@@ -101,16 +99,16 @@ window.addEventListener("keydown", function (e) {
       class="button-modal"
       @click="isVisible = month.name"
     >
-      {{ month.name }}
+      {{ t(month.name) }}
     </p>
     <div v-show="isVisible == true || isVisible == month.name">
-      <p v-show="isVisible == month.name"> {{ month.name }}</p>
+      <p v-show="isVisible == month.name"> {{ t(month.name) }}</p>
       <button
         v-show="isVisible == month.name"
         class="button-modal"
         @click="isVisible = true"
       >
-        retour
+        {{t('back')}}
       </button>
       <div class="month">
         <template v-for="(day, indexDay) in month.days">
@@ -180,24 +178,49 @@ window.addEventListener("keydown", function (e) {
 {
   "de": {
     "language": "Sprache",
-    "hello": "Hallo, Welt!",
     "print": "Drucken",
     "day parent1": "Tag Parent 1",
     "day parent2": "Tag Parent 2",
     "day not assigned": "Tag nicht zugewiesen",
     "conflict": "Konflikt",
+    "back": "Zurück",
+    "none": "Keine",
+    "school": "Kindergarten, die Primar-und Orientierungsschule",
+    "january": "Januar",
+    "february": "Februar",
+    "march": "März",
+    "april": "April",
+    "may": "Mai",
+    "june": "Juni",
+    "july": "Juli",
+    "august": "August",
+    "september": "September",
+    "october": "Oktober",
+    "november": "November",
+    "december": "Dezember",
   },
   "fr": {
     "language": "langue",
-    "hello": "salut",
     "print": "Imprimer",
     "day parent1": "Parent 1",
     "day parent2": "Parent 2",
     "day not assigned": "Jour non attribué",
     "conflict": "Conflit",
-    "neutral": "Neutre",
-    "holiday": "Vacances",
-    "parent": "Parent"
+    "back": "Retour",
+    "none": "Aucune",
+    "school": "Enfantine, primaire, CO",
+    "january": "Janvier",
+    "february": "Février",
+    "march": "Mars",
+    "april": "Avril",
+    "may": "Mai",
+    "june": "Juin",
+    "july": "Juillet",
+    "august": "Août",
+    "september": "Septembre",
+    "october": "Octobre",
+    "november": "Novembre",
+    "december": "Décembre",
   }
 }
 </i18n>

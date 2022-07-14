@@ -2,7 +2,7 @@ export let year = {
     months: [
       {
         id: 0,
-        name: 'janviercopy',
+        name: 'january',
         days: {
           1: {
             state: 'neutral',
@@ -158,7 +158,7 @@ export let year = {
       },
       {
         id: 1,
-        name: 'février',
+        name: 'february',
         days: {
           1: {
             state: 'neutral',
@@ -299,7 +299,7 @@ export let year = {
       },
       {
         id: 2,
-        name: 'mars',
+        name: 'march',
         days: {
           1: {
             state: 'neutral',
@@ -455,7 +455,7 @@ export let year = {
       },
       {
         id: 3,
-        name: 'avril',
+        name: 'april',
         days: {
           1: {
             state: 'neutral',
@@ -606,7 +606,7 @@ export let year = {
       },
       {
         id: 4,
-        name: 'mai',
+        name: 'may',
         days: {
           1: {
             state: 'neutral',
@@ -762,7 +762,7 @@ export let year = {
       },
       {
         id: 5,
-        name: 'juin',
+        name: 'june',
         days: {
           1: {
             state: 'neutral',
@@ -913,7 +913,7 @@ export let year = {
       },
       {
         id: 6,
-        name: 'juillet',
+        name: 'july',
         days: {
           1: {
             state: 'neutral',
@@ -1069,7 +1069,7 @@ export let year = {
       },
       {
         id: 7,
-        name: 'août',
+        name: 'august',
         days: {
           1: {
             state: 'neutral',
@@ -1225,7 +1225,7 @@ export let year = {
       },
       {
         id: 8,
-        name: 'septembre',
+        name: 'september',
         days: {
           1: {
             state: 'neutral',
@@ -1376,7 +1376,7 @@ export let year = {
       },
       {
         id: 9,
-        name: 'octobre',
+        name: 'october',
         days: {
           1: {
             state: 'neutral',
@@ -1532,7 +1532,7 @@ export let year = {
       },
       {
         id: 10,
-        name: 'novembre',
+        name: 'november',
         days: {
           1: {
             state: 'neutral',
@@ -1683,7 +1683,7 @@ export let year = {
       },
       {
         id: 11,
-        name: 'décembre',
+        name: 'december',
         days: {
           1: {
             state: 'neutral',
