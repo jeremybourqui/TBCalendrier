@@ -4,6 +4,13 @@ import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
 import { year } from "./assets/year_copy.js";
 import { year_fr_enfantine_primaire_co } from "./assets/year_fr_enfantine_primaire_co.js";
+import { useI18n } from 'vue-i18n'
+
+
+const { t, locale } = useI18n({
+      inheritLocale: true,
+      useScope: 'local'
+    });
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
@@ -53,6 +60,18 @@ window.addEventListener("keydown", function (e) {
 </script>
 
 <template>
+
+<form>
+    <label>{{ t('language') }}</label>
+    <select v-model="locale">
+      <option value="fr">fr</option>
+      <option value="de">de</option>
+    </select>
+  </form>
+  <p>{{ t('hello') }}</p>
+
+
+
   <div class="header">
     <select v-model="selectedYear">
       <option :value="year">Aucune</option>
@@ -60,15 +79,15 @@ window.addEventListener("keydown", function (e) {
         Enfantine, primaire, CO
       </option>
     </select>
-    <p>Jour non attribué : {{ neutralDay }}</p>
+    <p>{{ t('day not assigned') }} : {{ neutralDay }}</p>
     <p class="parent1" @click="selectParent(1)">
-      Jour parent 1 : {{ parent1Day }}
+      {{ t('day parent1') }} : {{ parent1Day }}
     </p>
     <p class="parent2" @click="selectParent(2)">
-      Jour parent 2 : {{ parent2Day }}
+      {{ t('day parent2') }} : {{ parent2Day }}
     </p>
-    <p>Conflit : {{ conflict }}</p>
-    <button class="print" @click="print()">Imprimer</button>
+    <p>{{ t('conflict') }} : {{ conflict }}</p>
+    <button class="print" @click="print()">{{t('print')}}</button>
   </div>
   <Count
     :neutral-day="neutralDay"
@@ -156,3 +175,29 @@ window.addEventListener("keydown", function (e) {
   }
 }
 </style>
+
+<i18n>
+{
+  "de": {
+    "language": "Sprache",
+    "hello": "Hallo, Welt!",
+    "print": "Drucken",
+    "day parent1": "Tag Parent 1",
+    "day parent2": "Tag Parent 2",
+    "day not assigned": "Tag nicht zugewiesen",
+    "conflict": "Konflikt",
+  },
+  "fr": {
+    "language": "langue",
+    "hello": "salut",
+    "print": "Imprimer",
+    "day parent1": "Parent 1",
+    "day parent2": "Parent 2",
+    "day not assigned": "Jour non attribué",
+    "conflict": "Conflit",
+    "neutral": "Neutre",
+    "holiday": "Vacances",
+    "parent": "Parent"
+  }
+}
+</i18n>
