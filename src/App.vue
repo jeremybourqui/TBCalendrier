@@ -2,7 +2,7 @@
 import { ref, watchEffect } from "vue";
 import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
-import { year } from "./assets/year_copy.js";
+import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co } from "./assets/year_fr_enfantine_primaire_co.js";
 import { useI18n } from "vue-i18n";
 
@@ -114,7 +114,7 @@ window.addEventListener("keydown", function (e) {
           <div class="month">
             <template v-for="(day, indexDay) in month.days">
               <DayShortcut
-                :day-number="parseInt(indexDay)"
+                :day-number="month.days[indexDay].day"
                 :month-number="parseInt(month.id)"
                 :selected-parent="selectedParent"
                 :is-holiday="month.days[indexDay].holiday"
