@@ -60,10 +60,14 @@
 
 <style scoped>
   .day {
-    height: 100px;
-    width: 100px;
+    /* height: 100px;
+    width: 100px; */
+    display: inline-block;
     border: 1px solid black;
     background-color: #DADADA;
+    place-self: center;
+    align-self: stretch;
+    justify-self: stretch;
 
   }
 

@@ -4,13 +4,12 @@ import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
 import { year } from "./assets/year_copy.js";
 import { year_fr_enfantine_primaire_co } from "./assets/year_fr_enfantine_primaire_co.js";
-import { useI18n } from 'vue-i18n'
-
+import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n({
-      inheritLocale: true,
-      useScope: 'local'
-    });
+  inheritLocale: true,
+  useScope: "local",
+});
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
@@ -19,6 +18,8 @@ let neutralDay = ref(31);
 let parent1Day = ref(0);
 let parent2Day = ref(0);
 let conflict = ref(0);
+
+const gridMonth = ref('grid');
 
 const isVisible = ref(true);
 
@@ -60,32 +61,30 @@ window.addEventListener("keydown", function (e) {
 </script>
 
 <template>
-
-<form>
-    <label>{{ t('language') }}</label>
+  <form>
+    <label>{{ t("language") }}</label>
     <select v-model="locale">
       <option value="fr">fr</option>
       <option value="de">de</option>
     </select>
   </form>
 
-
   <div class="header">
     <select v-model="selectedYear">
-      <option :value="year">{{ t('none') }}</option>
+      <option :value="year">{{ t("none") }}</option>
       <option :value="year_fr_enfantine_primaire_co">
-        {{ t('school') }}
+        {{ t("school") }}
       </option>
     </select>
-    <p>{{ t('day not assigned') }} : {{ neutralDay }}</p>
+    <p>{{ t("day not assigned") }} : {{ neutralDay }}</p>
     <p class="parent1" @click="selectParent(1)">
-      {{ t('day parent1') }} : {{ parent1Day }}
+      {{ t("day parent1") }} : {{ parent1Day }}
     </p>
     <p class="parent2" @click="selectParent(2)">
-      {{ t('day parent2') }} : {{ parent2Day }}
+      {{ t("day parent2") }} : {{ parent2Day }}
     </p>
-    <p>{{ t('conflict') }} : {{ conflict }}</p>
-    <button class="print" @click="print()">{{t('print')}}</button>
+    <p>{{ t("conflict") }} : {{ conflict }}</p>
+    <button class="print" @click="print()">{{ t("print") }}</button>
   </div>
   <Count
     :neutral-day="neutralDay"
@@ -93,39 +92,49 @@ window.addEventListener("keydown", function (e) {
     :parent2-day="parent2Day"
     :conflict="conflict"
   />
-  <template v-for="month in selectedYear.months">
-    <p
-      v-show="isVisible == true"
-      class="button-modal"
-      @click="isVisible = month.name"
-    >
-      {{ t(month.name) }}
-    </p>
-    <div v-show="isVisible == true || isVisible == month.name">
-      <p v-show="isVisible == month.name"> {{ t(month.name) }}</p>
-      <button
-        v-show="isVisible == month.name"
-        class="button-modal"
-        @click="isVisible = true"
-      >
-        {{t('back')}}
-      </button>
-      <div class="month">
-        <template v-for="(day, indexDay) in month.days">
+  <div class="home-grid">
+    <template v-for="month in selectedYear.months">
+      <div>
+        <p
+          v-show="isVisible == true"
+          class="button-modal"
+          @click="isVisible = month.name, gridMonth = none"
+        >
+          {{ t(month.name) }}
+        </p>
+        <div v-show="isVisible == true || isVisible == month.name">
+          <p v-show="isVisible == month.name">{{ t(month.name) }}</p>
+          <button
+            v-show="isVisible == month.name"
+            class="button-modal"
+            @click="isVisible = true, gridMonth = 'grid'"
+          >
+            {{ t("back") }}
+          </button>
           <div class="month">
-            <DayShortcut
-              :day-number="parseInt(indexDay)"
-              :month-number="parseInt(month.id)"
-              :selected-parent="selectedParent"
-              :is-holiday="month.days[indexDay].holiday"
-              @state-change="updateDayState"
-            />
+            <template v-for="(day, indexDay) in month.days">
+              <DayShortcut
+                :day-number="parseInt(indexDay)"
+                :month-number="parseInt(month.id)"
+                :selected-parent="selectedParent"
+                :is-holiday="month.days[indexDay].holiday"
+                @state-change="updateDayState"
+              />
+            </template>
           </div>
-        </template>
+        </div>
       </div>
-    </div>
-  </template>
+    </template>
+  </div>
 </template>
+
+<style scoped>
+.home-grid {
+  display: v-bind('gridMonth');
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+</style>
 
 <style>
 #app {
@@ -138,9 +147,11 @@ window.addEventListener("keydown", function (e) {
 }
 
 .month {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
@@ -155,6 +166,10 @@ window.addEventListener("keydown", function (e) {
 
 .parent2 {
   background-color: #d82626;
+}
+
+.test {
+  background-color: #1ea93a;
 }
 
 .button-modal {
