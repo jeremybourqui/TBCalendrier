@@ -118,7 +118,9 @@ window.addEventListener("keydown", function (e) {
                 :month-number="parseInt(month.id)"
                 :selected-parent="selectedParent"
                 :is-holiday="month.days[indexDay].holiday"
+                :state="month.days[indexDay].state"
                 @state-change="updateDayState"
+                :is-displayed="month.days[indexDay].displayed"
               />
             </template>
           </div>
@@ -133,6 +135,7 @@ window.addEventListener("keydown", function (e) {
   display: v-bind('gridMonth');
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  grid-gap: 15px;
 }
 </style>
 

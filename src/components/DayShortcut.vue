@@ -8,19 +8,23 @@
     dayNumber: Number,
     monthNumber: Number,
     selectedParent: Number,
-    isHoliday: Boolean
+    isHoliday: Boolean,
+    isDisplayed: Boolean,
   });
 
   const { dayNumber } = toRefs(props);
   const { monthNumber } = toRefs(props);
   let { selectedParent } = toRefs(props);
   let { isHoliday } = toRefs(props);
+  let { isDisplayed } = toRefs(props);
 
   let colorDay = ref('neutral');
 
   const emit = defineEmits(['stateChange']);
 
+
   function toggleColor() {
+    console.log(isDisplayed.value);
 
     if (colorDay.value === 'neutral') {
       if (selectedParent.value === 1) {
@@ -45,7 +49,10 @@
 </script>
 
 <template>
-  <template v-if="isHoliday">
+  <template v-if="isDisplayed === false">
+  <div class="blank"></div>
+  </template>
+  <template v-else-if="isHoliday">
     <div :class="colorDay" class="day holiday" @click="toggleColor()">
       <p>{{ dayNumber }}</p>
     </div>
@@ -90,5 +97,9 @@
   .holiday {
     border-color: #47115a;
     border-width: 5px;
+  }
+
+  .blank {
+    visibility: hidden;
   }
 </style>

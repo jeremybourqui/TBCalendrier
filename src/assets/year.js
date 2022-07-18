@@ -5,227 +5,226 @@ export let year = {
         name: 'january',
         days: {
           0: {
-            day: 26,
-            state: 'neutral',
-            holiday: true,
-            activity: false,
-          },
-          1: {
             day: 27,
             state: 'neutral',
             holiday: true,
             activity: false,
+            displayed: false
           },
-          2: {
+          1: {
             day: 28,
             state: 'neutral',
-            holiday: false,
+            holiday: true,
             activity: false,
-          },
-          3: {
+            displayed: false
+            },
+          2: {
             day: 29,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
-          4: {
+          3: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
-          5: {
+          4: {
             day: 31,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
-          6: {
+          5: {
             day: 1,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
+          6: {
+            day:  2,
+            state: 'neutral',
+            holiday: false,
+            activity: false,
+          },
           7: {
-            day: 2,
+            day:  3,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           8: {
-            day: 3,
+            day:  4,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           9: {
-            day: 4,
+            day:  5,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           10: {
-            day: 5,
+            day:  6,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           11: {
-            day: 6,
+            day:  7,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           12: {
-            day: 7,
+            day:  8,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           13: {
-            day: 8,
+            day:  9,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           14: {
-            day: 9,
+            day:  10,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           15: {
-            day: 10,
+            day:  11,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           16: {
-            day: 11,
+            day:  12,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           17: {
-            day: 12,
-            state: 'neutral',
-            holiday: false,
-            activity: false,
-          },
-          18: {
             day: 13,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
+          18: {
+            day:  14,
+            state: 'neutral',
+            holiday: false,
+            activity: false,
+          },
           19: {
-            day: 14,
+            day:  15,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           20: {
-            day: 15,
+            day:  16,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           21: {
-            day: 16,
+            day:  17,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           22: {
-            day: 17,
+            day:  18,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           23: {
-            day: 18,
+            day:  19,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           24: {
-            day: 19,
+            day:  20,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           25: {
-            day: 20,
+            day:  21,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           26: {
-            day: 21,
+            day:  22,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           27: {
-            day: 22,
+            day:  23,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           28: {
-            day: 23,
+            day:  24,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           29: {
-            day: 24,
+            day:  25,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           30: {
-            day: 25,
+            day:  26,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           31: {
-            day: 26,
+            day:  27,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           32: {
-            day: 27,
+            day:  28,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           33: {
-            day: 28,
+            day:  29,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           34: {
-            day: 29,
+            day:  30,
             state: 'neutral',
             holiday: false,
             activity: false,
           },
           35: {
-            day: 30,
+            day:  31,
             state: 'neutral',
             holiday: false,
             activity: false,
-          },
-          36: {
-            day: 31,
-            state: 'neutral',
-            holiday: false,
-            activity: false,
-          },
+          },         
         },
       },
       {
@@ -237,12 +236,14 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 31,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 1,
@@ -408,12 +409,6 @@ export let year = {
           },
           29: {
             day: 28,
-            state: 'blank',
-            holiday: false,
-            activity: false,
-          },
-          30: {
-            day: 29,
             state: 'blank',
             holiday: false,
             activity: false,
@@ -429,12 +424,14 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 28,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 1,
@@ -633,24 +630,28 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 29,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           3: {
             day: 31,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           4: {
             day:  1,
@@ -832,12 +833,6 @@ export let year = {
             holiday: false,
             activity: false,
           },
-          34: {
-            day:  31,
-            state: 'neutral',
-            holiday: false,
-            activity: false,
-          },
         },
       },
       {
@@ -849,36 +844,42 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 26,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 27,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           3: {
             day: 28,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           4: {
             day: 29,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           5: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           6: {
             day: 1,
@@ -1077,18 +1078,21 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 31,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 1,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           3: {
             day: 2,
@@ -1276,24 +1280,28 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 28,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 29,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           3: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           4: {
             day: 1,
@@ -1491,7 +1499,7 @@ export let year = {
             day: 1,
             state: 'neutral',
             holiday: false,
-            activity: false,
+            activity: false
           },
           1: {
             day: 2,
@@ -1684,18 +1692,21 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           1: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           2: {
             day: 31,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           3: {
             day: 1,
@@ -1900,30 +1911,35 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           1: {
             day: 27,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           2: {
             day: 28,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           3: {
             day: 29,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           4: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false,
           },
           5: {
             day: 1,
@@ -2122,6 +2138,7 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 1,
@@ -2314,18 +2331,21 @@ export let year = {
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           1: {
             day: 29,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           2: {
             day: 30,
             state: 'neutral',
             holiday: false,
             activity: false,
+            displayed: false
           },
           3: {
             day: 1,
