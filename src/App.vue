@@ -23,8 +23,10 @@ const gridMonth = ref('grid');
 
 const isVisible = ref(true);
 
+//print
 let print = () => window.print();
 
+//update the selected day
 let updateDayState = (newState, dayClicked, monthNumber) => {
   let day = dayClicked.value;
   let month = monthNumber.value;
@@ -32,6 +34,7 @@ let updateDayState = (newState, dayClicked, monthNumber) => {
   countDayState();
 };
 
+//count each day state
 let countDayState = () => {
   let countValuesInObj = (obj, value) => {
     let count = 0;
@@ -51,6 +54,7 @@ let countDayState = () => {
   conflict.value = countValuesInObj(year, "conflict");
 };
 
+//shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
   if (e.code === "Digit1") {
     selectedParent.value = 1;
@@ -58,6 +62,26 @@ window.addEventListener("keydown", function (e) {
     selectedParent.value = 2;
   }
 });
+
+
+
+
+localStorage.clear();
+// a loop that goes through each day of year
+let updateYear = () => {
+  for (let i = 0; i < year.months.length; i++) {
+    console.log(year.months[i]);
+    console.log(year.months[i].days.length);
+    for (let j = 0; j < year.months[i].days.length; j++) {
+      console.log(year.months[i].days[j]);
+      localStorage.setItem(`year.months[${i}].days[${j}].`, JSON.stringify(year.months[i].days[j]));
+    }
+  }
+};
+updateYear();
+
+
+
 </script>
 
 <template>

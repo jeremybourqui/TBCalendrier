@@ -24,25 +24,29 @@
 
 
   function toggleColor() {
-    console.log(isDisplayed.value);
-
+  console.log(`year.months[${monthNumber.value}].days[${dayNumber.value}]`);
     if (colorDay.value === 'neutral') {
       if (selectedParent.value === 1) {
         colorDay.value = 'parent1';
+        localStorage.setItem(`year.months[${monthNumber.value}].days[${dayNumber.value}]`, JSON.stringify({"day":dayNumber.value,"state":"parent1","holiday":true,"activity":false,"displayed":true}));
         emit('stateChange', 'parent1', dayNumber, monthNumber);
       } else if (selectedParent.value === 2) {
         colorDay.value = 'parent2';
         emit('stateChange', 'parent2', dayNumber, monthNumber);
+       localStorage.setItem(`year.months[${monthNumber.value}].days[${dayNumber.value}]`, JSON.stringify({"day":dayNumber.value,"state":"parent2","holiday":true,"activity":false,"displayed":true}));
       }
     } else if (colorDay.value === 'parent1' && selectedParent.value === 2) {
       colorDay.value = 'conflict';
       emit('stateChange', 'conflict', dayNumber, monthNumber);
+      localStorage.setItem(`year.months[${monthNumber.value}].days[${dayNumber.value}]`, JSON.stringify({"day":dayNumber.value,"state":"conflict","holiday":true,"activity":false,"displayed":true}));
     } else if (colorDay.value === 'parent2' && selectedParent.value === 1) {
       colorDay.value = 'conflict';
       emit('stateChange', 'conflict', dayNumber, monthNumber);
+      localStorage.setItem(`year.months[${monthNumber.value}].days[${dayNumber.value}]`, JSON.stringify({"day":dayNumber.value,"state":"conflict","holiday":true,"activity":false,"displayed":true}));
     } else if (colorDay.value === 'conflict') {
       colorDay.value = 'neutral';
       emit('stateChange', 'neutral', dayNumber, monthNumber);
+      localStorage.setItem(`year.months[${monthNumber.value}].days[${dayNumber.value}]`, JSON.stringify({"day":dayNumber.value,"state":"neutral","holiday":true,"activity":false,"displayed":true}));
     }
 
   };
