@@ -66,19 +66,29 @@ window.addEventListener("keydown", function (e) {
 
 
 
-localStorage.clear();
+// localStorage.clear();
 // a loop that goes through each day of year
+
+
 let updateYear = () => {
   for (let i = 0; i < year.months.length; i++) {
-    console.log(year.months[i]);
-    console.log(year.months[i].days.length);
+    // console.log(year.months[i]);
+    // console.log(year.months[i].days.length);
     for (let j = 0; j < year.months[i].days.length; j++) {
-      console.log(year.months[i].days[j]);
-      localStorage.setItem(`year.months[${i}].days[${j}].`, JSON.stringify(year.months[i].days[j]));
+      // console.log(year.months[i].days[j]);
+      localStorage.setItem(`year.months[${i}].days[${j}]`, JSON.stringify(year.months[i].days[j]));
     }
   }
 };
-updateYear();
+
+if(localStorage.length === 0) {
+  console.log(localStorage.length);;
+  updateYear();
+} else {
+  console.log('plein');;
+}
+
+
 
 
 
