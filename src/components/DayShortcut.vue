@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, ref, toRefs } from "vue";
+import { ref, toRefs, watch } from "vue";
 
 const props = defineProps({
   dayNumber: Number,
@@ -8,6 +8,7 @@ const props = defineProps({
   isHoliday: Boolean,
   isDisplayed: Boolean,
   state: String,
+  clear: Boolean
 });
 
 const { dayNumber } = toRefs(props);
@@ -15,7 +16,8 @@ const { monthNumber } = toRefs(props);
 const { selectedParent } = toRefs(props);
 const { isHoliday } = toRefs(props);
 const { isDisplayed } = toRefs(props);
-const { state } = toRefs(props);
+let { state } = toRefs(props);
+let { clear } = toRefs(props);
 
   let colorDay = ref("");
   let storedState = localStorage.getItem((`year.months[${monthNumber.value}].days[${dayNumber.value}]`));
@@ -24,19 +26,35 @@ const { state } = toRefs(props);
     colorDay.value = jsonState.state;
   };
   
+watch(() => props.clear, (clear, prevClear) => { 
+  clearDay();
 
-console.log(colorDay.value);
+  // localStorage.clear();
+})
+
+let clearDay = () => { 
+  // localStorage.removeItem((`year.months[${monthNumber.value}].days[${dayNumber.value}]`));
+  localStorage.setItem(
+        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        JSON.stringify({
+          day: dayNumber.value,
+          state: "neutral",
+          holiday: true,
+          activity: false,
+          displayed: true,
+        }));
+  colorDay.value = "";
+};
 
 const emit = defineEmits(["stateChange"]);
 
-function toggleColor() {
+let toggleColor = () => {
   storedState = localStorage.getItem((`year.months[${monthNumber.value}].days[${dayNumber.value}]`));
   jsonState = JSON.parse(storedState);
-  colorDay.value = jsonState.state;
+  if (jsonState !== null) {
+    colorDay.value = jsonState.state;
+  };
 
-
-  console.log(jsonState.state);
-  // console.log(`year.months[${monthNumber.value}].days[${dayNumber.value}]`);
   if (colorDay.value === "neutral" || colorDay.value === "") {
     if (selectedParent.value === 1) {
       colorDay.value = "parent1";

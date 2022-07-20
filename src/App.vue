@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, onMounted } from "vue";
 import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
 import { year } from "./assets/year.js";
@@ -25,6 +25,21 @@ const isVisible = ref(true);
 
 //print
 let print = () => window.print();
+
+let clear = ref(false);
+
+//define a function to assign clear to false and then to true after a while
+let clearDay = () => {
+  clear.value = false;
+  neutralDay.value = 0;
+  parent1Day.value = 0;
+  parent2Day.value = 0;
+  conflict.value = 0;
+
+  setTimeout(() => {
+    clear.value = true;
+  }, 10);
+};
 
 //update the selected day
 let updateDayState = (newState, dayClicked, monthNumber) => {
@@ -64,11 +79,7 @@ window.addEventListener("keydown", function (e) {
 });
 
 
-
-
-// localStorage.clear();
 // a loop that goes through each day of year
-
 
 let updateYear = () => {
   for (let i = 0; i < year.months.length; i++) {
@@ -82,7 +93,7 @@ let updateYear = () => {
 };
 
 if(localStorage.length === 0) {
-  console.log(localStorage.length);;
+  // console.log(localStorage.length);;
   updateYear();
 } else {
   console.log('plein');;
@@ -119,6 +130,7 @@ if(localStorage.length === 0) {
     </p>
     <p>{{ t("conflict") }} : {{ conflict }}</p>
     <button class="print" @click="print()">{{ t("print") }}</button>
+    <button class="print" @click="clearDay()">{{ t("clear") }}</button>
   </div>
   <Count
     :neutral-day="neutralDay"
@@ -148,6 +160,7 @@ if(localStorage.length === 0) {
           <div class="month">
             <template v-for="(day, indexDay) in month.days">
               <DayShortcut
+                :clear="clear"
                 :day-number="month.days[indexDay].day"
                 :month-number="parseInt(month.id)"
                 :selected-parent="selectedParent"
@@ -231,6 +244,7 @@ if(localStorage.length === 0) {
   "de": {
     "language": "Sprache",
     "print": "Drucken",
+    "clear": "Löschen",
     "day parent1": "Tag Parent 1",
     "day parent2": "Tag Parent 2",
     "day not assigned": "Tag nicht zugewiesen",
@@ -254,6 +268,7 @@ if(localStorage.length === 0) {
   "fr": {
     "language": "langue",
     "print": "Imprimer",
+    "clear": "Effacer",
     "day parent1": "Parent 1",
     "day parent2": "Parent 2",
     "day not assigned": "Jour non attribué",
