@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, onMounted } from "vue";
+import { ref, watch, onMounted } from "vue";
 import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
 import { year } from "./assets/year.js";
@@ -13,13 +13,17 @@ const { t, locale } = useI18n({
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
+let comment = ref(false);
 
 let neutralDay = ref(31);
 let parent1Day = ref(0);
 let parent2Day = ref(0);
 let conflict = ref(0);
 
-const gridMonth = ref('grid');
+let displayedComment = ref([]);
+
+
+const gridMonth = ref("grid");
 
 const isVisible = ref(true);
 
@@ -35,17 +39,22 @@ let clearDay = () => {
   parent1Day.value = 0;
   parent2Day.value = 0;
   conflict.value = 0;
-
+  displayedComment.value = [];
   setTimeout(() => {
     clear.value = true;
   }, 10);
 };
 
 //update the selected day
-let updateDayState = (newState, dayClicked, monthNumber) => {
+let updateDayState = (newState, dayClicked, monthNumber, newActivity) => {
   let day = dayClicked.value;
   let month = monthNumber.value;
+  // console.log(`newacti ${newActivity}`);
+  // console.log(`oldacti ${year.months[month].days[day].activity}`);
+  // console.log(`newstate ${newState}`);
+  // console.log(`oldastate ${year.months[month].days[day].state}`);
   year.months[month].days[day].state = newState;
+  year.months[month].days[day].activity = newActivity;
   countDayState();
 };
 
@@ -71,38 +80,72 @@ let countDayState = () => {
 
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
+  // console.log(e.code);
   if (e.code === "Digit1") {
     selectedParent.value = 1;
   } else if (e.code === "Digit2") {
     selectedParent.value = 2;
-  }
+  } else if (e.code === "KeyC") {
+    comment.value = true;
+  };
 });
+
+// reset comment to false
+let resetComment = () => {
+  console.log("reset comment");
+  comment.value = false;
+};
+
+
+let displayComment = (comment) => {
+  displayedComment.value.push(comment);
+
+// define a function to loop the local storage and display the comments  
+    // for (let i = 0; i < localStorage.length; i++) {
+    //   let key = localStorage.key(i);
+    //   let value = localStorage.getItem(key);
+    //   let obj = JSON.parse(value);
+    //   if (obj.activity) {
+    //     console.log(obj);
+    //     displayedComment.value.push(obj.activity);
+    //   };
+    // };
+  // console.log(displayedComment.value);
+  };
+
+//define a function to retrieve the comment in local storage
+for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      let value = localStorage.getItem(key);
+      let obj = JSON.parse(value);
+      if (obj.activity) {
+        console.log(obj);
+        displayedComment.value.push(obj.activity);
+      };
+    };
 
 
 // a loop that goes through each day of year
-
 let updateYear = () => {
   for (let i = 0; i < year.months.length; i++) {
     // console.log(year.months[i]);
     // console.log(year.months[i].days.length);
     for (let j = 0; j < year.months[i].days.length; j++) {
       // console.log(year.months[i].days[j]);
-      localStorage.setItem(`year.months[${i}].days[${j}]`, JSON.stringify(year.months[i].days[j]));
+      localStorage.setItem(
+        `year.months[${i}].days[${j}]`,
+        JSON.stringify(year.months[i].days[j])
+      );
     }
   }
 };
 
-if(localStorage.length === 0) {
+if (localStorage.length === 0) {
   // console.log(localStorage.length);;
   updateYear();
 } else {
-  console.log('plein');;
+  console.log("plein");
 }
-
-
-
-
-
 </script>
 
 <template>
@@ -144,7 +187,7 @@ if(localStorage.length === 0) {
         <p
           v-show="isVisible == true"
           class="button-modal"
-          @click="isVisible = month.name, gridMonth = none"
+          @click="(isVisible = month.name), (gridMonth = none)"
         >
           {{ t(month.name) }}
         </p>
@@ -153,7 +196,7 @@ if(localStorage.length === 0) {
           <button
             v-show="isVisible == month.name"
             class="button-modal"
-            @click="isVisible = true, gridMonth = 'grid'"
+            @click="(isVisible = true), (gridMonth = 'grid')"
           >
             {{ t("back") }}
           </button>
@@ -166,8 +209,12 @@ if(localStorage.length === 0) {
                 :selected-parent="selectedParent"
                 :is-holiday="month.days[indexDay].holiday"
                 :state="month.days[indexDay].state"
+                :activity="month.days[indexDay].activity"
                 @state-change="updateDayState"
+                @reset-comment="resetComment"
+                @save-comment="displayComment"
                 :is-displayed="month.days[indexDay].displayed"
+                :comment="comment"
               />
             </template>
           </div>
@@ -175,11 +222,14 @@ if(localStorage.length === 0) {
       </div>
     </template>
   </div>
+      <p v-for="comment in displayedComment">
+        {{ comment }}
+      </p>
 </template>
 
 <style scoped>
 .home-grid {
-  display: v-bind('gridMonth');
+  display: v-bind("gridMonth");
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 15px;
