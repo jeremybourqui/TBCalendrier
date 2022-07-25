@@ -27,18 +27,26 @@ let { clear } = toRefs(props);
 let { showCommentModal } = toRefs(props);
 
 let colorDay = ref("");
-let showActivity = ref("");
+let showActivity = ref(false);
 
 let storedState = localStorage.getItem(
   `year.months[${monthNumber.value}].days[${dayNumber.value}]`
 );
 let jsonState = JSON.parse(storedState);
 if (jsonState !== null) {
-  colorDay.value = jsonState.state;
-  showActivity.value = jsonState.hasActivity;
-  hasActivity.value = jsonState.hasActivity;
   console.log(jsonState.activity);
-  console.log(hasActivity.value);
+  colorDay.value = jsonState.state;
+  console.log("jsonStateactivity"+ jsonState.activity);
+  if (typeof jsonState.activity == 'undefined') {
+    showActivity.value = false;
+    console.log("undefined log");
+  } else {
+    showActivity.value = jsonState.activity;
+    console.log("defined log");
+  };
+  // hasActivity.value = jsonState.hasActivity;
+  console.log("jsont "+jsonState.activity);
+  // console.log("hasactivity "+hasActivity.value);
 };
 
 watch(
@@ -64,6 +72,8 @@ let toggleColor = () => {
 //   console.log("dayid " + dayId.value);
 console.log("hasActivity " + hasActivity.value);
 console.log("showActivity " + showActivity.value);
+  // console.log("jsont "+jsonState.activity);
+
 
 
   if (!showCommentModal.value) {
@@ -77,17 +87,17 @@ console.log("showActivity " + showActivity.value);
             day: dayNumber.value,
             state: "parent1",
             holiday: true,
-            activity: hasActivity.value,
+            activity: showActivity.value,
             displayed: true,
           })
         );
-        emit("stateChange", "parent1", dayId, dayNumber, monthNumber, hasActivity.value);
+        emit("stateChange", "parent1", dayId, dayNumber, monthNumber, showActivity.value);
 
     // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
 
       } else if (selectedParent.value === 2) {
         colorDay.value = "parent2";
-        emit("stateChange", "parent2", dayId, dayNumber, monthNumber, hasActivity.value);
+        emit("stateChange", "parent2", dayId, dayNumber, monthNumber, showActivity.value);
         localStorage.setItem(
           `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
           JSON.stringify({
@@ -102,7 +112,7 @@ console.log("showActivity " + showActivity.value);
       }
     } else if (colorDay.value === "parent1" && selectedParent.value === 2) {
       colorDay.value = "conflict";
-      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, hasActivity.value);
+      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -110,13 +120,13 @@ console.log("showActivity " + showActivity.value);
           day: dayNumber.value,
           state: "conflict",
           holiday: true,
-          activity: hasActivity.value,
+          activity: showActivity.value,
           displayed: true,
         })
       );
     } else if (colorDay.value === "parent2" && selectedParent.value === 1) {
       colorDay.value = "conflict";
-      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, hasActivity.value);
+      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -124,13 +134,13 @@ console.log("showActivity " + showActivity.value);
           day: dayNumber.value,
           state: "conflict",
           holiday: true,
-          activity: hasActivity.value,
+          activity: showActivity.value,
           displayed: true,
         })
       );
     } else if (colorDay.value === "conflict") {
       colorDay.value = "neutral";
-      emit("stateChange", "neutral", dayId, dayNumber, monthNumber, hasActivity.value);
+      emit("stateChange", "neutral", dayId, dayNumber, monthNumber, showActivity.value);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -138,7 +148,7 @@ console.log("showActivity " + showActivity.value);
           day: dayNumber.value,
           state: "neutral",
           holiday: true,
-          activity: hasActivity.value,
+          activity: showActivity.value,
           displayed: true,
         })
       );
