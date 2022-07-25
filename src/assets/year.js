@@ -5,6 +5,7 @@ export let year = {
       name: "january",
       days: [
         {
+          id: 0,
           day: 27,
           state: "neutral",
           holiday: true,
@@ -12,6 +13,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 1,
           day: 28,
           state: "neutral",
           holiday: true,
@@ -19,6 +21,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 2,
           day: 29,
           state: "neutral",
           holiday: false,
@@ -26,6 +29,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 3,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -33,6 +37,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 4,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -40,186 +45,217 @@ export let year = {
           displayed: false,
         },
         {
+          id: 5,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 6,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 7,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 8,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 9,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 10,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 11,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 12,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 13,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 14,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 15,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 16,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 17,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 18,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 19,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 20,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 21,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 22,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 23,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 24,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 25,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 26,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 27,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 28,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 29,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 30,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 31,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 32,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 33,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 34,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 35,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -231,189 +267,218 @@ export let year = {
       id: 1,
       name: "february",
       days: [
-        
-          {
-            day: 30,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-            displayed: false,
-          },
-          {
-            day: 31,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-            displayed: false,
-          },
-           {
-            day: 1,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 2,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 3,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 4,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 5,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 6,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 7,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 8,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 9,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 10,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 11,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 12,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 13,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 14,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 15,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 16,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 17,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 18,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 19,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-          {
-            day: 20,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 21,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 22,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 23,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 24,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 25,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 26,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 27,
-            state: "neutral",
-            holiday: false,
-            activity: false,
-          },
-           {
-            day: 28,
-            state: "blank",
-            holiday: false,
-            activity: false,
-          },
+        {
+          id: 0,
+          day: 30,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+          displayed: false,
+        },
+        {
+          id: 1,
+          day: 31,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+          displayed: false,
+        },
+        {
+          id: 2,
+          day: 1,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 3,
+          day: 2,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 4,
+          day: 3,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 5,
+          day: 4,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 6,
+          day: 5,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 7,
+          day: 6,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 8,
+          day: 7,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 9,
+          day: 8,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 10,
+          day: 9,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 11,
+          day: 10,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 12,
+          day: 11,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 13,
+          day: 12,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 14,
+          day: 13,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 15,
+          day: 14,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 16,
+          day: 15,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 17,
+          day: 16,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 18,
+          day: 17,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 19,
+          day: 18,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 20,
+          day: 19,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 21,
+          day: 20,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 22,
+          day: 21,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 23,
+          day: 22,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 24,
+          day: 23,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 25,
+          day: 24,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 26,
+          day: 25,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 27,
+          day: 26,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 28,
+          day: 27,
+          state: "neutral",
+          holiday: false,
+          activity: false,
+        },
+        {
+          id: 29,
+          day: 28,
+          state: "blank",
+          holiday: false,
+          activity: false,
+        },
       ],
     },
     {
@@ -421,6 +486,7 @@ export let year = {
       name: "march",
       days: [
         {
+          id: 0,
           day: 27,
           state: "neutral",
           holiday: false,
@@ -428,6 +494,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 1,
           day: 28,
           state: "neutral",
           holiday: false,
@@ -435,186 +502,217 @@ export let year = {
           displayed: false,
         },
         {
+          id: 2,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 3,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 4,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 5,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 6,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 7,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 8,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 9,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 10,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 11,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 12,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 13,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 14,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 16,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 18,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 19,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 20,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 21,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 22,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 32,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -627,13 +725,15 @@ export let year = {
       name: "april",
       days: [
         {
+          id: 0,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 1,
           day: 29,
           state: "neutral",
           holiday: false,
@@ -641,6 +741,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 2,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -648,6 +749,7 @@ export let year = {
           displayed: false,
         },
         {
+          id: 3,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -655,180 +757,210 @@ export let year = {
           displayed: false,
         },
         {
+          id: 4,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 5,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 6,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 7,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 8,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 13,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 14,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 15,
           day: 12,
           state: "neutral",
           holiday: true,
           activity: false,
         },
         {
+          id: 16,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 17,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 19,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 32,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 33,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -840,229 +972,266 @@ export let year = {
       id: 4,
       name: "may",
       days: [
-         {
+        {
+          id: 0,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 1,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 2,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 3,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 4,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 5,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 6,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 8,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 21,
           state: "neutral",
           holiday: true,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 32,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 33,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 34,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 35,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 36,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -1074,7 +1243,8 @@ export let year = {
       id: 5,
       name: "june",
       days: [
-         {
+        {
+          id: 0,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -1082,189 +1252,220 @@ export let year = {
           displayed: false,
         },
         {
+          id: 1,
           day: 31,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 2,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 3,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 4,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 5,
           day: 4,
 
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 6,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 8,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 15,
           state: "neutral",
           holiday: true,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -1276,215 +1477,250 @@ export let year = {
       id: 6,
       name: "july",
       days: [
-         {
+        {
+          id: 0,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
-         day: 28,
+        {
+          id: 1,
+          day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 2,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 3,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 4,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 5,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 6,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 8,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 32,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 33,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 34,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -1496,187 +1732,218 @@ export let year = {
       id: 7,
       name: "august",
       days: [
-       {
+        {
+          id: 0,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 1,
           day: 2,
           state: "neutral",
           holiday: true,
           activity: false,
         },
-         {
+        {
+          id: 2,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 3,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 4,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 5,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 6,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 8,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 16,
           state: "neutral",
           holiday: true,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -1688,7 +1955,8 @@ export let year = {
       id: 8,
       name: "september",
       days: [
-       {
+        {
+          id: 0,
           day: 29,
           state: "neutral",
           holiday: false,
@@ -1696,206 +1964,240 @@ export let year = {
           displayed: false,
         },
         {
+          id: 1,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 2,
           day: 31,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 3,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 4,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 5,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 6,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
-         day: 6,
+        {
+          id: 8,
+          day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
-         day: 8,
+        {
+          id: 10,
+          day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 32,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 33,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 34,
           day: 2,
           state: "neutral",
           holiday: false,
@@ -1907,222 +2209,258 @@ export let year = {
       id: 9,
       name: "october",
       days: [
-         {
+        {
+          id: 0,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 1,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 2,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 3,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 4,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 5,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 6,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 8,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 22,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 31,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 32,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 33,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 34,
           day: 30,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 35,
           day: 31,
           state: "neutral",
           holiday: false,
@@ -2134,188 +2472,219 @@ export let year = {
       id: 10,
       name: "november",
       days: [
-         {
+        {
+          id: 0,
           day: 31,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 1,
           day: 1,
           state: "neutral",
           holiday: true,
           activity: false,
         },
-         {
+        {
+          id: 2,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 3,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 4,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 5,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 6,
           day: 6,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 7,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 8,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 9,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 10,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 11,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 12,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 13,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 14,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 15,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 16,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 17,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 18,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 19,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 20,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 21,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 22,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 23,
           day: 23,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 24,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 25,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 26,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 27,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 28,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 29,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
         },
-         {
+        {
+          id: 30,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -2327,21 +2696,24 @@ export let year = {
       id: 11,
       name: "december",
       days: [
-         {
+        {
+          id: 0,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 1,
           day: 29,
           state: "neutral",
           holiday: false,
           activity: false,
           displayed: false,
         },
-         {
+        {
+          id: 2,
           day: 30,
           state: "neutral",
           holiday: false,
@@ -2349,174 +2721,203 @@ export let year = {
           displayed: false,
         },
         {
+          id: 3,
           day: 1,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 4,
           day: 2,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 5,
           day: 3,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 6,
           day: 4,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 7,
           day: 5,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 8,
           day: 6,
           state: "neutral",
           holiday: true,
           activity: false,
         },
         {
+          id: 9,
           day: 7,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 10,
           day: 8,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 11,
           day: 9,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 12,
           day: 10,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 13,
           day: 11,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 14,
           day: 12,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 15,
           day: 13,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 16,
           day: 14,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 17,
           day: 15,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 18,
           day: 16,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 19,
           day: 17,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 20,
           day: 18,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 21,
           day: 19,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 22,
           day: 20,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 23,
           day: 21,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 24,
           day: 22,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 25,
           day: 23,
           state: "neutral",
           holiday: true,
           activity: false,
         },
         {
+          id: 26,
           day: 24,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 27,
           day: 25,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 28,
           day: 26,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 29,
           day: 27,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 30,
           day: 28,
           state: "neutral",
           holiday: false,
           activity: false,
         },
         {
+          id: 31,
           day: 29,
           state: "neutral",
           holiday: false,

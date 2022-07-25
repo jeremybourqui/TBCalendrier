@@ -10,8 +10,9 @@ const props = defineProps({
   isDisplayed: Boolean,
   state: String,
   clear: Boolean,
-  comment: Boolean,
+  showCommentModal: Boolean,
   hasActivity: Boolean,
+  dayId: Number
 });
 
 let { hasActivity } = toRefs(props);
@@ -20,9 +21,10 @@ const { monthNumber } = toRefs(props);
 const { selectedParent } = toRefs(props);
 const { isHoliday } = toRefs(props);
 const { isDisplayed } = toRefs(props);
+const { dayId } = toRefs(props);
 let { state } = toRefs(props);
 let { clear } = toRefs(props);
-let { comment } = toRefs(props);
+let { showCommentModal } = toRefs(props);
 
 let colorDay = ref("");
 let storedState = localStorage.getItem(
@@ -67,7 +69,11 @@ let toggleColor = () => {
     colorDay.value = jsonState.state;
   }
 
-  if (!comment.value) {
+  console.log("dayid " + dayId.value);
+console.log("daynum " + dayNumber.value);
+
+
+  if (!showCommentModal.value) {
     if (colorDay.value === "neutral" || colorDay.value === "") {
       if (selectedParent.value === 1) {
         colorDay.value = "parent1";
@@ -81,10 +87,13 @@ let toggleColor = () => {
             displayed: true,
           })
         );
-        emit("stateChange", "parent1", dayNumber, monthNumber);
+        emit("stateChange", "parent1", dayId, dayNumber, monthNumber, hasActivity);
+
+    // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
+
       } else if (selectedParent.value === 2) {
         colorDay.value = "parent2";
-        emit("stateChange", "parent2", dayNumber, monthNumber);
+        emit("stateChange", "parent2", dayId, dayNumber, monthNumber, hasActivity);
         localStorage.setItem(
           `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
           JSON.stringify({
@@ -98,7 +107,7 @@ let toggleColor = () => {
       }
     } else if (colorDay.value === "parent1" && selectedParent.value === 2) {
       colorDay.value = "conflict";
-      emit("stateChange", "conflict", dayNumber, monthNumber);
+      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, hasActivity);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -111,7 +120,7 @@ let toggleColor = () => {
       );
     } else if (colorDay.value === "parent2" && selectedParent.value === 1) {
       colorDay.value = "conflict";
-      emit("stateChange", "conflict", dayNumber, monthNumber);
+      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, hasActivity);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -124,7 +133,7 @@ let toggleColor = () => {
       );
     } else if (colorDay.value === "conflict") {
       colorDay.value = "neutral";
-      emit("stateChange", "neutral", dayNumber, monthNumber);
+      emit("stateChange", "neutral", dayId, dayNumber, monthNumber, hasActivity);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -135,8 +144,8 @@ let toggleColor = () => {
           displayed: true,
         })
       );
-    }
-  }
+    };
+  };
 };
 
 let modalComment = ref(false);
@@ -144,31 +153,38 @@ let modalComment = ref(false);
 const textComment = ref("");
 
 let addComment = () => {
-  console.log(comment.value);
-  if (comment.value) {
-    console.log("add comment");
+  if (showCommentModal.value) {
     modalComment.value = true;
     emit("resetComment");
-  }
+  };
 };
 
 let saveComment = () => {
-  console.log("actiday " + activity.value);
+  // console.log("actiday " + activity.value);
   emit("saveComment", textComment);
-  emit("stateChange", state, dayNumber, monthNumber, true);
+  emit("stateChange", state, dayId, dayNumber, monthNumber, true);
+  console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
           `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
           JSON.stringify({
+            id: dayId.value,
             day: dayNumber.value,
             state: state.value,
             holiday: true,
-            activity: textComment.value,
+            activity: true,
             displayed: true,
           }));
 };
 </script>
 
 <template>
+<modal :show="modalComment" @close="modalComment = false">
+    <slot>
+      <p>Commentaire</p>
+      <input v-model="textComment">
+      <button @click="saveComment()">enregister</button>
+    </slot>
+    </modal> 
   <template v-if="isDisplayed === false">
     <div class="blank"></div>
   </template>
@@ -179,20 +195,11 @@ let saveComment = () => {
       @click="toggleColor(), addComment()"
     >
       <p>{{ dayNumber }}</p>
-      <div v-if="activity">
+      <div v-if="hasActivity">
       <div class="activity"></div>
       </div>
     </div>
   </template>
-    <modal :show="modalComment" @close="modalComment = false">
-    <slot>
-      <p>Commentaire</p>
-      <input v-model="textComment">
-      <button @click="saveComment()">enregister</button>
-    </slot>
-    </modal> 
-    
-
 </template>
 
 <style scoped>

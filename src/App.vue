@@ -11,9 +11,11 @@ const { t, locale } = useI18n({
   useScope: "local",
 });
 
+console.log(year);
+
 let selectedParent = ref(1);
 let selectedYear = ref(year);
-let comment = ref(false);
+let showCommentModal = ref(false);
 
 let neutralDay = ref(31);
 let parent1Day = ref(0);
@@ -21,7 +23,6 @@ let parent2Day = ref(0);
 let conflict = ref(0);
 
 let displayedComment = ref([]);
-
 
 const gridMonth = ref("grid");
 
@@ -46,16 +47,19 @@ let clearDay = () => {
 };
 
 //update the selected day
-let updateDayState = (newState, dayClicked, monthNumber, newActivity) => {
+let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity) => {
   let day = dayClicked.value;
+  console.log("day id " +dayId.value);
+  console.log("day click " +dayClicked.value);
   let month = monthNumber.value;
   // console.log(`newacti ${newActivity}`);
   // console.log(`oldacti ${year.months[month].days[day].activity}`);
   // console.log(`newstate ${newState}`);
-  // console.log(`oldastate ${year.months[month].days[day].state}`);
-  year.months[month].days[day].state = newState;
-  year.months[month].days[day].activity = newActivity;
+  // console.log(`dayupdate ${year.months[month].days[day].day}`);
+  year.months[month].days[dayId.value].state = newState;
+  year.months[month].days[dayId.value].activity = newActivity;
   countDayState();
+  console.log(year);
 };
 
 //count each day state
@@ -86,14 +90,14 @@ window.addEventListener("keydown", function (e) {
   } else if (e.code === "Digit2") {
     selectedParent.value = 2;
   } else if (e.code === "KeyC") {
-    comment.value = true;
+    showCommentModal.value = true;
   };
 });
 
 // reset comment to false
 let resetComment = () => {
   console.log("reset comment");
-  comment.value = false;
+  showCommentModal.value = false;
 };
 
 
@@ -201,20 +205,22 @@ if (localStorage.length === 0) {
             {{ t("back") }}
           </button>
           <div class="month">
-            <template v-for="(day, indexDay) in month.days">
+            <template v-for="(days, indexDay) in month.days">
+            <!-- {{ indexDay }} -->
               <DayShortcut
                 :clear="clear"
+                :day-id="month.days[indexDay].id"
                 :day-number="month.days[indexDay].day"
                 :month-number="parseInt(month.id)"
                 :selected-parent="selectedParent"
                 :is-holiday="month.days[indexDay].holiday"
                 :state="month.days[indexDay].state"
-                :activity="month.days[indexDay].activity"
+                :has-activity="month.days[indexDay].activity"
                 @state-change="updateDayState"
                 @reset-comment="resetComment"
                 @save-comment="displayComment"
                 :is-displayed="month.days[indexDay].displayed"
-                :comment="comment"
+                :showCommentModal="showCommentModal"
               />
             </template>
           </div>
@@ -305,7 +311,7 @@ if (localStorage.length === 0) {
     "january": "Januar",
     "february": "Februar",
     "march": "März",
-    "april": "April",
+    "april": "April",c
     "may": "Mai",
     "june": "Juni",
     "july": "Juli",
