@@ -11,7 +11,7 @@ const { t, locale } = useI18n({
   useScope: "local",
 });
 
-console.log(year);
+// console.log(year);
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
@@ -49,17 +49,17 @@ let clearDay = () => {
 //update the selected day
 let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity) => {
   let day = dayClicked.value;
-  console.log("day id " +dayId.value);
-  console.log("day click " +dayClicked.value);
   let month = monthNumber.value;
-  // console.log(`newacti ${newActivity}`);
-  // console.log(`oldacti ${year.months[month].days[day].activity}`);
+  // let activity = newActivity.value;
+  console.log(`newacti ${newActivity}`);
+  console.log(year.months[month].days[dayId.value]);
   // console.log(`newstate ${newState}`);
   // console.log(`dayupdate ${year.months[month].days[day].day}`);
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   countDayState();
-  console.log(year);
+  console.log(year.months[month].days[dayId.value]);
+  // console.log(year);
 };
 
 //count each day state
@@ -123,33 +123,30 @@ for (let i = 0; i < localStorage.length; i++) {
       let value = localStorage.getItem(key);
       let obj = JSON.parse(value);
       if (obj.activity) {
-        console.log(obj);
+        // console.log(obj);
         displayedComment.value.push(obj.activity);
       };
     };
 
 
 // a loop that goes through each day of year
-let updateYear = () => {
-  for (let i = 0; i < year.months.length; i++) {
-    // console.log(year.months[i]);
-    // console.log(year.months[i].days.length);
-    for (let j = 0; j < year.months[i].days.length; j++) {
-      // console.log(year.months[i].days[j]);
-      localStorage.setItem(
-        `year.months[${i}].days[${j}]`,
-        JSON.stringify(year.months[i].days[j])
-      );
-    }
-  }
-};
+// let updateYear = () => {
+//   for (let i = 0; i < year.months.length; i++) {
+    
+//     for (let j = 0; j < year.months[i].days.length; j++) {
+//       localStorage.setItem(
+//         `year.months[${i}].days[${j}]`,
+//         JSON.stringify(year.months[i].days[j])
+//       );
+//     }
+//   }
+// };
 
-if (localStorage.length === 0) {
-  // console.log(localStorage.length);;
-  updateYear();
-} else {
-  console.log("plein");
-}
+// if (localStorage.length === 0) {
+//   updateYear();
+// } else {
+//   console.log("plein");
+// }
 </script>
 
 <template>
