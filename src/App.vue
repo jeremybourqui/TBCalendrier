@@ -50,13 +50,13 @@ let clearDay = () => {
 let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity, comment) => {
   let day = dayClicked.value;
   let month = monthNumber.value;
-  console.log(`newacti ${newActivity}`);
-  console.log(year.months[month].days[dayId.value]);
+  // console.log(`newacti ${newActivity}`);
+  // console.log(year.months[month].days[dayId.value]);
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
   countDayState();
-  console.log(year.months[month].days[dayId.value]);
+  // console.log(year.months[month].days[dayId.value]);
 };
 
 //count each day state
@@ -64,6 +64,7 @@ let countDayState = () => {
   let countValuesInObj = (obj, value) => {
     let count = 0;
     for (const property in obj) {
+      // console.log(property);
       if (typeof obj[property] === "object") {
         count = count + countValuesInObj(obj[property], value);
       }
@@ -100,19 +101,51 @@ let resetComment = () => {
 
 let displayComment = (comment) => {
   displayedComment.value.push(comment);
-
-// define a function to loop the local storage and display the comments  
-    // for (let i = 0; i < localStorage.length; i++) {
-    //   let key = localStorage.key(i);
-    //   let value = localStorage.getItem(key);
-    //   let obj = JSON.parse(value);
-    //   if (obj.activity) {
-    //     console.log(obj);
-    //     displayedComment.value.push(obj.activity);
-    //   };
-    // };
   // console.log(displayedComment.value);
   };
+
+let deleteComment = (comment) => {
+  console.log(comment);
+  let index = displayedComment.value.indexOf(comment);
+  displayedComment.value.splice(index, 1);
+
+  for (var i = 0; i < localStorage.length; i++) {
+   console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+   let storage = (JSON.parse(localStorage.getItem(localStorage.key(i))));
+    if (storage.comment === comment.value || storage.comment === comment) {
+      storage.comment = "";
+      storage.activity = false;
+    }
+    localStorage.setItem(localStorage.key(i), JSON.stringify(storage));
+    // console.log(storage);
+  };
+
+
+  //define a function to loop in the nested property of the object and delete the comment
+  // let deleteCommentInObj = (obj, comment) => {
+  //   for (const property in obj) {
+  //     // console.log(property);
+  //     if (typeof obj[property] === "object") {
+  //       deleteCommentInObj(obj[property], comment);
+  //     }
+  //     if (obj[property] === comment) {
+  //       console.log(obj[property]);
+  //       obj[property].activity = false;
+  //     }
+  //   }
+  // };
+
+  //loop in the object to delete the comment
+  // deleteCommentInObj(year, comment);
+  
+
+
+  // console.log(year.months[9].days[31].comment);
+  // console.log(year.months[9].days[32].comment);
+  // console.log(year.months[9].days[33].comment);
+  // console.log(year.months[9].days[34].comment);
+
+};
 
 //define a function to retrieve the comment in local storage
 for (let i = 0; i < localStorage.length; i++) {
@@ -223,9 +256,11 @@ for (let i = 0; i < localStorage.length; i++) {
       </div>
     </template>
   </div>
-      <p v-for="comment in displayedComment">
-        {{ comment }}
-      </p>
+      <div v-for="comment in displayedComment">
+       <p> {{ comment }}
+       <button @click="deleteComment(comment)">Supprimer</button>
+       </p>
+      </div>
 </template>
 
 <style scoped>
@@ -233,7 +268,7 @@ for (let i = 0; i < localStorage.length; i++) {
   display: v-bind("gridMonth");
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  grid-gap: 15px;
+  grid-gap: 25px;
 }
 </style>
 

@@ -36,18 +36,18 @@ let storedState = localStorage.getItem(
 );
 let jsonState = JSON.parse(storedState);
 if (jsonState !== null) {
-  console.log(jsonState.activity);
+  // console.log(jsonState.activity);
   colorDay.value = jsonState.state;
-  console.log("jsonStateactivity"+ jsonState.activity);
+  // console.log("jsonStateactivity"+ jsonState.activity);
   if (typeof jsonState.activity == 'undefined') {
     showActivity.value = false;
-    console.log("undefined log");
+    // console.log("undefined log");
   } else {
     showActivity.value = jsonState.activity;
-    console.log("defined log");
+    // console.log("defined log");
   };
   // hasActivity.value = jsonState.hasActivity;
-  console.log("jsont "+jsonState.activity);
+  // console.log("jsont "+jsonState.activity);
   // console.log("hasactivity "+hasActivity.value);
 };
 
@@ -186,8 +186,9 @@ let saveComment = () => {
 <modal :show="modalComment" @close="modalComment = false">
     <slot>
       <p>Commentaire</p>
-      <input v-model="textComment">
-      <button @click="saveComment()">enregister</button>
+      <p> {{ dayNumber }}.{{ monthNumber+1 }} </p>
+      <textarea v-model=textComment></textarea>
+      <button @click="saveComment(), modalComment = false">Enregister</button>
     </slot>
     </modal> 
   <template v-if="isDisplayed === false">

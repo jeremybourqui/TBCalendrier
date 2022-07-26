@@ -15,13 +15,11 @@
     <div v-if="show" class="modal">
         <div class="modal-content">
             
-            <p> test </p>
-
-            <button class="modal-default-button" @click="$emit('close')">Retour</button>
-
+            
             <div>
                 <slot></slot>
             </div>
+                <button class="modal-default-button" @click="$emit('close')">Retour</button>
 
         </div>
     </div>
