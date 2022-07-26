@@ -79,7 +79,7 @@ let toggleColor = () => {
             id: dayId.value,
             day: dayNumber.value,
             state: "parent1",
-            holiday: true,
+            holiday: isHoliday.value,
             activity: showActivity.value,
             comment: comment.value,
             displayed: true,
@@ -95,7 +95,7 @@ let toggleColor = () => {
             id: dayId.value,
             day: dayNumber.value,
             state: "parent2",
-            holiday: true,
+            holiday: isHoliday.value,
             activity: hasActivity.value,
             comment: comment.value,
             displayed: true,
@@ -111,7 +111,7 @@ let toggleColor = () => {
           id: dayId.value,
           day: dayNumber.value,
           state: "conflict",
-          holiday: true,
+          holiday: isHoliday.value,
           activity: showActivity.value,
           comment: comment.value,
           displayed: true,
@@ -126,7 +126,7 @@ let toggleColor = () => {
           id: dayId.value,
           day: dayNumber.value,
           state: "conflict",
-          holiday: true,
+          holiday: isHoliday.value,
           activity: showActivity.value,
           comment: comment.value,
           displayed: true,
@@ -141,7 +141,7 @@ let toggleColor = () => {
           id: dayId.value,
           day: dayNumber.value,
           state: "neutral",
-          holiday: true,
+          holiday: isHoliday.value,
           activity: showActivity.value,
           comment: comment.value,
           displayed: true,
@@ -162,8 +162,28 @@ let addComment = () => {
   };
 };
 
-let saveComment = () => {
+let deleteComment = () => {
   // console.log("actiday " + activity.value);
+  showActivity.value = false;
+  textComment.value = "";
+  // emit("saveComment", textComment);
+  emit("stateChange", state, dayId, dayNumber, monthNumber, false, "");
+  // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
+  localStorage.setItem(
+          `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+          JSON.stringify({
+            id: dayId.value,
+            day: dayNumber.value,
+            state: state.value,
+            holiday: true,
+            activity: false,
+            comment: "",
+            displayed: true,
+          }));
+};
+
+let saveComment = () => {
+  console.log();
   showActivity.value = true;
   emit("saveComment", textComment);
   emit("stateChange", state, dayId, dayNumber, monthNumber, true, textComment.value);
@@ -189,6 +209,7 @@ let saveComment = () => {
       <p> {{ dayNumber }}.{{ monthNumber+1 }} </p>
       <textarea v-model=textComment></textarea>
       <button @click="saveComment(), modalComment = false">Enregister</button>
+      <button @click="deleteComment(), modalComment = false">Effacer</button>
     </slot>
     </modal> 
   <template v-if="isDisplayed === false">
@@ -205,6 +226,14 @@ let saveComment = () => {
       <div class="activity"></div>
       </div>
     </div>
+    <!-- <div v-if="isHoliday" class="holiday day" @click="toggleColor(), addComment()"
+>
+      <p>{{ dayNumber }}</p>
+      <div v-if="showActivity">
+      <div class="activity"></div>
+      </div>
+    
+    </div> -->
   </template>
 </template>
 
@@ -213,11 +242,11 @@ let saveComment = () => {
   /* height: 100px;
     width: 100px; */
   display: inline-block;
-  border: 1px solid black;
   background-color: #dadada;
   place-self: center;
   align-self: stretch;
   justify-self: stretch;
+  border-radius: 8px;
 }
 
 .neutral {
@@ -237,8 +266,10 @@ let saveComment = () => {
 }
 
 .holiday {
-  border-color: #47115a;
+  border-color: #000000;
   border-width: 5px;
+  border-style: solid;
+
 }
 
 .blank {
@@ -249,5 +280,6 @@ let saveComment = () => {
   background-color: black;
   height: 10px;
   width: 10px;
+  border-radius: 100%;
 }
 </style>

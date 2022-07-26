@@ -2,6 +2,7 @@
 import { ref, watch, onMounted } from "vue";
 import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
+import Comment from "./components/Comment.vue";
 import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co } from "./assets/year_fr_enfantine_primaire_co.js";
 import { useI18n } from "vue-i18n";
@@ -33,6 +34,9 @@ let print = () => window.print();
 
 let clear = ref(false);
 
+// let clearComment = ref(false);
+
+
 //define a function to assign clear to false and then to true after a while
 let clearDay = () => {
   clear.value = false;
@@ -47,16 +51,27 @@ let clearDay = () => {
 };
 
 //update the selected day
-let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity, comment) => {
+let updateDayState = (
+  newState,
+  dayId,
+  dayClicked,
+  monthNumber,
+  newActivity,
+  comment
+) => {
   let day = dayClicked.value;
   let month = monthNumber.value;
   // console.log(`newacti ${newActivity}`);
   // console.log(year.months[month].days[dayId.value]);
+
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
   countDayState();
-  // console.log(year.months[month].days[dayId.value]);
+  console.log(year.months[month].days[dayId.value]);
+  watch(dayId, (newValue) => {
+      console.log(newValue);
+  });
 };
 
 //count each day state
@@ -89,7 +104,7 @@ window.addEventListener("keydown", function (e) {
     selectedParent.value = 2;
   } else if (e.code === "KeyC") {
     showCommentModal.value = true;
-  };
+  }
 });
 
 // reset comment to false
@@ -98,37 +113,45 @@ let resetComment = () => {
   showCommentModal.value = false;
 };
 
-
 let displayComment = (comment) => {
   displayedComment.value.push(comment);
   // console.log(displayedComment.value);
-  };
+};
 
-let deleteComment = (comment) => {
-  console.log(comment);
-  let index = displayedComment.value.indexOf(comment);
-  displayedComment.value.splice(index, 1);
+let deleteComment = (month, day) => {
+  console.log(month, day);
+  // let index = displayedComment.value.indexOf(comment);
+  // displayedComment.value.splice(index, 1);
 
   for (var i = 0; i < localStorage.length; i++) {
-   console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-   let storage = (JSON.parse(localStorage.getItem(localStorage.key(i))));
-    if (storage.comment === comment.value || storage.comment === comment) {
-      storage.comment = "";
-      storage.activity = false;
-    }
-    localStorage.setItem(localStorage.key(i), JSON.stringify(storage));
+    //  console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+    // let storage = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    // if (storage.comment === comment.value || storage.comment === comment) {
+    //   storage.comment = "";
+    //   storage.activity = false;
+    // }
+    // localStorage.setItem(localStorage.key(i), JSON.stringify(storage));
     // console.log(storage);
-  };
+  }
 
+  selectedYear.value.months[month].days[day].comment = "";
+  selectedYear.value.months[month].days[day].activity = false;
+  // year.months[month].days[day].comment = "";
+  // year.months[month].days[day].activity = false;
+  // console.log(selectedYear.value.months[month].days[day]);
 
-  //define a function to loop in the nested property of the object and delete the comment
+  console.log(year);
+  console.log(selectedYear.value);
+
+  // define a function to loop in the nested property of the object and delete the comment
   // let deleteCommentInObj = (obj, comment) => {
   //   for (const property in obj) {
   //     // console.log(property);
   //     if (typeof obj[property] === "object") {
   //       deleteCommentInObj(obj[property], comment);
   //     }
-  //     if (obj[property] === comment) {
+  //     if (obj[property] === comment.value) {
+  //       console.log("delete comment");
   //       console.log(obj[property]);
   //       obj[property].activity = false;
   //     }
@@ -137,32 +160,28 @@ let deleteComment = (comment) => {
 
   //loop in the object to delete the comment
   // deleteCommentInObj(year, comment);
-  
-
 
   // console.log(year.months[9].days[31].comment);
   // console.log(year.months[9].days[32].comment);
   // console.log(year.months[9].days[33].comment);
   // console.log(year.months[9].days[34].comment);
-
 };
 
 //define a function to retrieve the comment in local storage
 for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i);
-      let value = localStorage.getItem(key);
-      let obj = JSON.parse(value);
-      if (obj.comment) {
-        // console.log(obj);
-        displayedComment.value.push(obj.comment);
-      };
-    };
-
+  let key = localStorage.key(i);
+  let value = localStorage.getItem(key);
+  let obj = JSON.parse(value);
+  if (obj.comment) {
+    // console.log(obj);
+    displayedComment.value.push(obj.comment);
+  }
+}
 
 // a loop that goes through each day of year
 // let updateYear = () => {
 //   for (let i = 0; i < year.months.length; i++) {
-    
+
 //     for (let j = 0; j < year.months[i].days.length; j++) {
 //       localStorage.setItem(
 //         `year.months[${i}].days[${j}]`,
@@ -177,6 +196,8 @@ for (let i = 0; i < localStorage.length; i++) {
 // } else {
 //   console.log("plein");
 // }
+
+
 </script>
 
 <template>
@@ -233,7 +254,7 @@ for (let i = 0; i < localStorage.length; i++) {
           </button>
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
-            <!-- {{ indexDay }} -->
+              <!-- {{ indexDay }} -->
               <DayShortcut
                 :clear="clear"
                 :day-id="month.days[indexDay].id"
@@ -256,11 +277,23 @@ for (let i = 0; i < localStorage.length; i++) {
       </div>
     </template>
   </div>
-      <div v-for="comment in displayedComment">
-       <p> {{ comment }}
-       <button @click="deleteComment(comment)">Supprimer</button>
-       </p>
+  <!-- <div v-for="comment in displayedComment">
+    <p>
+      {{ comment }}
+      <button @click="deleteComment(comment)">Supprimer</button>
+    </p> -->
+  <!-- </div> -->
+
+  <template v-for="month in selectedYear.months">
+    
+      <div v-for="day in month.days">
+        <div v-if="day.comment">
+          {{day.day}}.{{month.id}} {{ day.comment}}
+        </div>
       </div>
+    
+  </template>
+
 </template>
 
 <style scoped>
@@ -288,6 +321,8 @@ for (let i = 0; i < localStorage.length; i++) {
   gap: 10px 10px;
   justify-content: center;
   align-items: center;
+  background-color: #2c3e5009;
+  border-radius: 6px;
 }
 
 .header {
