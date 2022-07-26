@@ -12,7 +12,8 @@ const props = defineProps({
   clear: Boolean,
   showCommentModal: Boolean,
   hasActivity: Boolean,
-  dayId: Number
+  dayId: Number,
+  comment: String,
 });
 
 let { hasActivity } = toRefs(props);
@@ -25,6 +26,7 @@ const { dayId } = toRefs(props);
 let { state } = toRefs(props);
 let { clear } = toRefs(props);
 let { showCommentModal } = toRefs(props);
+let { comment } = toRefs(props);
 
 let colorDay = ref("");
 let showActivity = ref(false);
@@ -67,15 +69,6 @@ let clearDay = () => {
 const emit = defineEmits(["stateChange", "resetComment", "saveComment"]);
 
 let toggleColor = () => {
-
-
-//   console.log("dayid " + dayId.value);
-console.log("hasActivity " + hasActivity.value);
-console.log("showActivity " + showActivity.value);
-  // console.log("jsont "+jsonState.activity);
-
-
-
   if (!showCommentModal.value) {
     if (colorDay.value === "neutral" || colorDay.value === "") {
       if (selectedParent.value === 1) {
@@ -92,9 +85,6 @@ console.log("showActivity " + showActivity.value);
           })
         );
         emit("stateChange", "parent1", dayId, dayNumber, monthNumber, showActivity.value);
-
-    // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
-
       } else if (selectedParent.value === 2) {
         colorDay.value = "parent2";
         emit("stateChange", "parent2", dayId, dayNumber, monthNumber, showActivity.value);
@@ -171,7 +161,7 @@ let saveComment = () => {
   // console.log("actiday " + activity.value);
   showActivity.value = true;
   emit("saveComment", textComment);
-  emit("stateChange", state, dayId, dayNumber, monthNumber, true);
+  emit("stateChange", state, dayId, dayNumber, monthNumber, true, textComment.value);
   // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
           `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
@@ -181,6 +171,7 @@ let saveComment = () => {
             state: state.value,
             holiday: true,
             activity: true,
+            comment: textComment.value,
             displayed: true,
           }));
 };

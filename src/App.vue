@@ -47,19 +47,15 @@ let clearDay = () => {
 };
 
 //update the selected day
-let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity) => {
+let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity, comment) => {
   let day = dayClicked.value;
   let month = monthNumber.value;
-  // let activity = newActivity.value;
   console.log(`newacti ${newActivity}`);
   console.log(year.months[month].days[dayId.value]);
-  // console.log(`newstate ${newState}`);
-  // console.log(`dayupdate ${year.months[month].days[day].day}`);
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   countDayState();
   console.log(year.months[month].days[dayId.value]);
-  // console.log(year);
 };
 
 //count each day state
@@ -122,9 +118,9 @@ for (let i = 0; i < localStorage.length; i++) {
       let key = localStorage.key(i);
       let value = localStorage.getItem(key);
       let obj = JSON.parse(value);
-      if (obj.activity) {
+      if (obj.comment) {
         // console.log(obj);
-        displayedComment.value.push(obj.activity);
+        displayedComment.value.push(obj.comment);
       };
     };
 
@@ -213,6 +209,7 @@ for (let i = 0; i < localStorage.length; i++) {
                 :is-holiday="month.days[indexDay].holiday"
                 :state="month.days[indexDay].state"
                 :has-activity="month.days[indexDay].activity"
+                :comment="month.days[indexDay].comment"
                 @state-change="updateDayState"
                 @reset-comment="resetComment"
                 @save-comment="displayComment"
