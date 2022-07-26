@@ -81,13 +81,14 @@ let toggleColor = () => {
             state: "parent1",
             holiday: true,
             activity: showActivity.value,
+            comment: comment.value,
             displayed: true,
           })
         );
-        emit("stateChange", "parent1", dayId, dayNumber, monthNumber, showActivity.value);
+        emit("stateChange", "parent1", dayId, dayNumber, monthNumber, showActivity.value, comment);
       } else if (selectedParent.value === 2) {
         colorDay.value = "parent2";
-        emit("stateChange", "parent2", dayId, dayNumber, monthNumber, showActivity.value);
+        emit("stateChange", "parent2", dayId, dayNumber, monthNumber, showActivity.value, comment);
         localStorage.setItem(
           `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
           JSON.stringify({
@@ -96,13 +97,14 @@ let toggleColor = () => {
             state: "parent2",
             holiday: true,
             activity: hasActivity.value,
+            comment: comment.value,
             displayed: true,
           })
         );
       }
     } else if (colorDay.value === "parent1" && selectedParent.value === 2) {
       colorDay.value = "conflict";
-      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value);
+      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value, comment);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -111,12 +113,13 @@ let toggleColor = () => {
           state: "conflict",
           holiday: true,
           activity: showActivity.value,
+          comment: comment.value,
           displayed: true,
         })
       );
     } else if (colorDay.value === "parent2" && selectedParent.value === 1) {
       colorDay.value = "conflict";
-      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value);
+      emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value, comment);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -125,12 +128,13 @@ let toggleColor = () => {
           state: "conflict",
           holiday: true,
           activity: showActivity.value,
+          comment: comment.value,
           displayed: true,
         })
       );
     } else if (colorDay.value === "conflict") {
       colorDay.value = "neutral";
-      emit("stateChange", "neutral", dayId, dayNumber, monthNumber, showActivity.value);
+      emit("stateChange", "neutral", dayId, dayNumber, monthNumber, showActivity.value, comment);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
@@ -139,6 +143,7 @@ let toggleColor = () => {
           state: "neutral",
           holiday: true,
           activity: showActivity.value,
+          comment: comment.value,
           displayed: true,
         })
       );

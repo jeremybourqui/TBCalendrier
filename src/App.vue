@@ -54,6 +54,7 @@ let updateDayState = (newState, dayId, dayClicked, monthNumber, newActivity, com
   console.log(year.months[month].days[dayId.value]);
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
+  year.months[month].days[dayId.value].comment = comment;
   countDayState();
   console.log(year.months[month].days[dayId.value]);
 };
