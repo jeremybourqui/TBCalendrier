@@ -2,7 +2,6 @@
 import { ref, watch, onMounted } from "vue";
 import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
-import Comment from "./components/Comment.vue";
 import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co } from "./assets/year_fr_enfantine_primaire_co.js";
 import { useI18n } from "vue-i18n";
@@ -201,22 +200,23 @@ for (let i = 0; i < localStorage.length; i++) {
 </script>
 
 <template>
-  <form>
+  
+
+  <div class="header print-hidden">
+    <form class="print-hidden">
     <label>{{ t("language") }}</label>
     <select v-model="locale">
       <option value="fr">fr</option>
       <option value="de">de</option>
     </select>
   </form>
-
-  <div class="header">
-    <select v-model="selectedYear">
+    <select v-model="selectedYear" >
       <option :value="year">{{ t("none") }}</option>
       <option :value="year_fr_enfantine_primaire_co">
         {{ t("school") }}
       </option>
     </select>
-    <p>{{ t("day not assigned") }} : {{ neutralDay }}</p>
+    <!-- <p>{{ t("day not assigned") }} : {{ neutralDay }}</p> -->
     <p class="parent1" @click="selectParent(1)">
       {{ t("day parent1") }} : {{ parent1Day }}
     </p>
@@ -224,16 +224,16 @@ for (let i = 0; i < localStorage.length; i++) {
       {{ t("day parent2") }} : {{ parent2Day }}
     </p>
     <p>{{ t("conflict") }} : {{ conflict }}</p>
-    <button class="print" @click="print()">{{ t("print") }}</button>
-    <button class="print" @click="clearDay()">{{ t("clear") }}</button>
+    <button class="print-hidden" @click="print()">{{ t("print") }}</button>
+    <button class="print-hidden" @click="clearDay()">{{ t("clear") }}</button>
   </div>
-  <Count
+  <Count class="print-hidden"
     :neutral-day="neutralDay"
     :parent1-day="parent1Day"
     :parent2-day="parent2Day"
     :conflict="conflict"
   />
-  <div class="home-grid">
+  <div class="home-grid print-position">
     <template v-for="month in selectedYear.months">
       <div>
         <p
@@ -245,13 +245,15 @@ for (let i = 0; i < localStorage.length; i++) {
         </p>
         <div v-show="isVisible == true || isVisible == month.name">
           <p v-show="isVisible == month.name">{{ t(month.name) }}</p>
+          <div>
           <button
             v-show="isVisible == month.name"
-            class="button-modal"
+            class="button-modal print-hidden"
             @click="(isVisible = true), (gridMonth = 'grid')"
           >
             {{ t("back") }}
           </button>
+          </div>
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
               <!-- {{ indexDay }} -->
@@ -288,7 +290,7 @@ for (let i = 0; i < localStorage.length; i++) {
     
       <div v-for="day in month.days">
         <div v-if="day.comment">
-          {{day.day}}.{{month.id}} {{ day.comment}}
+          {{day.day}}.{{month.id+1}} {{ day.comment}}
         </div>
       </div>
     
@@ -313,6 +315,7 @@ for (let i = 0; i < localStorage.length; i++) {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #f7f8f9cb;
 }
 
 .month {
@@ -321,8 +324,9 @@ for (let i = 0; i < localStorage.length; i++) {
   gap: 10px 10px;
   justify-content: center;
   align-items: center;
-  background-color: #2c3e5009;
+  background-color: #fff;
   border-radius: 6px;
+  padding: 10px;
 }
 
 .header {
@@ -354,7 +358,17 @@ for (let i = 0; i < localStorage.length; i++) {
     print-color-adjust: exact !important;
   }
 
-  .print {
+  .print-position {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 9999;
+  }
+
+  .print-hidden {
     visibility: hidden;
   }
 }

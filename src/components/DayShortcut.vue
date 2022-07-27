@@ -28,7 +28,7 @@ let { clear } = toRefs(props);
 let { showCommentModal } = toRefs(props);
 let { comment } = toRefs(props);
 
-let colorDay = ref(state);
+let colorDay = ref("");
 let showActivity = ref(false);
 
 let storedState = localStorage.getItem(
