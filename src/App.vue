@@ -296,6 +296,7 @@ for (let i = 0; i < localStorage.length; i++) {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 25px;
+  user-select: none;
 }
 
 .conflict {

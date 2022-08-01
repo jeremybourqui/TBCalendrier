@@ -328,6 +328,10 @@ let slide = () => {
   border-radius: 8px;
 }
 
+.day:nth-child(7n -1),.day:nth-child(7n) {
+  filter: brightness(70%);
+}
+
 .neutral {
   background-color: #dadada;
 }
