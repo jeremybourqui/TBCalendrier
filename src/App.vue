@@ -194,11 +194,11 @@ for (let i = 0; i < localStorage.length; i++) {
 
 
     <div class="shortcut">
-      <div class="shortcut-item" :class="selectedParent === 1 ? 'parent1' : ''">Parent 1</div>  
-      <div class="shortcut-item" :class="selectedParent === 2 ? 'parent2' : ''">Parent 2</div>
-      <div class="shortcut-item" :class="selectedParent === 3 ? 'shared' : ''">Partagé</div> 
-      <div class="shortcut-item" :class="selectedParent === 4 ? 'conflict' : ''">Conflict</div>
-      <div class="shortcut-item" :class="selectedParent === 5 ? 'comment' : ''">Commentaire</div>
+      <div @click="selectedParent = 1" class="shortcut-item" :class="selectedParent === 1 ? 'parent1' : ''">Parent 1</div>  
+      <div @click="selectedParent = 2" class="shortcut-item" :class="selectedParent === 2 ? 'parent2' : ''">Parent 2</div>
+      <div @click="selectedParent = 3" class="shortcut-item" :class="selectedParent === 3 ? 'shared' : ''">Partagé</div> 
+      <div @click="selectedParent = 4" class="shortcut-item" :class="selectedParent === 4 ? 'conflict' : ''">Conflict</div>
+      <div @click="selectedParemt = 5" class="shortcut-item" :class="selectedParent === 5 ? 'comment' : ''">Commentaire</div>
     </div>
   <div class="header print-hidden">
     <form class="print-hidden">

@@ -350,8 +350,7 @@ let slide = () => {
 
 .shared {
   background-color: #15b039;
-  /* clip-path: polygon(100% 0, 0% 100%, 100% 100%); */
-  background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);;
+  background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
 }
 
 .holiday {
