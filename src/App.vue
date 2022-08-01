@@ -60,7 +60,6 @@ let updateDayState = (
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
   countDayState();
-  console.log(year.months[month].days[dayId.value]);
   watch(dayId, (newValue) => {
       console.log(newValue);
   });
@@ -94,6 +93,10 @@ window.addEventListener("keydown", function (e) {
     selectedParent.value = 2;
   } else if (e.code === "KeyC") {
     showCommentModal.value = true;
+  } else if (e.code === "Digit3") {
+    selectedParent.value = 3;
+  } else if (e.code === "Digit4") {
+    selectedParent.value = 4;
   }
 });
 
@@ -188,8 +191,15 @@ for (let i = 0; i < localStorage.length; i++) {
 </script>
 
 <template>
-  
 
+
+    <div class="shortcut">
+      <div class="shortcut-item" :class="selectedParent === 1 ? 'parent1' : ''">Parent 1</div>  
+      <div class="shortcut-item" :class="selectedParent === 2 ? 'parent2' : ''">Parent 2</div>
+      <div class="shortcut-item" :class="selectedParent === 3 ? 'shared' : ''">Partagé</div> 
+      <div class="shortcut-item" :class="selectedParent === 4 ? 'conflict' : ''">Conflict</div>
+      <div class="shortcut-item" :class="selectedParent === 5 ? 'comment' : ''">Commentaire</div>
+    </div>
   <div class="header print-hidden">
     <form class="print-hidden">
     <label>{{ t("language") }}</label>
@@ -287,9 +297,36 @@ for (let i = 0; i < localStorage.length; i++) {
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 25px;
 }
+
+.conflict {
+  border-radius: 8px;
+  border: solid 5px #ebfc30;
+}
+
+.parent1 {
+  border: solid 5px #2698d8;
+  border-radius: 8px;
+}
+
+.parent2 {
+  border: 5px solid #d82626;
+  border-radius: 8px;
+}
 </style>
 
 <style>
+
+.shortcut{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.shortcut-item{
+  padding: 10px;
+
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -317,12 +354,11 @@ for (let i = 0; i < localStorage.length; i++) {
   justify-content: space-evenly;
 }
 
-.parent1 {
-  background-color: #2698d8;
-}
 
-.parent2 {
-  background-color: #d82626;
+
+.shared {
+  border-radius: 8px;
+  border: solid 5px #15b039;
 }
 
 .test {
@@ -362,8 +398,8 @@ for (let i = 0; i < localStorage.length; i++) {
     "language": "Sprache",
     "print": "Drucken",
     "clear": "Löschen",
-    "day parent1": "Tag Parent 1",
-    "day parent2": "Tag Parent 2",
+    "day parent1": "Tag Eltern 1",
+    "day parent2": "Tag Eltern 2",
     "day not assigned": "Tag nicht zugewiesen",
     "conflict": "Konflikt",
     "back": "Zurück",

@@ -51,6 +51,8 @@ if (jsonState !== null) {
   // console.log("hasactivity "+hasActivity.value);
 };
 
+console.log(selectedParent.value);3
+
 watch(
   () => props.clear,
   (clear, prevClear) => {
@@ -71,7 +73,7 @@ const emit = defineEmits(["stateChange", "resetComment", "saveComment"]);
 
 let toggleColor = () => {
   if (!showCommentModal.value) {
-    if (colorDay.value === "neutral" || colorDay.value === "") {
+    
       if (selectedParent.value === 1) {
         colorDay.value = "parent1";
         localStorage.setItem(
@@ -103,7 +105,8 @@ let toggleColor = () => {
           })
         );
       }
-    } else if (colorDay.value === "parent1" && selectedParent.value === 2) {
+     else if (selectedParent.value === 3) {
+      console.log("parent3");
       colorDay.value = "conflict";
       emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value, comment);
       localStorage.setItem(
@@ -118,8 +121,8 @@ let toggleColor = () => {
           displayed: true,
         })
       );
-    } else if (colorDay.value === "parent2" && selectedParent.value === 1) {
-      colorDay.value = "conflict";
+    } else if (selectedParent.value === 4) {
+      colorDay.value = "shared";
       emit("stateChange", "conflict", dayId, dayNumber, monthNumber, showActivity.value, comment);
       localStorage.setItem(
         `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
@@ -133,7 +136,7 @@ let toggleColor = () => {
           displayed: true,
         })
       );
-    } else if (colorDay.value === "conflict") {
+    } else if (selectedParent.value === 5) {
       colorDay.value = "neutral";
       emit("stateChange", "neutral", dayId, dayNumber, monthNumber, showActivity.value, comment);
       localStorage.setItem(
@@ -264,6 +267,10 @@ let saveComment = () => {
 
 .conflict {
   background-color: #ebfc30;
+}
+
+.shared {
+  background-color: #15b039;
 }
 
 .holiday {
