@@ -67,15 +67,18 @@ let clearDay = () => {
   localStorage.clear();
   colorDay.value = "";
   showActivity.value = "";
-  emit(
-    "stateChange",
-    "neutral",
-    dayId,
-    dayNumber,
-    monthNumber,
-    showActivity.value,
-    comment
-  );
+  if (state.value != "neutral") {
+    state.value = "neutral";
+    emit(
+      "stateChange",
+      "neutral",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+  };
 };
 
 const emit = defineEmits(["stateChange", "resetComment", "saveComment"]);
@@ -328,7 +331,8 @@ let slide = () => {
   border-radius: 8px;
 }
 
-.day:nth-child(7n -1),.day:nth-child(7n) {
+.day:nth-child(7n -1),
+.day:nth-child(7n) {
   filter: brightness(70%);
 }
 
