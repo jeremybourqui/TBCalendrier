@@ -30,6 +30,7 @@ defineProps({
     flex-direction: row;
     justify-content: center;
     margin: 10px 0 10px 0;
+    width: 300px;
   }
 
   .count-item {

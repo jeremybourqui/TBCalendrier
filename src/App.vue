@@ -225,12 +225,14 @@ for (let i = 0; i < localStorage.length; i++) {
     <button class="print-hidden" @click="print()">{{ t("print") }}</button>
     <button class="print-hidden" @click="clearDay()">{{ t("clear") }}</button>
   </div>
+  <div class="count">
   <Count class="print-hidden"
     :neutral-day="neutralDay"
     :parent1-day="parent1Day"
     :parent2-day="parent2Day"
     :conflict="conflict"
   />
+  </div>
   <div class="home-grid print-position">
     <template v-for="month in selectedYear.months">
       <div>
@@ -291,6 +293,7 @@ for (let i = 0; i < localStorage.length; i++) {
 </template>
 
 <style scoped>
+
 .home-grid {
   display: v-bind("gridMonth");
   grid-template-columns: repeat(4, 1fr);
@@ -313,19 +316,34 @@ for (let i = 0; i < localStorage.length; i++) {
   border: 5px solid #d82626;
   border-radius: 8px;
 }
+
+.shared {
+  border-radius: 8px;
+  border: solid 5px; 
+  border-color: #d82626 #d82626 #2698d8 #2698d8;
+}
+
+.count {
+  display: flex;
+  justify-content: center;
+}
 </style>
 
 <style>
+
+html {
+  background-color: #f8f9fa;
+}
 
 .shortcut{
   display: flex;
   justify-content: center;
   align-content: center;
+  margin-bottom: 20px;
 }
 
 .shortcut-item{
   padding: 10px;
-
 }
 
 #app {
@@ -334,8 +352,8 @@ for (let i = 0; i < localStorage.length; i++) {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-  background-color: #f7f8f9cb;
+  margin-top: 20px;
+  background-color: #f8f9fa;
 }
 
 .month {
@@ -353,17 +371,6 @@ for (let i = 0; i < localStorage.length; i++) {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
-
-
-
-.shared {
-  border-radius: 8px;
-  border: solid 5px #15b039;
-}
-
-.test {
-  background-color: #1ea93a;
 }
 
 .button-modal {

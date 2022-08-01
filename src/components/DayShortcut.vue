@@ -128,7 +128,7 @@ let toggleColor = () => {
           displayed: true,
         })
       );
-    } else if (selectedParent.value === 3) {
+    } else if (selectedParent.value === 4) {
       console.log("parent3");
       colorDay.value = "conflict";
       emit(
@@ -152,7 +152,7 @@ let toggleColor = () => {
           displayed: true,
         })
       );
-    } else if (selectedParent.value === 4) {
+    } else if (selectedParent.value === 3) {
       colorDay.value = "shared";
       emit(
         "stateChange",
@@ -350,6 +350,8 @@ let slide = () => {
 
 .shared {
   background-color: #15b039;
+  /* clip-path: polygon(100% 0, 0% 100%, 100% 100%); */
+  background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);;
 }
 
 .holiday {
