@@ -11,8 +11,6 @@ const { t, locale } = useI18n({
   useScope: "local",
 });
 
-// console.log(year);
-
 let selectedParent = ref(1);
 let selectedYear = ref(year);
 let showCommentModal = ref(false);
@@ -32,8 +30,6 @@ const isVisible = ref(true);
 let print = () => window.print();
 
 let clear = ref(false);
-
-// let clearComment = ref(false);
 
 
 //define a function to assign clear to false and then to true after a while
@@ -60,9 +56,6 @@ let updateDayState = (
 ) => {
   let day = dayClicked.value;
   let month = monthNumber.value;
-  // console.log(`newacti ${newActivity}`);
-  // console.log(year.months[month].days[dayId.value]);
-
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
@@ -78,7 +71,6 @@ let countDayState = () => {
   let countValuesInObj = (obj, value) => {
     let count = 0;
     for (const property in obj) {
-      // console.log(property);
       if (typeof obj[property] === "object") {
         count = count + countValuesInObj(obj[property], value);
       }
@@ -96,7 +88,6 @@ let countDayState = () => {
 
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
-  // console.log(e.code);
   if (e.code === "Digit1") {
     selectedParent.value = 1;
   } else if (e.code === "Digit2") {
@@ -114,13 +105,10 @@ let resetComment = () => {
 
 let displayComment = (comment) => {
   displayedComment.value.push(comment);
-  // console.log(displayedComment.value);
 };
 
 let deleteComment = (month, day) => {
   console.log(month, day);
-  // let index = displayedComment.value.indexOf(comment);
-  // displayedComment.value.splice(index, 1);
 
   for (var i = 0; i < localStorage.length; i++) {
     //  console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
@@ -279,12 +267,6 @@ for (let i = 0; i < localStorage.length; i++) {
       </div>
     </template>
   </div>
-  <!-- <div v-for="comment in displayedComment">
-    <p>
-      {{ comment }}
-      <button @click="deleteComment(comment)">Supprimer</button>
-    </p> -->
-  <!-- </div> -->
 
   <template v-for="month in selectedYear.months">
     

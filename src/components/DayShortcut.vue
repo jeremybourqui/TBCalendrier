@@ -64,6 +64,7 @@ let clearDay = () => {
   localStorage.clear();
   colorDay.value = "";
   showActivity.value = "";
+  emit("stateChange", "neutral", dayId, dayNumber, monthNumber, showActivity.value, comment);
 };
 
 const emit = defineEmits(["stateChange", "resetComment", "saveComment"]);
