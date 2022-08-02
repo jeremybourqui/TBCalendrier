@@ -15,10 +15,11 @@ let selectedParent = ref(1);
 let selectedYear = ref(year);
 let showCommentModal = ref(false);
 
-let neutralDay = ref(31);
+let neutralDay = ref(0);
 let parent1Day = ref(0);
 let parent2Day = ref(0);
 let conflict = ref(0);
+let shared = ref(0);
 
 let displayedComment = ref([]);
 
@@ -38,6 +39,7 @@ let clearDay = () => {
   parent1Day.value = 0;
   parent2Day.value = 0;
   conflict.value = 0;
+  shared.value = 0;
   displayedComment.value = [];
   setTimeout(() => {
     clear.value = true;
@@ -90,6 +92,7 @@ let countDayState = () => {
   parent1Day.value = countValuesInObj(year, "parent1");
   parent2Day.value = countValuesInObj(year, "parent2");
   conflict.value = countValuesInObj(year, "conflict");
+  shared.value = countValuesInObj(year, "shared");
 };
 
 //shortcut for selectedParent
@@ -157,35 +160,35 @@ for (let i = 0; i < localStorage.length; i++) {
 <div class="sticky">
   <div class="shortcut">
     <div
-      @click="selectedParent = 1"
+      @click="selectedParent = 1, showCommentModal = false"
       class="shortcut-item"
       :class="selectedParent === 1 ? 'parent1' : ''"
     >
       Parent 1
     </div>
     <div
-      @click="selectedParent = 2"
+      @click="selectedParent = 2, showCommentModal = false"
       class="shortcut-item"
       :class="selectedParent === 2 ? 'parent2' : ''"
     >
       Parent 2
     </div>
     <div
-      @click="selectedParent = 3"
+      @click="selectedParent = 3, showCommentModal = false"
       class="shortcut-item"
       :class="selectedParent === 3 ? 'shared' : ''"
     >
       Partagé
     </div>
     <div
-      @click="selectedParent = 4"
+      @click="selectedParent = 4, showCommentModal = false"
       class="shortcut-item"
       :class="selectedParent === 4 ? 'conflict' : ''"
     >
       Conflict
     </div>
     <div
-      @click="selectedParent = 5"
+      @click="selectedParent = 5, showCommentModal = false"
       class="shortcut-item"
       :class="selectedParent === 5 ? 'neutral' : ''"
     >
@@ -214,13 +217,16 @@ for (let i = 0; i < localStorage.length; i++) {
       </option>
     </select>
     <!-- <p>{{ t("day not assigned") }} : {{ neutralDay }}</p> -->
-    <p class="parent1" @click="selectParent(1)">
+    <p class="parent1" @click="selectedParent = 1, showCommentModal = false">
       {{ t("day parent1") }} : {{ parent1Day }}
     </p>
-    <p class="parent2" @click="selectParent(2)">
+    <p class="parent2" @click="selectedParent = 2, showCommentModal = false">
       {{ t("day parent2") }} : {{ parent2Day }}
     </p>
-    <p>{{ t("conflict") }} : {{ conflict }}</p>
+    <p class="shared" @click="selectedParent = 3, showCommentModal = false">{{ t("shared") }} : {{ shared }}</p>
+    <p class="conflict" @click="selectedParent = 4, showCommentModal = false">{{ t("conflict") }} : {{ conflict }}</p>
+    <p class="neutral" @click="selectedParent = 5, showCommentModal = false">{{ t("neutral") }}</p>
+    <p class="comment" @click="selectedParent = 6, showCommentModal = true">{{ t("comment") }} </p>
     <button class="print-hidden" @click="print()">{{ t("print") }}</button>
     <button class="print-hidden" @click="clearDay()">{{ t("clear") }}</button>
   </div>
@@ -231,6 +237,7 @@ for (let i = 0; i < localStorage.length; i++) {
       :parent1-day="parent1Day"
       :parent2-day="parent2Day"
       :conflict="conflict"
+      :shared="shared"
     />
   </div>
   </div>
@@ -306,29 +313,35 @@ for (let i = 0; i < localStorage.length; i++) {
 }
 
 .conflict {
+  padding: 4px;
   border-radius: 8px;
   border: solid 5px #ebfc30;
 }
 
 .parent1 {
+  padding: 4px;
   border: solid 5px #2698d8;
   border-radius: 8px;
 }
 
 .parent2 {
+  padding: 4px;
   border: 5px solid #d82626;
   border-radius: 8px;
 }
 .neutral {
+  padding: 4px;
   border: 5px solid #dadada;
   border-radius: 8px;
 }
 .comment {
+  padding: 4px;
   border: 5px solid #000000;
   border-radius: 8px;
 }
 
 .shared {
+  padding: 4px;
   border-radius: 8px;
   border: solid 5px;
   border-color: #d82626 #d82626 #2698d8 #2698d8;
@@ -428,6 +441,9 @@ html {
     "day parent2": "Tag Eltern 2",
     "day not assigned": "Tag nicht zugewiesen",
     "conflict": "Konflikt",
+    "shared": "Gemeinsam",
+    "neutral": "Nicht zugewiesen",
+    "comment": "Kommentar",
     "back": "Zurück",
     "none": "Keine",
     "school": "Kindergarten, die Primar-und Orientierungsschule",
@@ -445,13 +461,16 @@ html {
     "december": "Dezember",
   },
   "fr": {
-    "language": "langue",
+    "language": "Langue",
     "print": "Imprimer",
     "clear": "Effacer",
     "day parent1": "Parent 1",
     "day parent2": "Parent 2",
     "day not assigned": "Jour non attribué",
     "conflict": "Conflit",
+    "shared": "Partagé",
+    "neutral":"Non attribué",
+    "comment": "Commentaire",
     "back": "Retour",
     "none": "Aucune",
     "school": "Enfantine, primaire, CO",
