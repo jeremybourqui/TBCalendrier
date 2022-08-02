@@ -31,7 +31,6 @@ let print = () => window.print();
 
 let clear = ref(false);
 
-
 //define a function to assign clear to false and then to true after a while
 let clearDay = () => {
   clear.value = false;
@@ -60,8 +59,14 @@ let updateDayState = (
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
   countDayState();
+
+  if (selectedParent.value === 6) {
+    selectedParent.value = 1;
+    selectedParent.value = 6;
+  }
+  
   watch(dayId, (newValue) => {
-      console.log(newValue);
+    console.log(newValue);
   });
 };
 
@@ -91,71 +96,24 @@ window.addEventListener("keydown", function (e) {
     selectedParent.value = 1;
   } else if (e.code === "Digit2") {
     selectedParent.value = 2;
-  } else if (e.code === "KeyC") {
+  } else if (e.code === "Digit6") {
     showCommentModal.value = true;
+    selectedParent.value = 6;
   } else if (e.code === "Digit3") {
     selectedParent.value = 3;
   } else if (e.code === "Digit4") {
     selectedParent.value = 4;
+  } else if (e.code === "Digit5") {
+    selectedParent.value = 5;
   }
 });
 
 // reset comment to false
 let resetComment = () => {
   console.log("reset comment");
-  showCommentModal.value = false;
+  // showCommentModal.value = false;
 };
 
-let displayComment = (comment) => {
-  displayedComment.value.push(comment);
-};
-
-let deleteComment = (month, day) => {
-  console.log(month, day);
-
-  for (var i = 0; i < localStorage.length; i++) {
-    //  console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-    // let storage = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    // if (storage.comment === comment.value || storage.comment === comment) {
-    //   storage.comment = "";
-    //   storage.activity = false;
-    // }
-    // localStorage.setItem(localStorage.key(i), JSON.stringify(storage));
-    // console.log(storage);
-  }
-
-  selectedYear.value.months[month].days[day].comment = "";
-  selectedYear.value.months[month].days[day].activity = false;
-  // year.months[month].days[day].comment = "";
-  // year.months[month].days[day].activity = false;
-  // console.log(selectedYear.value.months[month].days[day]);
-
-  console.log(year);
-  console.log(selectedYear.value);
-
-  // define a function to loop in the nested property of the object and delete the comment
-  // let deleteCommentInObj = (obj, comment) => {
-  //   for (const property in obj) {
-  //     // console.log(property);
-  //     if (typeof obj[property] === "object") {
-  //       deleteCommentInObj(obj[property], comment);
-  //     }
-  //     if (obj[property] === comment.value) {
-  //       console.log("delete comment");
-  //       console.log(obj[property]);
-  //       obj[property].activity = false;
-  //     }
-  //   }
-  // };
-
-  //loop in the object to delete the comment
-  // deleteCommentInObj(year, comment);
-
-  // console.log(year.months[9].days[31].comment);
-  // console.log(year.months[9].days[32].comment);
-  // console.log(year.months[9].days[33].comment);
-  // console.log(year.months[9].days[34].comment);
-};
 
 //define a function to retrieve the comment in local storage
 for (let i = 0; i < localStorage.length; i++) {
@@ -186,29 +144,62 @@ for (let i = 0; i < localStorage.length; i++) {
 // } else {
 //   console.log("plein");
 // }
-
-
 </script>
 
 <template>
-
-
-    <div class="shortcut">
-      <div @click="selectedParent = 1" class="shortcut-item" :class="selectedParent === 1 ? 'parent1' : ''">Parent 1</div>  
-      <div @click="selectedParent = 2" class="shortcut-item" :class="selectedParent === 2 ? 'parent2' : ''">Parent 2</div>
-      <div @click="selectedParent = 3" class="shortcut-item" :class="selectedParent === 3 ? 'shared' : ''">Partagé</div> 
-      <div @click="selectedParent = 4" class="shortcut-item" :class="selectedParent === 4 ? 'conflict' : ''">Conflict</div>
-      <div @click="selectedParemt = 5" class="shortcut-item" :class="selectedParent === 5 ? 'comment' : ''">Commentaire</div>
+  <div class="shortcut">
+    <div
+      @click="selectedParent = 1"
+      class="shortcut-item"
+      :class="selectedParent === 1 ? 'parent1' : ''"
+    >
+      Parent 1
     </div>
+    <div
+      @click="selectedParent = 2"
+      class="shortcut-item"
+      :class="selectedParent === 2 ? 'parent2' : ''"
+    >
+      Parent 2
+    </div>
+    <div
+      @click="selectedParent = 3"
+      class="shortcut-item"
+      :class="selectedParent === 3 ? 'shared' : ''"
+    >
+      Partagé
+    </div>
+    <div
+      @click="selectedParent = 4"
+      class="shortcut-item"
+      :class="selectedParent === 4 ? 'conflict' : ''"
+    >
+      Conflict
+    </div>
+    <div
+      @click="selectedParent = 5"
+      class="shortcut-item"
+      :class="selectedParent === 5 ? 'neutral' : ''"
+    >
+      Neutre
+    </div>
+    <div
+      @click="selectedParent = 6"
+      class="shortcut-item"
+      :class="selectedParent === 6 ? 'comment' : ''"
+    >
+      Commentaire
+    </div>
+  </div>
   <div class="header print-hidden">
     <form class="print-hidden">
-    <label>{{ t("language") }}</label>
-    <select v-model="locale">
-      <option value="fr">fr</option>
-      <option value="de">de</option>
-    </select>
-  </form>
-    <select v-model="selectedYear" >
+      <label>{{ t("language") }}</label>
+      <select v-model="locale">
+        <option value="fr">fr</option>
+        <option value="de">de</option>
+      </select>
+    </form>
+    <select v-model="selectedYear">
       <option :value="year">{{ t("none") }}</option>
       <option :value="year_fr_enfantine_primaire_co">
         {{ t("school") }}
@@ -226,12 +217,13 @@ for (let i = 0; i < localStorage.length; i++) {
     <button class="print-hidden" @click="clearDay()">{{ t("clear") }}</button>
   </div>
   <div class="count">
-  <Count class="print-hidden"
-    :neutral-day="neutralDay"
-    :parent1-day="parent1Day"
-    :parent2-day="parent2Day"
-    :conflict="conflict"
-  />
+    <Count
+      class="print-hidden"
+      :neutral-day="neutralDay"
+      :parent1-day="parent1Day"
+      :parent2-day="parent2Day"
+      :conflict="conflict"
+    />
   </div>
   <div class="home-grid print-position">
     <template v-for="month in selectedYear.months">
@@ -246,13 +238,13 @@ for (let i = 0; i < localStorage.length; i++) {
         <div v-show="isVisible == true || isVisible == month.name">
           <p v-show="isVisible == month.name">{{ t(month.name) }}</p>
           <div>
-          <button
-            v-show="isVisible == month.name"
-            class="button-modal print-hidden"
-            @click="(isVisible = true), (gridMonth = 'grid')"
-          >
-            {{ t("back") }}
-          </button>
+            <button
+              v-show="isVisible == month.name"
+              class="button-modal print-hidden"
+              @click="(isVisible = true), (gridMonth = 'grid')"
+            >
+              {{ t("back") }}
+            </button>
           </div>
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
@@ -268,8 +260,6 @@ for (let i = 0; i < localStorage.length; i++) {
                 :has-activity="month.days[indexDay].activity"
                 :comment="month.days[indexDay].comment"
                 @state-change="updateDayState"
-                @reset-comment="resetComment"
-                @save-comment="displayComment"
                 :is-displayed="month.days[indexDay].displayed"
                 :showCommentModal="showCommentModal"
               />
@@ -281,19 +271,15 @@ for (let i = 0; i < localStorage.length; i++) {
   </div>
 
   <template v-for="month in selectedYear.months">
-    
-      <div v-for="day in month.days">
-        <div v-if="day.comment">
-          {{day.day}}.{{month.id+1}} {{ day.comment}}
-        </div>
+    <div v-for="day in month.days">
+      <div v-if="day.comment">
+        {{ day.day }}.{{ month.id + 1 }} {{ day.comment }}
       </div>
-    
+    </div>
   </template>
-
 </template>
 
 <style scoped>
-
 .home-grid {
   display: v-bind("gridMonth");
   grid-template-columns: repeat(4, 1fr);
@@ -316,10 +302,18 @@ for (let i = 0; i < localStorage.length; i++) {
   border: 5px solid #d82626;
   border-radius: 8px;
 }
+.neutral {
+  border: 5px solid #dadada;
+  border-radius: 8px;
+}
+.comment {
+  border: 5px solid #000000;
+  border-radius: 8px;
+}
 
 .shared {
   border-radius: 8px;
-  border: solid 5px; 
+  border: solid 5px;
   border-color: #d82626 #d82626 #2698d8 #2698d8;
 }
 
@@ -330,19 +324,18 @@ for (let i = 0; i < localStorage.length; i++) {
 </style>
 
 <style>
-
 html {
   background-color: #f8f9fa;
 }
 
-.shortcut{
+.shortcut {
   display: flex;
   justify-content: center;
   align-content: center;
   margin-bottom: 20px;
 }
 
-.shortcut-item{
+.shortcut-item {
   padding: 10px;
 }
 

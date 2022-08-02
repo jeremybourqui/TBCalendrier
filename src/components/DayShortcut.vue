@@ -51,9 +51,6 @@ if (jsonState !== null) {
   // console.log("hasactivity "+hasActivity.value);
 }
 
-console.log(selectedParent.value);
-3;
-
 watch(
   () => props.clear,
   (clear, prevClear) => {
@@ -78,130 +75,155 @@ let clearDay = () => {
       showActivity.value,
       comment
     );
-  };
+  }
 };
 
-const emit = defineEmits(["stateChange", "resetComment", "saveComment"]);
+const emit = defineEmits([
+  "stateChange"
+]);
 
 let toggleColor = () => {
-  if (!showCommentModal.value) {
-    if (selectedParent.value === 1) {
-      colorDay.value = "parent1";
-      localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-        JSON.stringify({
-          id: dayId.value,
-          day: dayNumber.value,
-          state: "parent1",
-          holiday: isHoliday.value,
-          activity: showActivity.value,
-          comment: comment.value,
-          displayed: true,
-        })
-      );
-      emit(
-        "stateChange",
-        "parent1",
-        dayId,
-        dayNumber,
-        monthNumber,
-        showActivity.value,
-        comment
-      );
-    } else if (selectedParent.value === 2) {
-      colorDay.value = "parent2";
-      emit(
-        "stateChange",
-        "parent2",
-        dayId,
-        dayNumber,
-        monthNumber,
-        showActivity.value,
-        comment
-      );
-      localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-        JSON.stringify({
-          id: dayId.value,
-          day: dayNumber.value,
-          state: "parent2",
-          holiday: isHoliday.value,
-          activity: hasActivity.value,
-          comment: comment.value,
-          displayed: true,
-        })
-      );
-    } else if (selectedParent.value === 4) {
-      console.log("parent3");
-      colorDay.value = "conflict";
-      emit(
-        "stateChange",
-        "conflict",
-        dayId,
-        dayNumber,
-        monthNumber,
-        showActivity.value,
-        comment
-      );
-      localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-        JSON.stringify({
-          id: dayId.value,
-          day: dayNumber.value,
-          state: "conflict",
-          holiday: isHoliday.value,
-          activity: showActivity.value,
-          comment: comment.value,
-          displayed: true,
-        })
-      );
-    } else if (selectedParent.value === 3) {
-      colorDay.value = "shared";
-      emit(
-        "stateChange",
-        "conflict",
-        dayId,
-        dayNumber,
-        monthNumber,
-        showActivity.value,
-        comment
-      );
-      localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-        JSON.stringify({
-          id: dayId.value,
-          day: dayNumber.value,
-          state: "conflict",
-          holiday: isHoliday.value,
-          activity: showActivity.value,
-          comment: comment.value,
-          displayed: true,
-        })
-      );
-    } else if (selectedParent.value === 5) {
-      colorDay.value = "neutral";
-      emit(
-        "stateChange",
-        "neutral",
-        dayId,
-        dayNumber,
-        monthNumber,
-        showActivity.value,
-        comment
-      );
-      localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-        JSON.stringify({
-          id: dayId.value,
-          day: dayNumber.value,
-          state: "neutral",
-          holiday: isHoliday.value,
-          activity: showActivity.value,
-          comment: comment.value,
-          displayed: true,
-        })
-      );
-    }
+  console.log(comment.value);
+
+  if (selectedParent.value === 1) {
+    colorDay.value = "parent1";
+    localStorage.setItem(
+      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+      JSON.stringify({
+        id: dayId.value,
+        day: dayNumber.value,
+        state: "parent1",
+        holiday: isHoliday.value,
+        activity: showActivity.value,
+        comment: comment.value,
+        displayed: true,
+      })
+    );
+    emit(
+      "stateChange",
+      "parent1",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+  } else if (selectedParent.value === 2) {
+    colorDay.value = "parent2";
+    emit(
+      "stateChange",
+      "parent2",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+    localStorage.setItem(
+      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+      JSON.stringify({
+        id: dayId.value,
+        day: dayNumber.value,
+        state: "parent2",
+        holiday: isHoliday.value,
+        activity: hasActivity.value,
+        comment: comment.value,
+        displayed: true,
+      })
+    );
+  } else if (selectedParent.value === 4) {
+    console.log("parent3");
+    colorDay.value = "conflict";
+    emit(
+      "stateChange",
+      "conflict",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+    localStorage.setItem(
+      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+      JSON.stringify({
+        id: dayId.value,
+        day: dayNumber.value,
+        state: "conflict",
+        holiday: isHoliday.value,
+        activity: showActivity.value,
+        comment: comment.value,
+        displayed: true,
+      })
+    );
+  } else if (selectedParent.value === 3) {
+    colorDay.value = "shared";
+    emit(
+      "stateChange",
+      "conflict",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+    localStorage.setItem(
+      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+      JSON.stringify({
+        id: dayId.value,
+        day: dayNumber.value,
+        state: "conflict",
+        holiday: isHoliday.value,
+        activity: showActivity.value,
+        comment: comment.value,
+        displayed: true,
+      })
+    );
+  } else if (selectedParent.value === 5) {
+    colorDay.value = "neutral";
+    emit(
+      "stateChange",
+      "neutral",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+    localStorage.setItem(
+      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+      JSON.stringify({
+        id: dayId.value,
+        day: dayNumber.value,
+        state: "neutral",
+        holiday: isHoliday.value,
+        activity: showActivity.value,
+        comment: comment.value,
+        displayed: true,
+      })
+    );
+  } else if (selectedParent.value === 6) {
+    colorDay.value = "neutral";
+    emit(
+      "stateChange",
+      "neutral",
+      dayId,
+      dayNumber,
+      monthNumber,
+      showActivity.value,
+      comment
+    );
+    localStorage.setItem(
+      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+      JSON.stringify({
+        id: dayId.value,
+        day: dayNumber.value,
+        state: "neutral",
+        holiday: isHoliday.value,
+        activity: showActivity.value,
+        comment: comment.value,
+        displayed: true,
+      })
+    );
   }
 };
 
@@ -212,7 +234,6 @@ const textComment = ref("");
 let addComment = () => {
   if (showCommentModal.value) {
     modalComment.value = true;
-    emit("resetComment");
   }
 };
 
@@ -238,9 +259,7 @@ let deleteComment = () => {
 };
 
 let saveComment = () => {
-  console.log();
   showActivity.value = true;
-  emit("saveComment", textComment);
   emit(
     "stateChange",
     state,
