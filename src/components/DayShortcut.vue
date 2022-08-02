@@ -30,14 +30,26 @@ let { comment } = toRefs(props);
 
 let colorDay = ref("");
 let showActivity = ref(false);
+const textComment = ref("");
+
 
 let storedState = localStorage.getItem(
   `year.months[${monthNumber.value}].days[${dayNumber.value}]`
 );
 let jsonState = JSON.parse(storedState);
 if (jsonState !== null) {
-  // console.log(jsonState.activity);
+  console.log(jsonState.comment);
   colorDay.value = jsonState.state;
+  textComment.value = jsonState.comment;
+  emit(
+    "stateChange",
+    state,
+    dayId,
+    dayNumber,
+    monthNumber,
+    showActivity.value,
+    textComment.value
+  );
   // console.log("jsonStateactivity"+ jsonState.activity);
   if (typeof jsonState.activity == "undefined") {
     showActivity.value = false;
@@ -50,6 +62,8 @@ if (jsonState !== null) {
   // console.log("jsont "+jsonState.activity);
   // console.log("hasactivity "+hasActivity.value);
 }
+
+// console.log("text  "+textComment.value);
 
 watch(
   () => props.clear,
@@ -64,7 +78,8 @@ let clearDay = () => {
   localStorage.clear();
   colorDay.value = "";
   showActivity.value = "";
-  if (state.value != "neutral") {
+  textComment.value = "";
+  if (state.value != "neutral" || comment.value != "") {
     state.value = "neutral";
     emit(
       "stateChange",
@@ -73,7 +88,7 @@ let clearDay = () => {
       dayNumber,
       monthNumber,
       showActivity.value,
-      comment
+      ""
     );
   }
 };
@@ -160,7 +175,7 @@ let toggleColor = () => {
     colorDay.value = "shared";
     emit(
       "stateChange",
-      "conflict",
+      "shared",
       dayId,
       dayNumber,
       monthNumber,
@@ -172,7 +187,7 @@ let toggleColor = () => {
       JSON.stringify({
         id: dayId.value,
         day: dayNumber.value,
-        state: "conflict",
+        state: "shared",
         holiday: isHoliday.value,
         activity: showActivity.value,
         comment: comment.value,
@@ -231,7 +246,6 @@ let toggleColor = () => {
 
 let modalComment = ref(false);
 
-const textComment = ref("");
 
 let addComment = () => {
   if (showCommentModal.value) {
@@ -244,7 +258,7 @@ let deleteComment = () => {
   showActivity.value = false;
   textComment.value = "";
   // emit("saveComment", textComment);
-  emit("stateChange", state, dayId, dayNumber, monthNumber, false, "");
+  emit("stateChange", state, dayId, dayNumber, monthNumber, false, textComment);
   emit("resetComment");
   // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
@@ -255,7 +269,7 @@ let deleteComment = () => {
       state: state.value,
       holiday: true,
       activity: false,
-      comment: "",
+      comment: textComment.value,
       displayed: true,
     })
   );

@@ -53,11 +53,13 @@ let updateDayState = (
   newActivity,
   comment
 ) => {
+  console.log("update "+ comment.value);
   let day = dayClicked.value;
   let month = monthNumber.value;
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
+  console.log(year.months[month].days[dayId.value].comment);
   countDayState();
 
   if (selectedParent.value === 6) {
