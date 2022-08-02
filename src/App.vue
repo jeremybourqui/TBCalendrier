@@ -266,17 +266,24 @@ for (let i = 0; i < localStorage.length; i++) {
             </template>
           </div>
         </div>
+
+
+        
+        <template v-for="monthComment in selectedYear.months">
+        <div v-if="month.id == monthComment.id">
+          <div v-for="day in monthComment.days">
+            <div v-if="day.comment">
+              {{ day.day }}.  {{ day.comment }}
+            </div>
+          </div>
+        </div>
+        </template>
+
+
       </div>
     </template>
   </div>
 
-  <template v-for="month in selectedYear.months">
-    <div v-for="day in month.days">
-      <div v-if="day.comment">
-        {{ day.day }}.{{ month.id + 1 }} {{ day.comment }}
-      </div>
-    </div>
-  </template>
 </template>
 
 <style scoped>
