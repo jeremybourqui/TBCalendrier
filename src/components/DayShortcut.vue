@@ -79,7 +79,8 @@ let clearDay = () => {
 };
 
 const emit = defineEmits([
-  "stateChange"
+  "stateChange",
+  "resetComment"
 ]);
 
 let toggleColor = () => {
@@ -201,30 +202,31 @@ let toggleColor = () => {
         displayed: true,
       })
     );
-  } else if (selectedParent.value === 6) {
-    colorDay.value = "neutral";
-    emit(
-      "stateChange",
-      "neutral",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      comment
-    );
-    localStorage.setItem(
-      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-      JSON.stringify({
-        id: dayId.value,
-        day: dayNumber.value,
-        state: "neutral",
-        holiday: isHoliday.value,
-        activity: showActivity.value,
-        comment: comment.value,
-        displayed: true,
-      })
-    );
-  }
+  } 
+  // else if (selectedParent.value === 6) {
+  //   colorDay.value = "neutral";
+  //   emit(
+  //     "stateChange",
+  //     "neutral",
+  //     dayId,
+  //     dayNumber,
+  //     monthNumber,
+  //     showActivity.value,
+  //     comment
+  //   );
+  //   localStorage.setItem(
+  //     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+  //     JSON.stringify({
+  //       id: dayId.value,
+  //       day: dayNumber.value,
+  //       state: "neutral",
+  //       holiday: isHoliday.value,
+  //       activity: showActivity.value,
+  //       comment: comment.value,
+  //       displayed: true,
+  //     })
+  //   );
+  // }
 };
 
 let modalComment = ref(false);
@@ -243,6 +245,7 @@ let deleteComment = () => {
   textComment.value = "";
   // emit("saveComment", textComment);
   emit("stateChange", state, dayId, dayNumber, monthNumber, false, "");
+  emit("resetComment");
   // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
@@ -269,6 +272,7 @@ let saveComment = () => {
     true,
     textComment.value
   );
+  emit("resetComment");
   // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,

@@ -43,7 +43,7 @@ let clearDay = () => {
     clear.value = true;
   }, 10);
 };
-
+console.log(selectedParent.value);
 //update the selected day
 let updateDayState = (
   newState,
@@ -64,7 +64,7 @@ let updateDayState = (
     selectedParent.value = 1;
     selectedParent.value = 6;
   }
-  
+  console.log(selectedParent.value);
   watch(dayId, (newValue) => {
     console.log(newValue);
   });
@@ -111,7 +111,7 @@ window.addEventListener("keydown", function (e) {
 // reset comment to false
 let resetComment = () => {
   console.log("reset comment");
-  // showCommentModal.value = false;
+  showCommentModal.value = false;
 };
 
 
@@ -147,6 +147,7 @@ for (let i = 0; i < localStorage.length; i++) {
 </script>
 
 <template>
+<div class="sticky">
   <div class="shortcut">
     <div
       @click="selectedParent = 1"
@@ -184,7 +185,7 @@ for (let i = 0; i < localStorage.length; i++) {
       Neutre
     </div>
     <div
-      @click="selectedParent = 6"
+      @click="selectedParent = 6, showCommentModal = true"
       class="shortcut-item"
       :class="selectedParent === 6 ? 'comment' : ''"
     >
@@ -225,6 +226,7 @@ for (let i = 0; i < localStorage.length; i++) {
       :conflict="conflict"
     />
   </div>
+  </div>
   <div class="home-grid print-position">
     <template v-for="month in selectedYear.months">
       <div>
@@ -260,6 +262,7 @@ for (let i = 0; i < localStorage.length; i++) {
                 :has-activity="month.days[indexDay].activity"
                 :comment="month.days[indexDay].comment"
                 @state-change="updateDayState"
+                @reset-comment="resetComment"
                 :is-displayed="month.days[indexDay].displayed"
                 :showCommentModal="showCommentModal"
               />
@@ -344,6 +347,14 @@ html {
 
 .shortcut-item {
   padding: 10px;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #f8f9fa;
+  box-shadow: 0px 2px  #6f6f6f;
 }
 
 #app {
