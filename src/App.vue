@@ -93,17 +93,22 @@ let countDayState = () => {
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
   if (e.code === "Digit1") {
+    showCommentModal.value = false;
     selectedParent.value = 1;
   } else if (e.code === "Digit2") {
+    showCommentModal.value = false;
     selectedParent.value = 2;
   } else if (e.code === "Digit6") {
     showCommentModal.value = true;
     selectedParent.value = 6;
   } else if (e.code === "Digit3") {
+    showCommentModal.value = false;
     selectedParent.value = 3;
   } else if (e.code === "Digit4") {
+    showCommentModal.value = false;
     selectedParent.value = 4;
   } else if (e.code === "Digit5") {
+    showCommentModal.value = false;
     selectedParent.value = 5;
   }
 });
@@ -111,7 +116,7 @@ window.addEventListener("keydown", function (e) {
 // reset comment to false
 let resetComment = () => {
   console.log("reset comment");
-  showCommentModal.value = false;
+  // showCommentModal.value = false;
 };
 
 
