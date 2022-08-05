@@ -215,7 +215,7 @@ for (let i = 0; i < localStorage.length; i++) {
 
 <template>
 <div class="sticky">
-  <div class="shortcut">
+  <!-- <div class="shortcut">
     <div
       @click="selectedParent = 1, showCommentModal = false"
       class="shortcut-item"
@@ -258,7 +258,7 @@ for (let i = 0; i < localStorage.length; i++) {
     >
       Commentaire
     </div>
-  </div>
+  </div> -->
   <div class="header print-hidden">
     <form class="print-hidden">
       <label>{{ t("language") }}</label>
@@ -337,6 +337,7 @@ for (let i = 0; i < localStorage.length; i++) {
                 @reset-clear="resetClear"
                 :is-displayed="month.days[indexDay].displayed"
                 :showCommentModal="showCommentModal"
+                :localeProp="locale"
               />
             </template>
           </div>
@@ -506,6 +507,7 @@ html {
     "comment": "Kommentar",
     "back": "Zurück",
     "none": "Keine",
+    "save": "Speichern",
     "school": "Kindergarten, die Primar-und Orientierungsschule",
     "january": "Januar",
     "february": "Februar",
@@ -533,6 +535,7 @@ html {
     "comment": "Commentaire",
     "back": "Retour",
     "none": "Aucune",
+    "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
     "january": "Janvier",
     "february": "Février",

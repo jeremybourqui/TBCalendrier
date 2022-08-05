@@ -19,7 +19,9 @@
             <div>
                 <slot></slot>
             </div>
-                <button class="modal-default-button" @click="$emit('close')">Retour</button>
+                <!-- <button class="modal-default-button"
+                 @click="$emit('close')">
+                 Retour</button> -->
 
         </div>
     </div>

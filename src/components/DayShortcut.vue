@@ -1,6 +1,9 @@
 <script setup>
 import { ref, toRefs, watch } from "vue";
 import modal from "./Modal.vue";
+import { useI18n } from "vue-i18n";
+
+
 
 const props = defineProps({
   dayNumber: Number,
@@ -14,6 +17,7 @@ const props = defineProps({
   hasActivity: Boolean,
   dayId: Number,
   comment: String,
+  localeProp: String,
 });
 
 let { hasActivity } = toRefs(props);
@@ -27,6 +31,24 @@ let { state } = toRefs(props);
 let { clear } = toRefs(props);
 let { showCommentModal } = toRefs(props);
 let { comment } = toRefs(props);
+let { localeProp } = toRefs(props);
+
+const { t, locale } = useI18n({
+  inheritLocale: true,
+  useScope: "local",
+});
+
+watch(
+  () => props.localeProp,
+  (newLocale, oldLocale) => {
+  console.log("watchlocale" + locale.value);
+  console.log("watchlocale" + newLocale);
+  console.log("watchlocale" + oldLocale);
+  locale.value = newLocale;
+  }
+);
+
+// console.log(locale.value);
 
 let colorDay = ref("");
 let showActivity = ref(false);
@@ -327,8 +349,9 @@ let slide = () => {
       <p>Commentaire</p>
       <p>{{ dayNumber }}.{{ monthNumber + 1 }}</p>
       <textarea v-model="textComment"></textarea>
-      <button @click="saveComment(), (modalComment = false)">Enregister</button>
-      <button @click="deleteComment(), (modalComment = false)">Effacer</button>
+      <button @click="saveComment(), (modalComment = false)">{{ t("save") }}</button>
+      <button @click="deleteComment(), (modalComment = false)">{{ t("clear") }}</button>
+      <button @click="modalComment = false">{{ t("back") }}</button>
     </slot>
   </modal>
   <template v-if="isDisplayed === false">
@@ -412,3 +435,18 @@ let slide = () => {
   border-radius: 100%;
 }
 </style>
+
+<i18n>
+{
+  "de": {
+    "back": "Zurück",
+    "save": "Speichern",
+    "clear": "Löschen",
+  },
+  "fr": {
+    "back": "Retour",
+    "clear": "Effacer",
+    "save": "Enregistrer"
+  }
+}
+</i18n>
