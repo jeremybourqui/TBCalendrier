@@ -22,17 +22,15 @@ let conflict = ref(0);
 let shared = ref(0);
 
 for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    console.log(key);
-    let month = key.substring(12,13);
-    let value = localStorage.getItem(key);
-    let obj = JSON.parse(value);
-    let newState = obj.state;
-    console.log(obj.state);
-    year.months[month].days[obj.id].state = newState;
-
-    
-  };
+  let key = localStorage.key(i);
+  console.log(key);
+  let month = key.substring(12, 13);
+  let value = localStorage.getItem(key);
+  let obj = JSON.parse(value);
+  let newState = obj.state;
+  console.log(obj.state);
+  year.months[month].days[obj.id].state = newState;
+}
 
 let displayedComment = ref([]);
 
@@ -92,8 +90,6 @@ let updateDayState = (
   });
 };
 
-
-
 //count each day state
 let countDayState = () => {
   let countValuesInObj = (obj, value) => {
@@ -146,7 +142,6 @@ let resetComment = () => {
   // showCommentModal.value = false;
 };
 
-
 //define a function to retrieve the comment in local storage
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
@@ -177,126 +172,110 @@ for (let i = 0; i < localStorage.length; i++) {
 //   console.log("plein");
 // }
 
-
-  // for (let i = 0; i < localStorage.length; i++) {
-  //   let key = localStorage.key(i);
-  //   let value = localStorage.getItem(key);
-  //   let obj = JSON.parse(value);
-  //   // console.log(obj);
-  //   switch (obj.state) {
-  //     case "neutral":
-  //       neutralDay.value++;
-  //       break;
-  //     case "parent1":
-  //       parent1Day.value++;
-  //       break;
-  //     case "parent2":
-  //       parent2Day.value++;
-  //       break;
-  //     case "conflict":
-  //       conflict.value++;
-  //       break;
-  //     case "shared":
-  //       shared.value++;
-  //       break;
-  //     default:
-  //       break;
-  //   };
-  //   console.log(neutralDay.value);
-  //   console.log(parent1Day.value);
-  //   console.log(parent2Day.value);
-  //   console.log(conflict.value);
-  //   console.log(shared.value);
-  // };
-
-
-
+// for (let i = 0; i < localStorage.length; i++) {
+//   let key = localStorage.key(i);
+//   let value = localStorage.getItem(key);
+//   let obj = JSON.parse(value);
+//   // console.log(obj);
+//   switch (obj.state) {
+//     case "neutral":
+//       neutralDay.value++;
+//       break;
+//     case "parent1":
+//       parent1Day.value++;
+//       break;
+//     case "parent2":
+//       parent2Day.value++;
+//       break;
+//     case "conflict":
+//       conflict.value++;
+//       break;
+//     case "shared":
+//       shared.value++;
+//       break;
+//     default:
+//       break;
+//   };
+//   console.log(neutralDay.value);
+//   console.log(parent1Day.value);
+//   console.log(parent2Day.value);
+//   console.log(conflict.value);
+//   console.log(shared.value);
+// };
 </script>
 
 <template>
-<div class="sticky">
-  <!-- <div class="shortcut">
-    <div
-      @click="selectedParent = 1, showCommentModal = false"
-      class="shortcut-item"
-      :class="selectedParent === 1 ? 'parent1' : ''"
-    >
-      Parent 1
-    </div>
-    <div
-      @click="selectedParent = 2, showCommentModal = false"
-      class="shortcut-item"
-      :class="selectedParent === 2 ? 'parent2' : ''"
-    >
-      Parent 2
-    </div>
-    <div
-      @click="selectedParent = 3, showCommentModal = false"
-      class="shortcut-item"
-      :class="selectedParent === 3 ? 'shared' : ''"
-    >
-      Partagé
-    </div>
-    <div
-      @click="selectedParent = 4, showCommentModal = false"
-      class="shortcut-item"
-      :class="selectedParent === 4 ? 'conflict' : ''"
-    >
-      Conflict
-    </div>
-    <div
-      @click="selectedParent = 5, showCommentModal = false"
-      class="shortcut-item"
-      :class="selectedParent === 5 ? 'neutral' : ''"
-    >
-      Neutre
-    </div>
-    <div
-      @click="selectedParent = 6, showCommentModal = true"
-      class="shortcut-item"
-      :class="selectedParent === 6 ? 'comment' : ''"
-    >
-      Commentaire
-    </div>
-  </div> -->
-  <div class="header print-hidden">
-    <form class="print-hidden">
-      <label>{{ t("language") }}</label>
-      <select v-model="locale">
-        <option value="fr">fr</option>
-        <option value="de">de</option>
+  <div class="sticky">
+    <div class="header print-hidden">
+      <form class="print-hidden">
+        <label>{{ t("language") }}</label>
+        <select v-model="locale">
+          <option value="fr">fr</option>
+          <option value="de">de</option>
+        </select>
+      </form>
+      <select v-model="selectedYear">
+        <option :value="year">{{ t("none") }}</option>
+        <option :value="year_fr_enfantine_primaire_co">
+          {{ t("school") }}
+        </option>
       </select>
-    </form>
-    <select v-model="selectedYear">
-      <option :value="year">{{ t("none") }}</option>
-      <option :value="year_fr_enfantine_primaire_co">
-        {{ t("school") }}
-      </option>
-    </select>
-    <!-- <p>{{ t("day not assigned") }} : {{ neutralDay }}</p> -->
-    <p class="parent1" @click="selectedParent = 1, showCommentModal = false">
-      {{ t("day parent1") }} : {{ parent1Day }}
-    </p>
-    <p class="parent2" @click="selectedParent = 2, showCommentModal = false">
-      {{ t("day parent2") }} : {{ parent2Day }}
-    </p>
-    <p class="shared" @click="selectedParent = 3, showCommentModal = false">{{ t("shared") }} : {{ shared }}</p>
-    <p class="conflict" @click="selectedParent = 4, showCommentModal = false">{{ t("conflict") }} : {{ conflict }}</p>
-    <p class="neutral" @click="selectedParent = 5, showCommentModal = false">{{ t("neutral") }}</p>
-    <p class="comment" @click="selectedParent = 6, showCommentModal = true">{{ t("comment") }} </p>
-    <button class="print-hidden" @click="print()">{{ t("print") }}</button>
-    <button class="print-hidden" @click="clearDay()">{{ t("clear") }}</button>
-  </div>
-  <div class="count">
-    <Count
-      class="print-hidden"
-      :neutral-day="neutralDay"
-      :parent1-day="parent1Day"
-      :parent2-day="parent2Day"
-      :conflict="conflict"
-      :shared="shared"
-    />
-  </div>
+      <!-- <p>{{ t("day not assigned") }} : {{ neutralDay }}</p> -->
+      <p
+        class="parent1"
+        :class="selectedParent === 1 ? 'item-selected' : ''"
+        @click="(selectedParent = 1), (showCommentModal = false)"
+      >
+        {{ t("day parent1") }} : {{ parent1Day }}
+      </p>
+      <p
+        class="parent2"
+        :class="selectedParent === 2 ? 'item-selected' : ''"
+        @click="(selectedParent = 2), (showCommentModal = false)"
+      >
+        {{ t("day parent2") }} : {{ parent2Day }}
+      </p>
+      <p
+        class="shared"
+        :class="selectedParent === 3 ? 'item-selected' : ''"
+        @click="(selectedParent = 3), (showCommentModal = false)"
+      >
+        {{ t("shared") }} : {{ shared }}
+      </p>
+      <p
+        class="conflict"
+        :class="selectedParent === 4 ? 'item-selected' : ''"
+        @click="(selectedParent = 4), (showCommentModal = false)"
+      >
+        {{ t("conflict") }} : {{ conflict }}
+      </p>
+      <p
+        class="neutral"
+        :class="selectedParent === 5 ? 'item-selected' : ''"
+        @click="(selectedParent = 5), (showCommentModal = false)"
+      >
+        {{ t("neutral") }}
+      </p>
+      <p
+        class="comment"
+        :class="selectedParent === 6 ? 'item-selected' : ''"
+        @click="(selectedParent = 6), (showCommentModal = true)"
+      >
+        {{ t("comment") }}
+      </p>
+      <button class="print-hidden" @click="print()">{{ t("print") }}</button>
+      <button class="print-hidden" @click="clearDay()">{{ t("clear") }}</button>
+    </div>
+    <div class="count">
+      <Count
+        class="print-hidden"
+        :neutral-day="neutralDay"
+        :parent1-day="parent1Day"
+        :parent2-day="parent2Day"
+        :conflict="conflict"
+        :shared="shared"
+      />
+    </div>
   </div>
   <div class="home-grid print-position">
     <template v-for="month in selectedYear.months">
@@ -343,18 +322,15 @@ for (let i = 0; i < localStorage.length; i++) {
           </div>
         </div>
         <template v-for="monthComment in selectedYear.months">
-        <div v-if="month.id == monthComment.id">
-          <div v-for="day in monthComment.days">
-            <div v-if="day.comment">
-              {{ day.day }}.  {{ day.comment }}
+          <div v-if="month.id == monthComment.id">
+            <div v-for="day in monthComment.days">
+              <div v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
             </div>
           </div>
-        </div>
         </template>
       </div>
     </template>
   </div>
-
 </template>
 
 <style scoped>
@@ -366,39 +342,46 @@ for (let i = 0; i < localStorage.length; i++) {
   user-select: none;
 }
 
+.item-selected {
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 8px;
+}
+
 .conflict {
   padding: 4px;
-  border-radius: 8px;
-  border: solid 5px #ebfc30;
+  border-bottom: solid 5px;
+  border-color: #ebfc30;
 }
 
 .parent1 {
   padding: 4px;
-  border: solid 5px #2698d8;
-  border-radius: 8px;
+  border-bottom: solid 5px;
+  border-color: #2698d8;
 }
 
 .parent2 {
   padding: 4px;
-  border: 5px solid #d82626;
-  border-radius: 8px;
+  border-bottom: solid 5px;
+  border-color: #d82626;
 }
 .neutral {
   padding: 4px;
-  border: 5px solid #dadada;
-  border-radius: 8px;
+  border-bottom: solid 5px;
+  border-color: #dadada;
 }
 .comment {
   padding: 4px;
-  border: 5px solid #000000;
-  border-radius: 8px;
+  padding: 4px;
+  border-bottom: solid 5px;
+  border-color: #000000;
 }
 
 .shared {
   padding: 4px;
-  border-radius: 8px;
-  border: solid 5px;
-  border-color: #d82626 #d82626 #2698d8 #2698d8;
+  border-bottom: solid 5px;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, #2698d8 50%, #d82626 50%);
 }
 
 .count {
@@ -413,7 +396,6 @@ for (let i = 0; i < localStorage.length; i++) {
   --gray-light: #d3d3d3;
   --gray-dark: #171717;
 }
-
 
 html {
   background-color: var(--gray-middle);
@@ -435,7 +417,7 @@ html {
   top: 0;
   z-index: 1;
   background-color: var(--gray-middle);
-  box-shadow: 0px 2px  #6f6f6f;
+  box-shadow: 0px 2px #6f6f6f;
 }
 
 #app {

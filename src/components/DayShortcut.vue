@@ -346,7 +346,7 @@ let slide = () => {
 <template>
   <modal :show="modalComment" @close="modalComment = false">
     <slot>
-      <p>Commentaire</p>
+      <p>{{ t("comment") }}</p>
       <p>{{ dayNumber }}.{{ monthNumber + 1 }}</p>
       <textarea v-model="textComment"></textarea>
       <button @click="saveComment(), (modalComment = false)">{{ t("save") }}</button>
@@ -439,11 +439,13 @@ let slide = () => {
 <i18n>
 {
   "de": {
+    "comment": "Kommentar",
     "back": "Zurück",
     "save": "Speichern",
     "clear": "Löschen",
   },
   "fr": {
+    "comment": "Commentaire",
     "back": "Retour",
     "clear": "Effacer",
     "save": "Enregistrer"
