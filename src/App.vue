@@ -47,17 +47,22 @@ let clear = ref(false);
 
 //define a function to assign clear to false and then to true after a while
 let clearDay = () => {
-  clear.value = false;
+  clear.value = true;
   neutralDay.value = 0;
   parent1Day.value = 0;
   parent2Day.value = 0;
   conflict.value = 0;
   shared.value = 0;
   displayedComment.value = [];
-  setTimeout(() => {
-    clear.value = true;
-  }, 10);
+  // setTimeout(() => {
+  //   clear.value = true;
+  // }, 10);
 };
+
+let resetClear = () => {
+  clear.value = false;
+};
+
 // console.log(selectedParent.value);
 //update the selected day
 let updateDayState = (
@@ -329,6 +334,7 @@ for (let i = 0; i < localStorage.length; i++) {
                 :comment="month.days[indexDay].comment"
                 @state-change="updateDayState"
                 @reset-comment="resetComment"
+                @reset-clear="resetClear"
                 :is-displayed="month.days[indexDay].displayed"
                 :showCommentModal="showCommentModal"
               />

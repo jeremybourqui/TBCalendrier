@@ -91,11 +91,13 @@ let clearDay = () => {
       ""
     );
   }
+  emit("resetClear");
 };
 
 const emit = defineEmits([
   "stateChange",
-  "resetComment"
+  "resetComment",
+  "resetClear",
 ]);
 
 let toggleColor = () => {
@@ -142,7 +144,7 @@ let toggleColor = () => {
         day: dayNumber.value,
         state: "parent2",
         holiday: isHoliday.value,
-        activity: hasActivity.value,
+        activity: showActivity.value,
         comment: comment.value,
         displayed: true,
       })
