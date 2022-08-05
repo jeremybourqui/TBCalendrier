@@ -38,7 +38,7 @@ let storedState = localStorage.getItem(
 );
 let jsonState = JSON.parse(storedState);
 if (jsonState !== null) {
-  console.log(jsonState.comment);
+  // console.log(jsonState.comment);
   colorDay.value = jsonState.state;
   textComment.value = jsonState.comment;
   emit(
@@ -47,7 +47,7 @@ if (jsonState !== null) {
     dayId,
     dayNumber,
     monthNumber,
-    showActivity.value,
+    false,
     textComment.value
   );
   // console.log("jsonStateactivity"+ jsonState.activity);
@@ -245,7 +245,6 @@ let toggleColor = () => {
 };
 
 let modalComment = ref(false);
-
 
 let addComment = () => {
   if (showCommentModal.value) {

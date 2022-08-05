@@ -21,6 +21,19 @@ let parent2Day = ref(0);
 let conflict = ref(0);
 let shared = ref(0);
 
+for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    console.log(key);
+    let month = key.substring(12,13);
+    let value = localStorage.getItem(key);
+    let obj = JSON.parse(value);
+    let newState = obj.state;
+    console.log(obj.state);
+    year.months[month].days[obj.id].state = newState;
+
+    
+  };
+
 let displayedComment = ref([]);
 
 const gridMonth = ref("grid");
@@ -45,7 +58,7 @@ let clearDay = () => {
     clear.value = true;
   }, 10);
 };
-console.log(selectedParent.value);
+// console.log(selectedParent.value);
 //update the selected day
 let updateDayState = (
   newState,
@@ -55,24 +68,26 @@ let updateDayState = (
   newActivity,
   comment
 ) => {
-  console.log("update "+ comment.value);
+  // console.log("update "+ comment.value);
   let day = dayClicked.value;
   let month = monthNumber.value;
   year.months[month].days[dayId.value].state = newState;
   year.months[month].days[dayId.value].activity = newActivity;
   year.months[month].days[dayId.value].comment = comment;
-  console.log(year.months[month].days[dayId.value].comment);
+  // console.log(year.months[month].days[dayId.value].comment);
   countDayState();
 
   if (selectedParent.value === 6) {
     selectedParent.value = 1;
     selectedParent.value = 6;
   }
-  console.log(selectedParent.value);
+  // console.log(selectedParent.value);
   watch(dayId, (newValue) => {
     console.log(newValue);
   });
 };
+
+
 
 //count each day state
 let countDayState = () => {
@@ -94,6 +109,8 @@ let countDayState = () => {
   conflict.value = countValuesInObj(year, "conflict");
   shared.value = countValuesInObj(year, "shared");
 };
+
+// countDayState();
 
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
@@ -154,6 +171,41 @@ for (let i = 0; i < localStorage.length; i++) {
 // } else {
 //   console.log("plein");
 // }
+
+
+  // for (let i = 0; i < localStorage.length; i++) {
+  //   let key = localStorage.key(i);
+  //   let value = localStorage.getItem(key);
+  //   let obj = JSON.parse(value);
+  //   // console.log(obj);
+  //   switch (obj.state) {
+  //     case "neutral":
+  //       neutralDay.value++;
+  //       break;
+  //     case "parent1":
+  //       parent1Day.value++;
+  //       break;
+  //     case "parent2":
+  //       parent2Day.value++;
+  //       break;
+  //     case "conflict":
+  //       conflict.value++;
+  //       break;
+  //     case "shared":
+  //       shared.value++;
+  //       break;
+  //     default:
+  //       break;
+  //   };
+  //   console.log(neutralDay.value);
+  //   console.log(parent1Day.value);
+  //   console.log(parent2Day.value);
+  //   console.log(conflict.value);
+  //   console.log(shared.value);
+  // };
+
+
+
 </script>
 
 <template>
@@ -283,9 +335,6 @@ for (let i = 0; i < localStorage.length; i++) {
             </template>
           </div>
         </div>
-
-
-        
         <template v-for="monthComment in selectedYear.months">
         <div v-if="month.id == monthComment.id">
           <div v-for="day in monthComment.days">
@@ -295,8 +344,6 @@ for (let i = 0; i < localStorage.length; i++) {
           </div>
         </div>
         </template>
-
-
       </div>
     </template>
   </div>
@@ -354,8 +401,15 @@ for (let i = 0; i < localStorage.length; i++) {
 </style>
 
 <style>
+:root {
+  --gray-middle: #cfcdcd;
+  --gray-light: #d3d3d3;
+  --gray-dark: #171717;
+}
+
+
 html {
-  background-color: #f8f9fa;
+  background-color: var(--gray-middle);
 }
 
 .shortcut {
@@ -373,18 +427,18 @@ html {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #f8f9fa;
+  background-color: var(--gray-middle);
   box-shadow: 0px 2px  #6f6f6f;
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;
-  background-color: #f8f9fa;
+  background-color: var(--gray-middle);
 }
 
 .month {
