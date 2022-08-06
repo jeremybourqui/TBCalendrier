@@ -3,7 +3,8 @@ import { ref, watch, onMounted } from "vue";
 import Count from "./components/Count.vue";
 import DayShortcut from "./components/DayShortcut.vue";
 import { year } from "./assets/year.js";
-import { year_fr_enfantine_primaire_co } from "./assets/year_fr_enfantine_primaire_co.js";
+import { year_fr_enfantine_primaire_co_2022 } from "./assets/year_fr_enfantine_primaire_co_2022.js";
+import { year_fr_enfantine_primaire_co_2023 } from "./assets/year_fr_enfantine_primaire_co_2023.js";
 import { useI18n } from "vue-i18n";
 
 const { t, locale } = useI18n({
@@ -216,8 +217,11 @@ for (let i = 0; i < localStorage.length; i++) {
       </form>
       <select v-model="selectedYear">
         <option :value="year">{{ t("none") }}</option>
-        <option :value="year_fr_enfantine_primaire_co">
-          {{ t("school") }}
+        <option :value="year_fr_enfantine_primaire_co_2022">
+          {{ t("school") }} 2022
+        </option>
+        <option :value="year_fr_enfantine_primaire_co_2023">
+          {{ t("school") }} 2023
         </option>
       </select>
       <!-- <p>{{ t("day not assigned") }} : {{ neutralDay }}</p> -->

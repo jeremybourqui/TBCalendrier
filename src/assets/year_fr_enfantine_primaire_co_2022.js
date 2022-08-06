@@ -1,4 +1,4 @@
-export let year_fr_enfantine_primaire_co = {
+export let year_fr_enfantine_primaire_co_2022 = {
   months: [
     {
       id: 0,
