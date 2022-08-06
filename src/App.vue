@@ -320,7 +320,6 @@ for (let i = 0; i < localStorage.length; i++) {
               />
             </template>
           </div>
-        </div>
         <template v-for="monthComment in selectedYear.months">
           <div v-if="month.id == monthComment.id">
             <div v-for="day in monthComment.days">
@@ -328,6 +327,7 @@ for (let i = 0; i < localStorage.length; i++) {
             </div>
           </div>
         </template>
+        </div>
       </div>
     </template>
   </div>
