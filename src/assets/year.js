@@ -1,5 +1,4 @@
 export let year = {
-
   months: [
     {
       id: 0,

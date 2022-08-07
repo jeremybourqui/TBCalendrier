@@ -3,8 +3,6 @@ import { ref, toRefs, watch } from "vue";
 import modal from "./Modal.vue";
 import { useI18n } from "vue-i18n";
 
-
-
 const props = defineProps({
   dayNumber: Number,
   monthNumber: Number,
@@ -41,26 +39,19 @@ const { t, locale } = useI18n({
 watch(
   () => props.localeProp,
   (newLocale, oldLocale) => {
-  console.log("watchlocale" + locale.value);
-  console.log("watchlocale" + newLocale);
-  console.log("watchlocale" + oldLocale);
-  locale.value = newLocale;
+    locale.value = newLocale;
   }
 );
-
-// console.log(locale.value);
 
 let colorDay = ref("");
 let showActivity = ref(false);
 const textComment = ref("");
-
 
 let storedState = localStorage.getItem(
   `year.months[${monthNumber.value}].days[${dayNumber.value}]`
 );
 let jsonState = JSON.parse(storedState);
 if (jsonState !== null) {
-  // console.log(jsonState.comment);
   colorDay.value = jsonState.state;
   textComment.value = jsonState.comment;
   emit(
@@ -72,31 +63,21 @@ if (jsonState !== null) {
     false,
     textComment.value
   );
-  // console.log("jsonStateactivity"+ jsonState.activity);
   if (typeof jsonState.activity == "undefined") {
     showActivity.value = false;
-    // console.log("undefined log");
   } else {
     showActivity.value = jsonState.activity;
-    // console.log("defined log");
   }
-  // hasActivity.value = jsonState.hasActivity;
-  // console.log("jsont "+jsonState.activity);
-  // console.log("hasactivity "+hasActivity.value);
 }
-
-// console.log("text  "+textComment.value);
 
 watch(
   () => props.clear,
   (clear, prevClear) => {
     clearDay();
-    // localStorage.clear();
   }
 );
 
 let clearDay = () => {
-  // localStorage.removeItem((`year.months[${monthNumber.value}].days[${dayNumber.value}]`));
   localStorage.clear();
   colorDay.value = "";
   showActivity.value = "";
@@ -116,15 +97,9 @@ let clearDay = () => {
   emit("resetClear");
 };
 
-const emit = defineEmits([
-  "stateChange",
-  "resetComment",
-  "resetClear",
-]);
+const emit = defineEmits(["stateChange", "resetComment", "resetClear"]);
 
 let toggleColor = () => {
-  console.log(comment.value);
-
   if (selectedParent.value === 1) {
     colorDay.value = "parent1";
     localStorage.setItem(
@@ -241,31 +216,7 @@ let toggleColor = () => {
         displayed: true,
       })
     );
-  } 
-  // else if (selectedParent.value === 6) {
-  //   colorDay.value = "neutral";
-  //   emit(
-  //     "stateChange",
-  //     "neutral",
-  //     dayId,
-  //     dayNumber,
-  //     monthNumber,
-  //     showActivity.value,
-  //     comment
-  //   );
-  //   localStorage.setItem(
-  //     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-  //     JSON.stringify({
-  //       id: dayId.value,
-  //       day: dayNumber.value,
-  //       state: "neutral",
-  //       holiday: isHoliday.value,
-  //       activity: showActivity.value,
-  //       comment: comment.value,
-  //       displayed: true,
-  //     })
-  //   );
-  // }
+  }
 };
 
 let modalComment = ref(false);
@@ -277,13 +228,10 @@ let addComment = () => {
 };
 
 let deleteComment = () => {
-  // console.log("actiday " + activity.value);
   showActivity.value = false;
   textComment.value = "";
-  // emit("saveComment", textComment);
   emit("stateChange", state, dayId, dayNumber, monthNumber, false, textComment);
   emit("resetComment");
-  // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
     JSON.stringify({
@@ -310,7 +258,6 @@ let saveComment = () => {
     textComment.value
   );
   emit("resetComment");
-  // console.log(`${state.value} ${dayNumber.value} ${monthNumber.value}`);
   localStorage.setItem(
     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
     JSON.stringify({
@@ -349,8 +296,12 @@ let slide = () => {
       <p>{{ t("comment") }}</p>
       <p>{{ dayNumber }}.{{ monthNumber + 1 }}</p>
       <textarea v-model="textComment"></textarea>
-      <button @click="saveComment(), (modalComment = false)">{{ t("save") }}</button>
-      <button @click="deleteComment(), (modalComment = false)">{{ t("clear") }}</button>
+      <button @click="saveComment(), (modalComment = false)">
+        {{ t("save") }}
+      </button>
+      <button @click="deleteComment(), (modalComment = false)">
+        {{ t("clear") }}
+      </button>
       <button @click="modalComment = false">{{ t("back") }}</button>
     </slot>
   </modal>
@@ -369,21 +320,11 @@ let slide = () => {
         <div class="activity"></div>
       </div>
     </div>
-    <!-- <div v-if="isHoliday" class="holiday day" @click="toggleColor(), addComment()"
->
-      <p>{{ dayNumber }}</p>
-      <div v-if="showActivity">
-      <div class="activity"></div>
-      </div>
-    
-    </div> -->
   </template>
 </template>
 
 <style scoped>
 .day {
-  /* height: 100px;
-    width: 100px; */
   display: inline-block;
   background-color: #dadada;
   place-self: center;

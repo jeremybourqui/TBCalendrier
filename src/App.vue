@@ -53,16 +53,12 @@ let clearDay = () => {
   conflict.value = 0;
   shared.value = 0;
   displayedComment.value = [];
-  // setTimeout(() => {
-  //   clear.value = true;
-  // }, 10);
 };
 
 let resetClear = () => {
   clear.value = false;
 };
 
-// console.log(selectedParent.value);
 //update the selected day
 let updateDayState = (
   newState,
@@ -72,24 +68,47 @@ let updateDayState = (
   newActivity,
   comment
 ) => {
-  // console.log("update "+ comment.value);
   let day = dayClicked.value;
   let month = monthNumber.value;
-  year.months[month].days[dayId.value].state = newState;
-  year.months[month].days[dayId.value].activity = newActivity;
-  year.months[month].days[dayId.value].comment = comment;
-  // console.log(year.months[month].days[dayId.value].comment);
+  selectedYear.value.months[month].days[dayId.value].state = newState;
+  selectedYear.value.months[month].days[dayId.value].activity = newActivity;
+  selectedYear.value.months[month].days[dayId.value].comment = comment;
+  // year.months[month].days[dayId.value].state = newState;
+  // year.months[month].days[dayId.value].activity = newActivity;
+  // year.months[month].days[dayId.value].comment = comment;
   countDayState();
-
+  setTimeout(() => {
+    countDayState();
+  }, 1);
   if (selectedParent.value === 6) {
     selectedParent.value = 1;
     selectedParent.value = 6;
   }
-  // console.log(selectedParent.value);
-  watch(dayId, (newValue) => {
-    console.log(newValue);
-  });
 };
+
+watch(
+  () => parent1Day.value,
+  (newValue, oldValue) => {
+    console.log("p1 new: " + newValue);
+    console.log("p1 old " + oldValue);
+    countDayState();
+  }
+);
+watch(
+  () => parent2Day.value,
+  (newValue, oldValue) => {
+    console.log("p2 new: " + newValue);
+    console.log("p2 old: " + oldValue);
+    countDayState();
+  }
+);
+watch(
+  () => neutralDay.value,
+  (newValue, oldValue) => {
+    console.log("n " + newValue);
+    countDayState();
+  }
+);
 
 //count each day state
 let countDayState = () => {
@@ -111,8 +130,6 @@ let countDayState = () => {
   conflict.value = countValuesInObj(year, "conflict");
   shared.value = countValuesInObj(year, "shared");
 };
-
-// countDayState();
 
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
@@ -140,7 +157,6 @@ window.addEventListener("keydown", function (e) {
 // reset comment to false
 let resetComment = () => {
   console.log("reset comment");
-  // showCommentModal.value = false;
 };
 
 //define a function to retrieve the comment in local storage
@@ -149,60 +165,9 @@ for (let i = 0; i < localStorage.length; i++) {
   let value = localStorage.getItem(key);
   let obj = JSON.parse(value);
   if (obj.comment) {
-    // console.log(obj);
     displayedComment.value.push(obj.comment);
   }
 }
-
-// a loop that goes through each day of year
-// let updateYear = () => {
-//   for (let i = 0; i < year.months.length; i++) {
-
-//     for (let j = 0; j < year.months[i].days.length; j++) {
-//       localStorage.setItem(
-//         `year.months[${i}].days[${j}]`,
-//         JSON.stringify(year.months[i].days[j])
-//       );
-//     }
-//   }
-// };
-
-// if (localStorage.length === 0) {
-//   updateYear();
-// } else {
-//   console.log("plein");
-// }
-
-// for (let i = 0; i < localStorage.length; i++) {
-//   let key = localStorage.key(i);
-//   let value = localStorage.getItem(key);
-//   let obj = JSON.parse(value);
-//   // console.log(obj);
-//   switch (obj.state) {
-//     case "neutral":
-//       neutralDay.value++;
-//       break;
-//     case "parent1":
-//       parent1Day.value++;
-//       break;
-//     case "parent2":
-//       parent2Day.value++;
-//       break;
-//     case "conflict":
-//       conflict.value++;
-//       break;
-//     case "shared":
-//       shared.value++;
-//       break;
-//     default:
-//       break;
-//   };
-//   console.log(neutralDay.value);
-//   console.log(parent1Day.value);
-//   console.log(parent2Day.value);
-//   console.log(conflict.value);
-//   console.log(shared.value);
-// };
 </script>
 
 <template>
@@ -224,7 +189,6 @@ for (let i = 0; i < localStorage.length; i++) {
           {{ t("school") }} 2023
         </option>
       </select>
-      <!-- <p>{{ t("day not assigned") }} : {{ neutralDay }}</p> -->
       <p
         class="parent1"
         :class="selectedParent === 1 ? 'item-selected' : ''"
@@ -304,7 +268,6 @@ for (let i = 0; i < localStorage.length; i++) {
           </div>
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
-              <!-- {{ indexDay }} -->
               <DayShortcut
                 :clear="clear"
                 :day-id="month.days[indexDay].id"
@@ -324,13 +287,13 @@ for (let i = 0; i < localStorage.length; i++) {
               />
             </template>
           </div>
-        <template v-for="monthComment in selectedYear.months">
-          <div v-if="month.id == monthComment.id">
-            <div v-for="day in monthComment.days">
-              <div v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+          <template v-for="monthComment in selectedYear.months">
+            <div v-if="month.id == monthComment.id">
+              <div v-for="day in monthComment.days">
+                <div v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+              </div>
             </div>
-          </div>
-        </template>
+          </template>
         </div>
       </div>
     </template>
