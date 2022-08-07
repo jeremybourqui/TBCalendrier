@@ -295,13 +295,15 @@ let slide = () => {
     <slot>
       <p>{{ t("comment") }}</p>
       <p>{{ dayNumber }}.{{ monthNumber + 1 }}</p>
-      <textarea v-model="textComment"></textarea>
+      <textarea v-model="textComment" rows="4" cols="50"></textarea>
+      <br>
       <button @click="saveComment(), (modalComment = false)">
         {{ t("save") }}
       </button>
       <button @click="deleteComment(), (modalComment = false)">
         {{ t("clear") }}
       </button>
+      <br>
       <button @click="modalComment = false">{{ t("back") }}</button>
     </slot>
   </modal>
@@ -324,13 +326,19 @@ let slide = () => {
 </template>
 
 <style scoped>
+:root{
+  --border-size: 3px;
+}
+
 .day {
+  box-sizing: border-box;
   display: inline-block;
   background-color: #dadada;
   place-self: center;
   align-self: stretch;
   justify-self: stretch;
   border-radius: 8px;
+  padding: 3px;
 }
 
 .day:nth-child(7n -1),
@@ -361,8 +369,9 @@ let slide = () => {
 
 .holiday {
   border-color: #000000;
-  border-width: 5px;
   border-style: solid;
+  padding: 0px;
+
 }
 
 .blank {
@@ -374,6 +383,10 @@ let slide = () => {
   height: 10px;
   width: 10px;
   border-radius: 100%;
+}
+
+button {
+  margin: 5px;
 }
 </style>
 

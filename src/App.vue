@@ -52,7 +52,6 @@ let clearDay = () => {
   parent2Day.value = 0;
   conflict.value = 0;
   shared.value = 0;
-  displayedComment.value = [];
 };
 
 let resetClear = () => {
@@ -73,9 +72,6 @@ let updateDayState = (
   selectedYear.value.months[month].days[dayId.value].state = newState;
   selectedYear.value.months[month].days[dayId.value].activity = newActivity;
   selectedYear.value.months[month].days[dayId.value].comment = comment;
-  // year.months[month].days[dayId.value].state = newState;
-  // year.months[month].days[dayId.value].activity = newActivity;
-  // year.months[month].days[dayId.value].comment = comment;
   countDayState();
   setTimeout(() => {
     countDayState();
@@ -86,29 +82,6 @@ let updateDayState = (
   }
 };
 
-watch(
-  () => parent1Day.value,
-  (newValue, oldValue) => {
-    console.log("p1 new: " + newValue);
-    console.log("p1 old " + oldValue);
-    countDayState();
-  }
-);
-watch(
-  () => parent2Day.value,
-  (newValue, oldValue) => {
-    console.log("p2 new: " + newValue);
-    console.log("p2 old: " + oldValue);
-    countDayState();
-  }
-);
-watch(
-  () => neutralDay.value,
-  (newValue, oldValue) => {
-    console.log("n " + newValue);
-    countDayState();
-  }
-);
 
 //count each day state
 let countDayState = () => {
@@ -124,11 +97,11 @@ let countDayState = () => {
     }
     return count;
   };
-  neutralDay.value = countValuesInObj(year, "neutral");
-  parent1Day.value = countValuesInObj(year, "parent1");
-  parent2Day.value = countValuesInObj(year, "parent2");
-  conflict.value = countValuesInObj(year, "conflict");
-  shared.value = countValuesInObj(year, "shared");
+  neutralDay.value = Math.ceil(countValuesInObj(selectedYear, "neutral")/2);
+  parent1Day.value = Math.ceil(countValuesInObj(selectedYear, "parent1")/2);
+  parent2Day.value = Math.ceil(countValuesInObj(selectedYear, "parent2")/2);
+  conflict.value = Math.ceil(countValuesInObj(selectedYear, "conflict")/2);
+  shared.value = Math.ceil(countValuesInObj(selectedYear, "shared")/2);
 };
 
 //shortcut for selectedParent
@@ -180,15 +153,17 @@ for (let i = 0; i < localStorage.length; i++) {
           <option value="de">de</option>
         </select>
       </form>
-      <select v-model="selectedYear">
-        <option :value="year">{{ t("none") }}</option>
-        <option :value="year_fr_enfantine_primaire_co_2022">
-          {{ t("school") }} 2022
-        </option>
-        <option :value="year_fr_enfantine_primaire_co_2023">
-          {{ t("school") }} 2023
-        </option>
-      </select>
+      <div>
+        <input type="radio" id="year" :value="year" v-model="selectedYear">
+        <label for="year">{{ t("none") }}</label>
+        <br>
+        <input type="radio" id="year2022" :value="year_fr_enfantine_primaire_co_2022" v-model="selectedYear">
+        <label for="year2022">{{ t("school") }} 2022</label>
+        <br>
+        <input type="radio" id="year2023" :value="year_fr_enfantine_primaire_co_2023" v-model="selectedYear">
+        <label for="year2023">{{ t("school") }} 2023</label>
+      </div>
+    
       <p
         class="parent1"
         :class="selectedParent === 1 ? 'item-selected' : ''"
@@ -416,6 +391,7 @@ html {
 
 .button-modal {
   cursor: pointer;
+  margin: 5px;
 }
 
 @media print {
