@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import Count from "./components/Count.vue";
-import DayShortcut from "./components/DayShortcut.vue";
+import Day from "./components/Day.vue";
 import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co_2022 } from "./assets/year_fr_enfantine_primaire_co_2022.js";
 import { year_fr_enfantine_primaire_co_2023 } from "./assets/year_fr_enfantine_primaire_co_2023.js";
@@ -106,24 +106,34 @@ let countDayState = () => {
 
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
-  if (e.code === "Digit1") {
-    showCommentModal.value = false;
-    selectedParent.value = 1;
-  } else if (e.code === "Digit2") {
-    showCommentModal.value = false;
-    selectedParent.value = 2;
-  } else if (e.code === "Digit6") {
-    showCommentModal.value = true;
-    selectedParent.value = 6;
-  } else if (e.code === "Digit3") {
-    showCommentModal.value = false;
-    selectedParent.value = 3;
-  } else if (e.code === "Digit4") {
-    showCommentModal.value = false;
-    selectedParent.value = 4;
-  } else if (e.code === "Digit5") {
-    showCommentModal.value = false;
-    selectedParent.value = 5;
+
+  switch (e.code) {
+    case "Digit1":
+      showCommentModal.value = false;
+      selectedParent.value = 1;
+      break;
+    case "Digit2":
+      showCommentModal.value = false;
+      selectedParent.value = 2;
+      break;
+    case "Digit3":
+      showCommentModal.value = false;
+      selectedParent.value = 3;
+      break;
+    case "Digit4":
+      showCommentModal.value = false;
+      selectedParent.value = 4;
+      break;
+    case "Digit5":
+      showCommentModal.value = false;
+      selectedParent.value = 5;
+      break;
+    case "Digit6":
+      showCommentModal.value = true;
+      selectedParent.value = 6;
+      break;
+    default:
+      break;
   }
 });
 
@@ -243,7 +253,7 @@ for (let i = 0; i < localStorage.length; i++) {
           </div>
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
-              <DayShortcut
+              <Day
                 :clear="clear"
                 :day-id="month.days[indexDay].id"
                 :day-number="month.days[indexDay].day"
