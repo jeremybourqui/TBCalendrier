@@ -100,7 +100,6 @@ let clearDay = () => {
 const emit = defineEmits(["stateChange", "resetComment", "resetClear"]);
 
 let toggleColor = () => {
-
   switch (selectedParent.value) {
     case 1:
       colorDay.value = "parent1";
@@ -334,10 +333,6 @@ let slide = () => {
 </template>
 
 <style scoped>
-:root{
-  --border-size: 3px;
-}
-
 .day {
   box-sizing: border-box;
   display: inline-block;
@@ -355,31 +350,29 @@ let slide = () => {
 }
 
 .neutral {
-  background-color: #dadada;
+  background-color: var(--color-neutral);
 }
 
 .parent1 {
-  background-color: #2698d8;
+  background-color: var(--color-parent1);
 }
 
 .parent2 {
-  background-color: #d82626;
+  background-color: var(--color-parent2);
 }
 
 .conflict {
-  background-color: #ebfc30;
+  background-color: var(--color-conflict);
 }
 
 .shared {
-  background-color: #15b039;
-  background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
+  background: var(--color-shared);
 }
 
 .holiday {
   border-color: #000000;
   border-style: solid;
   padding: 0px;
-
 }
 
 .blank {

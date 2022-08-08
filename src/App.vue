@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, watchEffect } from "vue";
 import Count from "./components/Count.vue";
 import Day from "./components/Day.vue";
 import { year } from "./assets/year.js";
@@ -14,7 +14,27 @@ const { t, locale } = useI18n({
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
+let yearSelection = ref(1);
 let showCommentModal = ref(false);
+
+watch(
+  () => yearSelection.value,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    // console.log(selectedYear);
+    if (newYear == 1) {
+      selectedYear.value = year;
+      console.log("year");
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      console.log("year_fr_enfantine_primaire_co_2022");
+    } else if (newYear == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      console.log("year_fr_enfantine_primaire_co_2023");
+    }
+  }
+);
+
 
 let neutralDay = ref(0);
 let parent1Day = ref(0);
@@ -24,12 +44,10 @@ let shared = ref(0);
 
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
-  console.log(key);
   let month = key.substring(12, 13);
   let value = localStorage.getItem(key);
   let obj = JSON.parse(value);
   let newState = obj.state;
-  console.log(obj.state);
   year.months[month].days[obj.id].state = newState;
 }
 
@@ -164,14 +182,11 @@ for (let i = 0; i < localStorage.length; i++) {
         </select>
       </form>
       <div>
-        <input type="radio" id="year" :value="year" v-model="selectedYear">
-        <label for="year">{{ t("none") }}</label>
-        <br>
-        <input type="radio" id="year2022" :value="year_fr_enfantine_primaire_co_2022" v-model="selectedYear">
-        <label for="year2022">{{ t("school") }} 2022</label>
-        <br>
-        <input type="radio" id="year2023" :value="year_fr_enfantine_primaire_co_2023" v-model="selectedYear">
-        <label for="year2023">{{ t("school") }} 2023</label>
+        <select v-model="yearSelection">
+        <option value="1">{{t("publicHoliday")}}</option>
+        <option value="2">{{t("school")}}</option>
+        <option value="3">{{t("highschool")}}</option>
+        </select>
       </div>
     
       <p
@@ -275,7 +290,7 @@ for (let i = 0; i < localStorage.length; i++) {
           <template v-for="monthComment in selectedYear.months">
             <div v-if="month.id == monthComment.id">
               <div v-for="day in monthComment.days">
-                <div v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+                <div class="comment-display" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
               </div>
             </div>
           </template>
@@ -303,24 +318,24 @@ for (let i = 0; i < localStorage.length; i++) {
 .conflict {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #ebfc30;
+  border-color: var(--color-conflict);
 }
 
 .parent1 {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #2698d8;
+  border-color: var(--color-parent1);
 }
 
 .parent2 {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #d82626;
+  border-color: var(--color-parent2);
 }
 .neutral {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #dadada;
+  border-color: var(--color-neutral);
 }
 .comment {
   padding: 4px;
@@ -340,17 +355,31 @@ for (let i = 0; i < localStorage.length; i++) {
   display: flex;
   justify-content: center;
 }
+
+.comment-display {
+  margin: 4px;
+  padding: 4px 0px 4px 0px;; 
+  background-color: var(--color-white);
+  border-radius: 8px;
+  /* width: 100%; */
+}
 </style>
 
 <style>
 :root {
-  --gray-middle: #cfcdcd;
-  --gray-light: #d3d3d3;
-  --gray-dark: #171717;
+  --color-gray-middle: #cfcdcd;
+  --color-gray-light: #d3d3d3;
+  --color-gray-dark: #171717;
+  --color-white: #fff;
+  --color-parent1: #2698d8;
+  --color-parent2: #d82626;
+  --color-shared: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
+  --color-conflict: #ebfc30;
+  --color-neutral: #dadada;
 }
 
 html {
-  background-color: var(--gray-middle);
+  background-color: var(--color-gray-middle);
 }
 
 .shortcut {
@@ -368,7 +397,7 @@ html {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: var(--gray-middle);
+  background-color: var(--color-gray-middle);
   box-shadow: 0px 2px #6f6f6f;
 }
 
@@ -379,7 +408,7 @@ html {
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;
-  background-color: var(--gray-middle);
+  background-color: var(--color-gray-middle);
 }
 
 .month {
@@ -388,7 +417,7 @@ html {
   gap: 10px 10px;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--color-white);
   border-radius: 6px;
   padding: 10px;
 }
@@ -397,6 +426,7 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: baseline;
 }
 
 .button-modal {
@@ -430,7 +460,7 @@ html {
 <i18n>
 {
   "de": {
-    "language": "Sprache",
+    "language": "Sprache ",
     "print": "Drucken",
     "clear": "Löschen",
     "day parent1": "Tag Eltern 1",
@@ -444,6 +474,8 @@ html {
     "none": "Keine",
     "save": "Speichern",
     "school": "Kindergarten, die Primar-und Orientierungsschule",
+    "highschool": "Sekundarstufe",
+    "publicHoliday": "Feiertag",
     "january": "Januar",
     "february": "Februar",
     "march": "März",
@@ -458,7 +490,7 @@ html {
     "december": "Dezember",
   },
   "fr": {
-    "language": "Langue",
+    "language": "Langue ",
     "print": "Imprimer",
     "clear": "Effacer",
     "day parent1": "Parent 1",
@@ -472,6 +504,8 @@ html {
     "none": "Aucune",
     "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
+    "highschool": "Secondaire supérieur",
+    "publicHoliday": "Jours fériés",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",
