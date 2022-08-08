@@ -5,6 +5,9 @@ import Day from "./components/Day.vue";
 import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co_2022 } from "./assets/year_fr_enfantine_primaire_co_2022.js";
 import { year_fr_enfantine_primaire_co_2023 } from "./assets/year_fr_enfantine_primaire_co_2023.js";
+import { year_secondaire2_2022} from "./assets/year_secondaire2_2022.js";
+import { year_secondaire2_2023} from "./assets/year_secondaire2_2023.js";
+import { year_2023} from "./assets/year_2023.js";
 import { useI18n } from "vue-i18n";
 import { countValuesInObj} from "./utils/countValuesInObj.js";
 
@@ -25,17 +28,19 @@ watch(
     // console.log(selectedYear);
     if (newYear == 1) {
       selectedYear.value = year;
-      console.log("year");
     } else if (newYear == 2) {
       selectedYear.value = year_fr_enfantine_primaire_co_2022;
-      console.log("year_fr_enfantine_primaire_co_2022");
     } else if (newYear == 3) {
+      selectedYear.value = year_secondaire2_2022;
+    } else if (newYear == 4) {
       selectedYear.value = year_fr_enfantine_primaire_co_2023;
-      console.log("year_fr_enfantine_primaire_co_2023");
+    } else if (newYear == 5) {
+      selectedYear.value = year_secondaire2_2023;
+    } else if (newYear == 6) {
+      selectedYear.value = year_2023;
     }
   }
 );
-
 
 let neutralDay = ref(0);
 let parent1Day = ref(0);
@@ -43,16 +48,16 @@ let parent2Day = ref(0);
 let conflict = ref(0);
 let shared = ref(0);
 
+//retrieve the days state from localStorage
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
   let month = key.substring(12, 13);
   let value = localStorage.getItem(key);
   let obj = JSON.parse(value);
   let newState = obj.state;
-  year.months[month].days[obj.id].state = newState;
+  selectedYear.value.months[month].days[obj.id].state = newState;
 }
 
-let displayedComment = ref([]);
 
 const gridMonth = ref("grid");
 
@@ -63,7 +68,7 @@ let print = () => window.print();
 
 let clear = ref(false);
 
-//define a function to assign clear to false and then to true after a while
+
 let clearDay = () => {
   clear.value = true;
   neutralDay.value = 0;
@@ -149,15 +154,6 @@ let resetComment = () => {
   console.log("reset comment");
 };
 
-//define a function to retrieve the comment in local storage
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i);
-  let value = localStorage.getItem(key);
-  let obj = JSON.parse(value);
-  if (obj.comment) {
-    displayedComment.value.push(obj.comment);
-  }
-}
 </script>
 
 <template>
@@ -172,9 +168,12 @@ for (let i = 0; i < localStorage.length; i++) {
       </form>
       <div>
         <select v-model="yearSelection">
-        <option value="1">{{t("publicHoliday")}}</option>
-        <option value="2">{{t("school")}}</option>
-        <option value="3">{{t("highschool")}}</option>
+        <option value="1">{{t("publicHoliday")}} 2022</option>
+        <option value="2">{{t("school")}} 2022</option>
+        <option value="3">{{t("highschool")}} 2022</option>
+        <option value="6">{{t("publicHoliday")}} 2023</option>
+        <option value="4">{{t("school")}} 2023</option>
+        <option value="5">{{t("highschool")}} 2023</option>
         </select>
       </div>
     
@@ -353,7 +352,7 @@ for (let i = 0; i < localStorage.length; i++) {
 }
 
 .text-white-background {
-  margin: 1% 40% 1% 40% ;; 
+  margin: 1% 30% 1% 30% ;; 
   padding: 4px 0px 4px 0px;; 
   background-color: var(--color-white);
   border-radius: 8px;
@@ -500,7 +499,7 @@ html {
     "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
     "highschool": "Secondaire supérieur",
-    "publicHoliday": "Jours fériés",
+    "publicHoliday": "Jours fériés ",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",
