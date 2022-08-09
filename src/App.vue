@@ -15,6 +15,7 @@ const { t, locale } = useI18n({
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
+let yearSelection = ref(1);
 let showCommentModal = ref(false);
 
 let neutralDay = ref(0);
@@ -23,6 +24,27 @@ let parent2Day = ref(0);
 let conflict = ref(0);
 let shared = ref(0);
 
+let retrieveYear = localStorage.getItem('year');
+yearSelection.value = retrieveYear;
+
+
+watch(
+  () => yearSelection.value,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    if (newYear == 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+    } else if (newYear == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
+    }
+      countDayState();
+  }
+);
 
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
@@ -37,14 +59,8 @@ for (let i = 0; i < localStorage.length; i++) {
   }
 }
 
-localStorage.setItem('year', JSON.stringify(year));
 
-watch(
-  () => selectedYear.value,
-  (newYear, oldYear ) => {
-    console.log(year);
-  }
-);
+
 
 let displayedComment = ref([]);
 
@@ -158,22 +174,19 @@ for (let i = 0; i < localStorage.length; i++) {
 <template>
   <div class="sticky">
     <div class="header print-hidden">
-      <form class="print-hidden">
         <label>{{ t("language") }}</label>
         <select v-model="locale">
           <option value="fr">fr</option>
           <option value="de">de</option>
         </select>
-      </form>
+     
       <div>
-        <input type="radio" id="year" :value="year" v-model="selectedYear">
-        <label for="year">{{ t("none") }}</label>
-        <br>
-        <input type="radio" id="year2022" :value="year_fr_enfantine_primaire_co_2022" v-model="selectedYear">
-        <label for="year2022">{{ t("school") }} 2022</label>
-        <br>
-        <input type="radio" id="year2023" :value="year_fr_enfantine_primaire_co_2023" v-model="selectedYear">
-        <label for="year2023">{{ t("school") }} 2023</label>
+        <label>{{ t("holiday") }}</label>
+        <select v-model="yearSelection">
+        <option value="1">{{t("none")}} 2022</option>
+        <option value="2">{{t("school")}} 2022</option>
+        <option value="3">{{t("school")}} 2023</option>
+        </select>
       </div>
     
       <p
@@ -470,6 +483,7 @@ background-color: var(--color-gray-middle);}
     "school": "Kindergarten, die Primar-und Orientierungsschule",
     "highschool": "Sekundarstufe",
     "publicHoliday": "Feiertag",
+    "holiday": "Ferien ",
     "january": "Januar",
     "february": "Februar",
     "march": "März",
@@ -500,6 +514,7 @@ background-color: var(--color-gray-middle);}
     "school": "Enfantine, primaire, CO",
      "highschool": "Secondaire supérieur",
     "publicHoliday": "Jours fériés",
+    "holiday": "Vacances ",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",
