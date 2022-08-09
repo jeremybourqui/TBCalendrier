@@ -39,7 +39,7 @@ const props = defineProps({
 .count-item {
   width: 15px;
   height: 30px;
-  border: 1px solid var(--gray-dark);
+  border: 1px solid var(--color-gray-dark);
 }
 
 .neutral {

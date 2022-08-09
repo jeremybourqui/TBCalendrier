@@ -275,7 +275,7 @@ for (let i = 0; i < localStorage.length; i++) {
           <template v-for="monthComment in selectedYear.months">
             <div v-if="month.id == monthComment.id">
               <div v-for="day in monthComment.days">
-                <div v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+                <div class="comment-display" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
               </div>
             </div>
           </template>
@@ -303,30 +303,34 @@ for (let i = 0; i < localStorage.length; i++) {
 .conflict {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #ebfc30;
-}
+border-color: var(--color-conflict);}
 
 .parent1 {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #2698d8;
-}
+  border-color: var(--color-parent1);}
 
 .parent2 {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #d82626;
-}
+  border-color: var(--color-parent2);}
 .neutral {
   padding: 4px;
   border-bottom: solid 5px;
-  border-color: #dadada;
-}
+  border-color: var(--color-neutral);}
 .comment {
   padding: 4px;
   padding: 4px;
   border-bottom: solid 5px;
   border-color: #000000;
+}
+
+.comment-display {
+  margin: 4px;
+  padding: 4px 0px 4px 0px;; 
+  background-color: var(--color-white);
+  border-radius: 8px;
+  /* width: 100%; */
 }
 
 .shared {
@@ -345,13 +349,22 @@ for (let i = 0; i < localStorage.length; i++) {
 <style>
 :root {
   --gray-middle: #cfcdcd;
+  --color-gray-middle: #cfcdcd;
   --gray-light: #d3d3d3;
+  --color-gray-light: #d3d3d3;
   --gray-dark: #171717;
+  --color-gray-dark: #171717;
+  --color-white: #fff;
+  --color-parent1: #2698d8;
+  --color-parent2: #d82626;
+  --color-shared: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
+  --color-conflict: #ebfc30;
+  --color-neutral: #dadada;
 }
 
+
 html {
-  background-color: var(--gray-middle);
-}
+background-color: var(--color-gray-middle);}
 
 .shortcut {
   display: flex;
@@ -368,7 +381,7 @@ html {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: var(--gray-middle);
+  background-color: var(--color-gray-middle);
   box-shadow: 0px 2px #6f6f6f;
 }
 
@@ -379,7 +392,7 @@ html {
   text-align: center;
   color: #2c3e50;
   margin-top: 20px;
-  background-color: var(--gray-middle);
+  background-color: var(--color-gray-middle);
 }
 
 .month {
@@ -388,7 +401,7 @@ html {
   gap: 10px 10px;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--color-white);
   border-radius: 6px;
   padding: 10px;
 }
@@ -397,6 +410,7 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  align-items: baseline;
 }
 
 .button-modal {
@@ -430,7 +444,7 @@ html {
 <i18n>
 {
   "de": {
-    "language": "Sprache",
+    "language": "Sprache ",
     "print": "Drucken",
     "clear": "Löschen",
     "day parent1": "Tag Eltern 1",
@@ -444,6 +458,8 @@ html {
     "none": "Keine",
     "save": "Speichern",
     "school": "Kindergarten, die Primar-und Orientierungsschule",
+    "highschool": "Sekundarstufe",
+    "publicHoliday": "Feiertag",
     "january": "Januar",
     "february": "Februar",
     "march": "März",
@@ -458,7 +474,7 @@ html {
     "december": "Dezember",
   },
   "fr": {
-    "language": "Langue",
+    "language": "Langue ",
     "print": "Imprimer",
     "clear": "Effacer",
     "day parent1": "Parent 1",
@@ -472,6 +488,8 @@ html {
     "none": "Aucune",
     "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
+     "highschool": "Secondaire supérieur",
+    "publicHoliday": "Jours fériés",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",
