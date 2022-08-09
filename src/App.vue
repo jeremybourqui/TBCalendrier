@@ -6,6 +6,7 @@ import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co_2022 } from "./assets/year_fr_enfantine_primaire_co_2022.js";
 import { year_fr_enfantine_primaire_co_2023 } from "./assets/year_fr_enfantine_primaire_co_2023.js";
 import { useI18n } from "vue-i18n";
+import { countValuesInObj} from "./utils/countValuesInObj.js";
 
 const { t, locale } = useI18n({
   inheritLocale: true,
@@ -85,18 +86,7 @@ let updateDayState = (
 
 //count each day state
 let countDayState = () => {
-  let countValuesInObj = (obj, value) => {
-    let count = 0;
-    for (const property in obj) {
-      if (typeof obj[property] === "object") {
-        count = count + countValuesInObj(obj[property], value);
-      }
-      if (obj[property] === value) {
-        return 1; // count = count + 1; // count++;
-      }
-    }
-    return count;
-  };
+ 
   neutralDay.value = Math.ceil(countValuesInObj(selectedYear, "neutral")/2);
   parent1Day.value = Math.ceil(countValuesInObj(selectedYear, "parent1")/2);
   parent2Day.value = Math.ceil(countValuesInObj(selectedYear, "parent2")/2);
@@ -238,19 +228,11 @@ for (let i = 0; i < localStorage.length; i++) {
           class="button-modal"
           @click="(isVisible = month.name), (gridMonth = none)"
         >
-          {{ t(month.name) }}
+          <div class="text-white-background"> {{ t(month.name) }} </div>
         </p>
         <div v-show="isVisible == true || isVisible == month.name">
-          <p v-show="isVisible == month.name">{{ t(month.name) }}</p>
-          <div>
-            <button
-              v-show="isVisible == month.name"
-              class="button-modal print-hidden"
-              @click="(isVisible = true), (gridMonth = 'grid')"
-            >
-              {{ t("back") }}
-            </button>
-          </div>
+          <p class="text-white-background" v-show="isVisible == month.name">{{ t(month.name) }}</p>
+        
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
               <Day
@@ -279,6 +261,15 @@ for (let i = 0; i < localStorage.length; i++) {
               </div>
             </div>
           </template>
+          <div>
+            <button
+              v-show="isVisible == month.name"
+              class="button-modal print-hidden"
+              @click="(isVisible = true), (gridMonth = 'grid')"
+            >
+              {{ t("back") }}
+            </button>
+          </div>
         </div>
       </div>
     </template>
@@ -297,26 +288,25 @@ for (let i = 0; i < localStorage.length; i++) {
 .item-selected {
   border-width: 5px;
   border-style: solid;
-  border-radius: 8px;
+  border-radius: 8px 8px 8px 8px;
+  background-color: var(--color-white);
 }
 
-.conflict {
-  padding: 4px;
+.conflict, .shared, .neutral, .comment, .parent1, .parent2 {
+  padding: 6px;
   border-bottom: solid 5px;
-border-color: var(--color-conflict);}
+  background-color: var(--color-white);
+}
 
 .parent1 {
-  padding: 4px;
-  border-bottom: solid 5px;
+
   border-color: var(--color-parent1);}
 
 .parent2 {
-  padding: 4px;
-  border-bottom: solid 5px;
+
   border-color: var(--color-parent2);}
 .neutral {
-  padding: 4px;
-  border-bottom: solid 5px;
+
   border-color: var(--color-neutral);}
 .comment {
   padding: 4px;
@@ -325,12 +315,11 @@ border-color: var(--color-conflict);}
   border-color: #000000;
 }
 
-.comment-display {
+.text-white-background {
+  margin: 1% 40% 1% 40% ;; 
   margin: 4px;
-  padding: 4px 0px 4px 0px;; 
   background-color: var(--color-white);
   border-radius: 8px;
-  /* width: 100%; */
 }
 
 .shared {
