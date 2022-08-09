@@ -100,7 +100,6 @@ let clearDay = () => {
 const emit = defineEmits(["stateChange", "resetComment", "resetClear"]);
 
 let toggleColor = () => {
-
   switch (selectedParent.value) {
     case 1:
       colorDay.value = "parent1";
@@ -368,13 +367,13 @@ let slide = () => {
 
 .shared {
   background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
+
 }
 
 .holiday {
   border-color: #000000;
   border-style: solid;
   padding: 0px;
-
 }
 
 .blank {

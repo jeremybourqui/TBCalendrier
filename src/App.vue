@@ -1,10 +1,13 @@
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, watchEffect } from "vue";
 import Count from "./components/Count.vue";
 import Day from "./components/Day.vue";
 import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co_2022 } from "./assets/year_fr_enfantine_primaire_co_2022.js";
 import { year_fr_enfantine_primaire_co_2023 } from "./assets/year_fr_enfantine_primaire_co_2023.js";
+import { year_secondaire2_2022} from "./assets/year_secondaire2_2022.js";
+import { year_secondaire2_2023} from "./assets/year_secondaire2_2023.js";
+import { year_2023} from "./assets/year_2023.js";
 import { useI18n } from "vue-i18n";
 import { countValuesInObj} from "./utils/countValuesInObj.js";
 
@@ -18,21 +21,64 @@ let selectedYear = ref(year);
 let yearSelection = ref(1);
 let showCommentModal = ref(false);
 
+watch(
+  () => yearSelection.value,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    // console.log(selectedYear);
+    if (newYear == 1) {
+      selectedYear.value = year;
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+    } else if (newYear == 3) {
+      selectedYear.value = year_secondaire2_2022;
+    } else if (newYear == 4) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+    } else if (newYear == 5) {
+      selectedYear.value = year_secondaire2_2023;
+    } else if (newYear == 6) {
+      selectedYear.value = year_2023;
+    }
+  }
+);
+
 let neutralDay = ref(0);
 let parent1Day = ref(0);
 let parent2Day = ref(0);
 let conflict = ref(0);
 let shared = ref(0);
 
+let retrieveYear = localStorage.getItem('year');
+yearSelection.value = retrieveYear;
+
+
+watch(
+  () => yearSelection.value,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    if (newYear == 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+    } else if (newYear == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
+    }
+      countDayState();
+  }
+);
+
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
   if (key != "year") {
-    console.log(key);
+
     let month = key.substring(12, 13);
     let value = localStorage.getItem(key);
     let obj = JSON.parse(value);
     let newState = obj.state;
-    console.log(obj.state);
+
     year.months[month].days[obj.id].state = newState;
   }
 }
@@ -58,6 +104,8 @@ watch(
   }
 );
 
+
+
 const gridMonth = ref("grid");
 
 const isVisible = ref(true);
@@ -67,7 +115,7 @@ let print = () => window.print();
 
 let clear = ref(false);
 
-//define a function to assign clear to false and then to true after a while
+
 let clearDay = () => {
   clear.value = true;
   neutralDay.value = 0;
@@ -108,7 +156,7 @@ let updateDayState = (
 
 //count each day state
 let countDayState = () => {
- 
+
   neutralDay.value = Math.ceil(countValuesInObj(selectedYear, "neutral")/2);
   parent1Day.value = Math.ceil(countValuesInObj(selectedYear, "parent1")/2);
   parent2Day.value = Math.ceil(countValuesInObj(selectedYear, "parent2")/2);
@@ -154,21 +202,11 @@ let resetComment = () => {
   console.log("reset comment");
 };
 
-//define a function to retrieve the comment in local storage
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i);
-  let value = localStorage.getItem(key);
-  let obj = JSON.parse(value);
-  if (obj.comment) {
-    displayedComment.value.push(obj.comment);
-  }
-}
 </script>
 
 <template>
   <div class="sticky">
     <div class="header print-hidden">
-      <form class="print-hidden">
         <label>{{ t("language") }}</label>
         <select v-model="locale">
           <option value="fr">fr</option>
@@ -176,11 +214,14 @@ for (let i = 0; i < localStorage.length; i++) {
         </select>
       </form>
       <label>{{ t("holiday") }}</label>
+
         <select v-model="yearSelection">
         <option value="1">{{t("none")}} 2022</option>
         <option value="2">{{t("school")}} 2022</option>
         <option value="3">{{t("school")}} 2023</option>
       </select>
+
+
     
       <p
         class="parent1"
@@ -251,6 +292,7 @@ for (let i = 0; i < localStorage.length; i++) {
         <div v-show="isVisible == true || isVisible == month.name">
           <p class="text-white-background" v-show="isVisible == month.name">{{ t(month.name) }}</p>
         
+
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
               <Day
@@ -276,6 +318,7 @@ for (let i = 0; i < localStorage.length; i++) {
             <div v-if="month.id == monthComment.id">
               <div v-for="day in monthComment.days">
                 <div class="text-white-background" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+
               </div>
             </div>
           </template>
@@ -314,11 +357,12 @@ for (let i = 0; i < localStorage.length; i++) {
   padding: 6px;
   border-bottom: solid 5px;
   background-color: var(--color-white);
-}
 
 .parent1 {
-
   border-color: var(--color-parent1);}
+
+.conflict {
+  border-color: var(--color-conflict);}
 
 .parent2 {
 
@@ -326,6 +370,7 @@ for (let i = 0; i < localStorage.length; i++) {
 .neutral {
 
   border-color: var(--color-neutral);}
+
 .comment {
   padding: 4px;
   padding: 4px;
@@ -336,14 +381,26 @@ for (let i = 0; i < localStorage.length; i++) {
 .text-white-background {
   padding: 4px;
   margin: 1% 40% 1% 40% ;; 
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.text-white-background {
+  margin: 1% 30% 1% 30% ;; 
+  padding: 4px 0px 4px 0px;; 
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.shared {
+
+  padding: 4px;
   margin: 4px;
   background-color: var(--color-white);
   border-radius: 8px;
 }
 
 .shared {
-  padding: 4px;
-  border-bottom: solid 5px;
   border-image-slice: 1;
   border-image-source: linear-gradient(to left, #2698d8 50%, #d82626 50%);
 }
@@ -351,6 +408,13 @@ for (let i = 0; i < localStorage.length; i++) {
 .count {
   display: flex;
   justify-content: center;
+}
+
+.text-white-background {
+  margin: 1% 30% 1% 30% ;; 
+  padding: 4px 0px 4px 0px;; 
+  background-color: var(--color-white);
+  border-radius: 8px;
 }
 </style>
 
@@ -373,6 +437,8 @@ for (let i = 0; i < localStorage.length; i++) {
 
 html {
 background-color: var(--color-gray-middle);}
+
+
 
 .shortcut {
   display: flex;
@@ -500,6 +566,7 @@ background-color: var(--color-gray-middle);}
      "highschool": "Secondaire supérieur",
      "holiday": "Vacances",
     "publicHoliday": "Jours fériés",
+    "holiday": "Vacances ",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",
