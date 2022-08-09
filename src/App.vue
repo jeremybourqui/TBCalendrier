@@ -23,16 +23,28 @@ let parent2Day = ref(0);
 let conflict = ref(0);
 let shared = ref(0);
 
+
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
-  console.log(key);
-  let month = key.substring(12, 13);
-  let value = localStorage.getItem(key);
-  let obj = JSON.parse(value);
-  let newState = obj.state;
-  console.log(obj.state);
-  year.months[month].days[obj.id].state = newState;
+  if (key != "year") {
+    // console.log(key);
+    let month = key.substring(12, 13);
+    let value = localStorage.getItem(key);
+    let obj = JSON.parse(value);
+    let newState = obj.state;
+    // console.log(obj.state);
+    year.months[month].days[obj.id].state = newState;
+  }
 }
+
+localStorage.setItem('year', JSON.stringify(year));
+
+watch(
+  () => selectedYear.value,
+  (newYear, oldYear ) => {
+    console.log(year);
+  }
+);
 
 let displayedComment = ref([]);
 
@@ -299,8 +311,10 @@ for (let i = 0; i < localStorage.length; i++) {
 }
 
 .parent1 {
-
   border-color: var(--color-parent1);}
+
+.conflict {
+  border-color: var(--color-conflict);}
 
 .parent2 {
 
@@ -315,9 +329,16 @@ for (let i = 0; i < localStorage.length; i++) {
   border-color: #000000;
 }
 
-.text-white-background {
-  margin: 1% 40% 1% 40% ;; 
+.comment-display {
+  padding: 4px;
   margin: 4px;
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.text-white-background {
+  margin: 1% 30% 1% 30% ;; 
+  padding: 4px 0px 4px 0px;; 
   background-color: var(--color-white);
   border-radius: 8px;
 }
