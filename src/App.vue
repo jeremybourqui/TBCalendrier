@@ -15,6 +15,7 @@ const { t, locale } = useI18n({
 
 let selectedParent = ref(1);
 let selectedYear = ref(year);
+let yearSelection = ref(1);
 let showCommentModal = ref(false);
 
 let neutralDay = ref(0);
@@ -25,16 +26,37 @@ let shared = ref(0);
 
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
-  console.log(key);
-  let month = key.substring(12, 13);
-  let value = localStorage.getItem(key);
-  let obj = JSON.parse(value);
-  let newState = obj.state;
-  console.log(obj.state);
-  year.months[month].days[obj.id].state = newState;
+  if (key != "year") {
+    console.log(key);
+    let month = key.substring(12, 13);
+    let value = localStorage.getItem(key);
+    let obj = JSON.parse(value);
+    let newState = obj.state;
+    console.log(obj.state);
+    year.months[month].days[obj.id].state = newState;
+  }
 }
 
-let displayedComment = ref([]);
+let retrieveYear = localStorage.getItem('year');
+yearSelection.value = retrieveYear;
+
+watch(
+  () => yearSelection.value,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    if (newYear == 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+    } else if (newYear == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
+    }
+      countDayState();
+  }
+);
 
 const gridMonth = ref("grid");
 
@@ -153,16 +175,12 @@ for (let i = 0; i < localStorage.length; i++) {
           <option value="de">de</option>
         </select>
       </form>
-      <div>
-        <input type="radio" id="year" :value="year" v-model="selectedYear">
-        <label for="year">{{ t("none") }}</label>
-        <br>
-        <input type="radio" id="year2022" :value="year_fr_enfantine_primaire_co_2022" v-model="selectedYear">
-        <label for="year2022">{{ t("school") }} 2022</label>
-        <br>
-        <input type="radio" id="year2023" :value="year_fr_enfantine_primaire_co_2023" v-model="selectedYear">
-        <label for="year2023">{{ t("school") }} 2023</label>
-      </div>
+      <label>{{ t("holiday") }}</label>
+        <select v-model="yearSelection">
+        <option value="1">{{t("none")}} 2022</option>
+        <option value="2">{{t("school")}} 2022</option>
+        <option value="3">{{t("school")}} 2023</option>
+      </select>
     
       <p
         class="parent1"
@@ -257,7 +275,7 @@ for (let i = 0; i < localStorage.length; i++) {
           <template v-for="monthComment in selectedYear.months">
             <div v-if="month.id == monthComment.id">
               <div v-for="day in monthComment.days">
-                <div class="comment-display" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+                <div class="text-white-background" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
               </div>
             </div>
           </template>
@@ -316,6 +334,7 @@ for (let i = 0; i < localStorage.length; i++) {
 }
 
 .text-white-background {
+  padding: 4px;
   margin: 1% 40% 1% 40% ;; 
   margin: 4px;
   background-color: var(--color-white);
@@ -449,6 +468,7 @@ background-color: var(--color-gray-middle);}
     "school": "Kindergarten, die Primar-und Orientierungsschule",
     "highschool": "Sekundarstufe",
     "publicHoliday": "Feiertag",
+    "holiday": "Ferien",
     "january": "Januar",
     "february": "Februar",
     "march": "März",
@@ -478,6 +498,7 @@ background-color: var(--color-gray-middle);}
     "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
      "highschool": "Secondaire supérieur",
+     "holiday": "Vacances",
     "publicHoliday": "Jours fériés",
     "january": "Janvier",
     "february": "Février",
