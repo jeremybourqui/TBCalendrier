@@ -366,7 +366,8 @@ let slide = () => {
 }
 
 .shared {
-  background: var(--color-shared);
+  background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
+
 }
 
 .holiday {

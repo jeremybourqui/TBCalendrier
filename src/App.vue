@@ -48,15 +48,45 @@ let parent2Day = ref(0);
 let conflict = ref(0);
 let shared = ref(0);
 
-//retrieve the days state from localStorage
+let retrieveYear = localStorage.getItem('year');
+yearSelection.value = retrieveYear;
+
+
+watch(
+  () => yearSelection.value,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    if (newYear == 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+    } else if (newYear == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
+    }
+      countDayState();
+  }
+);
+
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
-  let month = key.substring(12, 13);
-  let value = localStorage.getItem(key);
-  let obj = JSON.parse(value);
-  let newState = obj.state;
-  selectedYear.value.months[month].days[obj.id].state = newState;
+  if (key != "year") {
+    // console.log(key);
+    let month = key.substring(12, 13);
+    let value = localStorage.getItem(key);
+    let obj = JSON.parse(value);
+    let newState = obj.state;
+    // console.log(obj.state);
+    year.months[month].days[obj.id].state = newState;
+  }
 }
+
+
+
+
+let displayedComment = ref([]);
 
 
 const gridMonth = ref("grid");
@@ -109,6 +139,7 @@ let updateDayState = (
 
 //count each day state
 let countDayState = () => {
+
   neutralDay.value = Math.ceil(countValuesInObj(selectedYear, "neutral")/2);
   parent1Day.value = Math.ceil(countValuesInObj(selectedYear, "parent1")/2);
   parent2Day.value = Math.ceil(countValuesInObj(selectedYear, "parent2")/2);
@@ -159,21 +190,19 @@ let resetComment = () => {
 <template>
   <div class="sticky">
     <div class="header print-hidden">
-      <form class="print-hidden">
         <label>{{ t("language") }}</label>
         <select v-model="locale">
           <option value="fr">fr</option>
           <option value="de">de</option>
         </select>
-      </form>
+     
       <div>
+
+        <label>{{ t("holiday") }}</label>
         <select v-model="yearSelection">
-        <option value="1">{{t("publicHoliday")}} 2022</option>
+        <option value="1">{{t("none")}} 2022</option>
         <option value="2">{{t("school")}} 2022</option>
-        <option value="3">{{t("highschool")}} 2022</option>
-        <option value="6">{{t("publicHoliday")}} 2023</option>
-        <option value="4">{{t("school")}} 2023</option>
-        <option value="5">{{t("highschool")}} 2023</option>
+        <option value="3">{{t("school")}} 2023</option>
         </select>
       </div>
     
@@ -241,11 +270,12 @@ let resetComment = () => {
           class="button-modal"
           @click="(isVisible = month.name), (gridMonth = none)"
         >
-         <div class="text-white-background"> {{ t(month.name) }} </div>
+          <div class="text-white-background"> {{ t(month.name) }} </div>
         </p>
         <div v-show="isVisible == true || isVisible == month.name">
           <p class="text-white-background" v-show="isVisible == month.name">{{ t(month.name) }}</p>
-          
+        
+
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
               <Day
@@ -270,9 +300,9 @@ let resetComment = () => {
           <template v-for="monthComment in selectedYear.months">
             <div v-if="month.id == monthComment.id">
               <div v-for="day in monthComment.days">
-                <div class="comment-display" v-if="day.comment">
-                {{ day.day }}. {{ day.comment }}
-                </div>
+
+                <div class="comment-display" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
+
               </div>
             </div>
           </template>
@@ -311,22 +341,20 @@ let resetComment = () => {
   padding: 6px;
   border-bottom: solid 5px;
   background-color: var(--color-white);
-}
-
-.conflict {
-  border-color: var(--color-conflict);
-}
 
 .parent1 {
-  border-color: var(--color-parent1);
-}
+  border-color: var(--color-parent1);}
+
+.conflict {
+  border-color: var(--color-conflict);}
 
 .parent2 {
-  border-color: var(--color-parent2);
-}
+
+  border-color: var(--color-parent2);}
 .neutral {
-  border-color: var(--color-neutral);
-}
+
+  border-color: var(--color-neutral);}
+
 .comment {
   padding: 4px;
   padding: 4px;
@@ -335,6 +363,21 @@ let resetComment = () => {
 }
 
 .comment-display {
+  padding: 4px;
+  margin: 4px;
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.text-white-background {
+  margin: 1% 30% 1% 30% ;; 
+  padding: 4px 0px 4px 0px;; 
+  background-color: var(--color-white);
+  border-radius: 8px;
+}
+
+.shared {
+
   padding: 4px;
   margin: 4px;
   background-color: var(--color-white);
@@ -361,8 +404,11 @@ let resetComment = () => {
 
 <style>
 :root {
+  --gray-middle: #cfcdcd;
   --color-gray-middle: #cfcdcd;
+  --gray-light: #d3d3d3;
   --color-gray-light: #d3d3d3;
+  --gray-dark: #171717;
   --color-gray-dark: #171717;
   --color-white: #fff;
   --color-parent1: #2698d8;
@@ -372,9 +418,11 @@ let resetComment = () => {
   --color-neutral: #dadada;
 }
 
+
 html {
-  background-color: var(--color-gray-middle);
-}
+background-color: var(--color-gray-middle);}
+
+
 
 .shortcut {
   display: flex;
@@ -470,6 +518,7 @@ html {
     "school": "Kindergarten, die Primar-und Orientierungsschule",
     "highschool": "Sekundarstufe",
     "publicHoliday": "Feiertag",
+    "holiday": "Ferien ",
     "january": "Januar",
     "february": "Februar",
     "march": "März",
@@ -498,8 +547,9 @@ html {
     "none": "Aucune",
     "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
-    "highschool": "Secondaire supérieur",
-    "publicHoliday": "Jours fériés ",
+     "highschool": "Secondaire supérieur",
+    "publicHoliday": "Jours fériés",
+    "holiday": "Vacances ",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",
