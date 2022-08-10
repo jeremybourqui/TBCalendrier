@@ -1,13 +1,10 @@
 <script setup>
-import { ref, watch, onMounted, watchEffect } from "vue";
+import { ref, watch, onMounted } from "vue";
 import Count from "./components/Count.vue";
 import Day from "./components/Day.vue";
 import { year } from "./assets/year.js";
 import { year_fr_enfantine_primaire_co_2022 } from "./assets/year_fr_enfantine_primaire_co_2022.js";
 import { year_fr_enfantine_primaire_co_2023 } from "./assets/year_fr_enfantine_primaire_co_2023.js";
-import { year_secondaire2_2022} from "./assets/year_secondaire2_2022.js";
-import { year_secondaire2_2023} from "./assets/year_secondaire2_2023.js";
-import { year_2023} from "./assets/year_2023.js";
 import { useI18n } from "vue-i18n";
 import { countValuesInObj} from "./utils/countValuesInObj.js";
 
@@ -16,72 +13,34 @@ const { t, locale } = useI18n({
   useScope: "local",
 });
 
-let selectedParent = ref(1);
-let selectedYear = ref(year);
-let yearSelection = ref(1);
-let showCommentModal = ref(false);
-
-watch(
-  () => yearSelection.value,
-  (newYear, oldYear) => {
-    console.log(newYear);
-    // console.log(selectedYear);
-    if (newYear == 1) {
-      selectedYear.value = year;
-    } else if (newYear == 2) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2022;
-    } else if (newYear == 3) {
-      selectedYear.value = year_secondaire2_2022;
-    } else if (newYear == 4) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2023;
-    } else if (newYear == 5) {
-      selectedYear.value = year_secondaire2_2023;
-    } else if (newYear == 6) {
-      selectedYear.value = year_2023;
-    }
-  }
-);
-
-let neutralDay = ref(0);
-let parent1Day = ref(0);
-let parent2Day = ref(0);
-let conflict = ref(0);
-let shared = ref(0);
-
-let retrieveYear = localStorage.getItem('year');
-yearSelection.value = retrieveYear;
-
-
-watch(
-  () => yearSelection.value,
-  (newYear, oldYear) => {
-    console.log(newYear);
-    if (newYear == 1) {
-      selectedYear.value = year;
-      localStorage.setItem('year', '1');
-    } else if (newYear == 2) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2022;
-      localStorage.setItem('year', '2');	
-    } else if (newYear == 3) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2023;
-      localStorage.setItem('year', '3');
-    }
-      countDayState();
-  }
-);
+const selectedParent = ref(1);
+const selectedYear = ref(year);
+const yearSelection = ref(1);
+const showCommentModal = ref(false);
+const gridMonth = ref("grid");
+const isVisible = ref(true);
+const neutralDay = ref(0);
+const parent1Day = ref(0);
+const parent2Day = ref(0);
+const conflict = ref(0);
+const shared = ref(0);
 
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
   if (key != "year") {
-
+    console.log(key);
     let month = key.substring(12, 13);
     let value = localStorage.getItem(key);
     let obj = JSON.parse(value);
     let newState = obj.state;
-
+    console.log(obj.state);
     year.months[month].days[obj.id].state = newState;
   }
 }
+
+if (localStorage.getItem("year") === null) {
+  localStorage.setItem("year", "1");
+};
 
 let retrieveYear = localStorage.getItem('year');
 yearSelection.value = retrieveYear;
@@ -90,32 +49,34 @@ watch(
   () => yearSelection.value,
   (newYear, oldYear) => {
     console.log(newYear);
-    if (newYear == 1) {
-      selectedYear.value = year;
-      localStorage.setItem('year', '1');
-    } else if (newYear == 2) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2022;
-      localStorage.setItem('year', '2');	
-    } else if (newYear == 3) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2023;
-      localStorage.setItem('year', '3');
+
+    switch (newYear) {
+      case 1:
+        selectedYear.value = year;
+        localStorage.setItem('year', '1');
+        break;
+      case 2:
+        selectedYear.value = year_fr_enfantine_primaire_co_2022;
+        localStorage.setItem('year', '2');
+        break;
+      case 3:
+        selectedYear.value = year_fr_enfantine_primaire_co_2023;
+        localStorage.setItem('year', '3');
+        break;
+    
+      default:
+        break;
     }
-      countDayState();
   }
 );
 
 
 
-const gridMonth = ref("grid");
-
-const isVisible = ref(true);
-
 //print
 let print = () => window.print();
 
+//clear day
 let clear = ref(false);
-
-
 let clearDay = () => {
   clear.value = true;
   neutralDay.value = 0;
@@ -123,6 +84,8 @@ let clearDay = () => {
   parent2Day.value = 0;
   conflict.value = 0;
   shared.value = 0;
+  countDayState();
+  selectedYear.value = year;
 };
 
 let resetClear = () => {
@@ -153,10 +116,8 @@ let updateDayState = (
   }
 };
 
-
 //count each day state
-let countDayState = () => {
-
+let countDayState = () => {  
   neutralDay.value = Math.ceil(countValuesInObj(selectedYear, "neutral")/2);
   parent1Day.value = Math.ceil(countValuesInObj(selectedYear, "parent1")/2);
   parent2Day.value = Math.ceil(countValuesInObj(selectedYear, "parent2")/2);
@@ -166,7 +127,6 @@ let countDayState = () => {
 
 //shortcut for selectedParent
 window.addEventListener("keydown", function (e) {
-
   switch (e.code) {
     case "Digit1":
       showCommentModal.value = false;
@@ -201,28 +161,26 @@ window.addEventListener("keydown", function (e) {
 let resetComment = () => {
   console.log("reset comment");
 };
-
 </script>
 
 <template>
   <div class="sticky">
     <div class="header print-hidden">
+      <form class="print-hidden">
         <label>{{ t("language") }}</label>
         <select v-model="locale">
           <option value="fr">fr</option>
           <option value="de">de</option>
         </select>
       </form>
+      <form>
       <label>{{ t("holiday") }}</label>
-
         <select v-model="yearSelection">
         <option value="1">{{t("none")}} 2022</option>
         <option value="2">{{t("school")}} 2022</option>
         <option value="3">{{t("school")}} 2023</option>
       </select>
-
-
-    
+      </form>
       <p
         class="parent1"
         :class="selectedParent === 1 ? 'item-selected' : ''"
@@ -292,7 +250,6 @@ let resetComment = () => {
         <div v-show="isVisible == true || isVisible == month.name">
           <p class="text-white-background" v-show="isVisible == month.name">{{ t(month.name) }}</p>
         
-
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
               <Day
@@ -318,7 +275,6 @@ let resetComment = () => {
             <div v-if="month.id == monthComment.id">
               <div v-for="day in monthComment.days">
                 <div class="text-white-background" v-if="day.comment">{{ day.day }}. {{ day.comment }}</div>
-
               </div>
             </div>
           </template>
@@ -357,12 +313,14 @@ let resetComment = () => {
   padding: 6px;
   border-bottom: solid 5px;
   background-color: var(--color-white);
-
-.parent1 {
-  border-color: var(--color-parent1);}
+}
 
 .conflict {
-  border-color: var(--color-conflict);}
+  border-color: var(--color-conflict);
+}
+.parent1 {
+
+  border-color: var(--color-parent1);}
 
 .parent2 {
 
@@ -370,7 +328,6 @@ let resetComment = () => {
 .neutral {
 
   border-color: var(--color-neutral);}
-
 .comment {
   padding: 4px;
   padding: 4px;
@@ -381,26 +338,14 @@ let resetComment = () => {
 .text-white-background {
   padding: 4px;
   margin: 1% 40% 1% 40% ;; 
-  background-color: var(--color-white);
-  border-radius: 8px;
-}
-
-.text-white-background {
-  margin: 1% 30% 1% 30% ;; 
-  padding: 4px 0px 4px 0px;; 
-  background-color: var(--color-white);
-  border-radius: 8px;
-}
-
-.shared {
-
-  padding: 4px;
   margin: 4px;
   background-color: var(--color-white);
   border-radius: 8px;
 }
 
 .shared {
+  padding: 4px;
+  border-bottom: solid 5px;
   border-image-slice: 1;
   border-image-source: linear-gradient(to left, #2698d8 50%, #d82626 50%);
 }
@@ -408,13 +353,6 @@ let resetComment = () => {
 .count {
   display: flex;
   justify-content: center;
-}
-
-.text-white-background {
-  margin: 1% 30% 1% 30% ;; 
-  padding: 4px 0px 4px 0px;; 
-  background-color: var(--color-white);
-  border-radius: 8px;
 }
 </style>
 
@@ -437,8 +375,6 @@ let resetComment = () => {
 
 html {
 background-color: var(--color-gray-middle);}
-
-
 
 .shortcut {
   display: flex;
@@ -564,9 +500,8 @@ background-color: var(--color-gray-middle);}
     "save": "Enregistrer",
     "school": "Enfantine, primaire, CO",
      "highschool": "Secondaire supérieur",
-     "holiday": "Vacances",
+     "holiday": "Vacances ",
     "publicHoliday": "Jours fériés",
-    "holiday": "Vacances ",
     "january": "Janvier",
     "february": "Février",
     "march": "Mars",

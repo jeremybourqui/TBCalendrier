@@ -18,18 +18,18 @@ const props = defineProps({
   localeProp: String,
 });
 
-let { hasActivity } = toRefs(props);
+const { hasActivity } = toRefs(props);
 const { dayNumber } = toRefs(props);
 const { monthNumber } = toRefs(props);
 const { selectedParent } = toRefs(props);
 const { isHoliday } = toRefs(props);
 const { isDisplayed } = toRefs(props);
 const { dayId } = toRefs(props);
-let { state } = toRefs(props);
-let { clear } = toRefs(props);
-let { showCommentModal } = toRefs(props);
-let { comment } = toRefs(props);
-let { localeProp } = toRefs(props);
+const { state } = toRefs(props);
+const { clear } = toRefs(props);
+const { showCommentModal } = toRefs(props);
+const { comment } = toRefs(props);
+const { localeProp } = toRefs(props);
 
 const { t, locale } = useI18n({
   inheritLocale: true,
@@ -56,7 +56,7 @@ if (jsonState !== null) {
   textComment.value = jsonState.comment;
   emit(
     "stateChange",
-    state,
+    state.value,
     dayId,
     dayNumber,
     monthNumber,
@@ -78,12 +78,18 @@ watch(
 );
 
 let clearDay = () => {
-  localStorage.clear();
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    if (key != "year") {
+      console.log(key);
+      localStorage.removeItem(key);
+    }
+  }
+
   colorDay.value = "";
   showActivity.value = "";
   textComment.value = "";
   if (state.value != "neutral" || comment.value != "") {
-    state.value = "neutral";
     emit(
       "stateChange",
       "neutral",
@@ -104,122 +110,122 @@ let toggleColor = () => {
     case 1:
       colorDay.value = "parent1";
       localStorage.setItem(
-      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-      JSON.stringify({
-        id: dayId.value,
-        day: dayNumber.value,
-        state: "parent1",
-        holiday: isHoliday.value,
-        activity: showActivity.value,
-        comment: comment.value,
-        displayed: true,
-      })
-    );
-    emit(
-      "stateChange",
-      "parent1",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      comment
-    );
+        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        JSON.stringify({
+          id: dayId.value,
+          day: dayNumber.value,
+          state: "parent1",
+          holiday: isHoliday.value,
+          activity: showActivity.value,
+          comment: comment.value,
+          displayed: true,
+        })
+      );
+      emit(
+        "stateChange",
+        "parent1",
+        dayId,
+        dayNumber,
+        monthNumber,
+        showActivity.value,
+        comment
+      );
       break;
     case 2:
       colorDay.value = "parent2";
-    emit(
-      "stateChange",
-      "parent2",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      comment
-    );
-    localStorage.setItem(
-      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-      JSON.stringify({
-        id: dayId.value,
-        day: dayNumber.value,
-        state: "parent2",
-        holiday: isHoliday.value,
-        activity: showActivity.value,
-        comment: comment.value,
-        displayed: true,
-      })
-    );
+      emit(
+        "stateChange",
+        "parent2",
+        dayId,
+        dayNumber,
+        monthNumber,
+        showActivity.value,
+        comment
+      );
+      localStorage.setItem(
+        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        JSON.stringify({
+          id: dayId.value,
+          day: dayNumber.value,
+          state: "parent2",
+          holiday: isHoliday.value,
+          activity: showActivity.value,
+          comment: comment.value,
+          displayed: true,
+        })
+      );
       break;
     case 3:
       colorDay.value = "shared";
-    emit(
-      "stateChange",
-      "shared",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      comment
-    );
-    localStorage.setItem(
-      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-      JSON.stringify({
-        id: dayId.value,
-        day: dayNumber.value,
-        state: "shared",
-        holiday: isHoliday.value,
-        activity: showActivity.value,
-        comment: comment.value,
-        displayed: true,
-      })
-    );
+      emit(
+        "stateChange",
+        "shared",
+        dayId,
+        dayNumber,
+        monthNumber,
+        showActivity.value,
+        comment
+      );
+      localStorage.setItem(
+        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        JSON.stringify({
+          id: dayId.value,
+          day: dayNumber.value,
+          state: "shared",
+          holiday: isHoliday.value,
+          activity: showActivity.value,
+          comment: comment.value,
+          displayed: true,
+        })
+      );
       break;
     case 4:
-    colorDay.value = "conflict";
-    emit(
-      "stateChange",
-      "conflict",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      comment
-    );
-    localStorage.setItem(
-      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-      JSON.stringify({
-        id: dayId.value,
-        day: dayNumber.value,
-        state: "conflict",
-        holiday: isHoliday.value,
-        activity: showActivity.value,
-        comment: comment.value,
-        displayed: true,
-      })
-    );
+      colorDay.value = "conflict";
+      emit(
+        "stateChange",
+        "conflict",
+        dayId,
+        dayNumber,
+        monthNumber,
+        showActivity.value,
+        comment
+      );
+      localStorage.setItem(
+        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        JSON.stringify({
+          id: dayId.value,
+          day: dayNumber.value,
+          state: "conflict",
+          holiday: isHoliday.value,
+          activity: showActivity.value,
+          comment: comment.value,
+          displayed: true,
+        })
+      );
       break;
     case 5:
       colorDay.value = "neutral";
-    emit(
-      "stateChange",
-      "neutral",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      comment
-    );
-    localStorage.setItem(
-      `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
-      JSON.stringify({
-        id: dayId.value,
-        day: dayNumber.value,
-        state: "neutral",
-        holiday: isHoliday.value,
-        activity: showActivity.value,
-        comment: comment.value,
-        displayed: true,
-      })
-    );
+      emit(
+        "stateChange",
+        "neutral",
+        dayId,
+        dayNumber,
+        monthNumber,
+        showActivity.value,
+        comment
+      );
+      localStorage.setItem(
+        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        JSON.stringify({
+          id: dayId.value,
+          day: dayNumber.value,
+          state: "neutral",
+          holiday: isHoliday.value,
+          activity: showActivity.value,
+          comment: comment.value,
+          displayed: true,
+        })
+      );
       break;
     default:
       break;
@@ -303,14 +309,14 @@ let slide = () => {
       <p>{{ t("comment") }}</p>
       <p>{{ dayNumber }}.{{ monthNumber + 1 }}</p>
       <textarea v-model="textComment" rows="4" cols="50"></textarea>
-      <br>
+      <br />
       <button @click="saveComment(), (modalComment = false)">
         {{ t("save") }}
       </button>
       <button @click="deleteComment(), (modalComment = false)">
         {{ t("clear") }}
       </button>
-      <br>
+      <br />
       <button @click="modalComment = false">{{ t("back") }}</button>
     </slot>
   </modal>
@@ -367,7 +373,6 @@ let slide = () => {
 
 .shared {
   background: linear-gradient(60deg, #2698d8 50%, #d82626 50%);
-
 }
 
 .holiday {

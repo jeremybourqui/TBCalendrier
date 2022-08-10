@@ -12,6 +12,7 @@ const props = defineProps({
 
 <template>
   <div class="count">
+    <div class="placeholder"></div>
     <template v-for="(n, i) in parent1Day" :key="i">
       <div class="count-item parent1"></div>
     </template>
@@ -40,6 +41,11 @@ const props = defineProps({
   width: 15px;
   height: 30px;
   border: 1px solid var(--color-gray-dark);
+}
+
+.placeholder {
+  width: 15px;
+  height: 30px;
 }
 
 .neutral {
