@@ -2,7 +2,7 @@
 
 Installation :
 
-you need node nodejs installed [https://nodejs.org/en/]
+you need nodejs installed [https://nodejs.org/en/]
 
 then :
 
