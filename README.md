@@ -1,7 +1,11 @@
-# Vue 3 + Vite
+# TB Calendrier Jeremy Bourqui
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Installation :
 
-## Recommended IDE Setup
+you need node nodejs installed [https://nodejs.org/en/]
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+then :
+
+>npm install
+
+>npm run dev
