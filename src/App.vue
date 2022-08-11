@@ -26,9 +26,9 @@ const conflict = ref(0);
 const shared = ref(0);
 
 
-
+//retrieve holiday
 if (localStorage.getItem("year") === null) {
-  localStorage.setItem("year", "2");
+  localStorage.setItem("year", "1");
 };
 
 let retrieveYear = localStorage.getItem('year');
