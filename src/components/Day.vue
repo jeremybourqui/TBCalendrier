@@ -36,6 +36,7 @@ const { t, locale } = useI18n({
   useScope: "local",
 });
 
+//update language selection
 watch(
   () => props.localeProp,
   (newLocale, oldLocale) => {
@@ -43,10 +44,11 @@ watch(
   }
 );
 
-let colorDay = ref("");
-let showActivity = ref(false);
+const colorDay = ref("");
+const showActivity = ref(false);
 const textComment = ref("");
 
+//retrieve state of the day
 let storedState = localStorage.getItem(
   `year.months[${monthNumber.value}].days[${dayNumber.value}]`
 );
@@ -70,22 +72,16 @@ if (jsonState !== null) {
   }
 }
 
+//delete state of the day
 watch(
   () => props.clear,
   (clear, prevClear) => {
-    clearDay();
-  }
-);
-
-let clearDay = () => {
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
     if (key != "year") {
-      console.log(key);
       localStorage.removeItem(key);
     }
   }
-
   colorDay.value = "";
   showActivity.value = "";
   textComment.value = "";
@@ -101,10 +97,13 @@ let clearDay = () => {
     );
   }
   emit("resetClear");
-};
+  }
+);
 
-const emit = defineEmits(["stateChange", "resetComment", "resetClear"]);
+const emit = defineEmits(["stateChange", "resetClear"]);
 
+
+//update state of the day
 let toggleColor = () => {
   switch (selectedParent.value) {
     case 1:
@@ -232,7 +231,8 @@ let toggleColor = () => {
   }
 };
 
-let modalComment = ref(false);
+//manage comment
+const modalComment = ref(false);
 
 let addComment = () => {
   if (showCommentModal.value) {
@@ -270,7 +270,6 @@ let saveComment = () => {
     true,
     textComment.value
   );
-  emit("resetComment");
   localStorage.setItem(
     `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
     JSON.stringify({
@@ -285,6 +284,7 @@ let saveComment = () => {
   );
 };
 
+//manage click and slide
 let isMouseDown = false;
 
 addEventListener("mousedown", () => {

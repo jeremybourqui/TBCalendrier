@@ -25,57 +25,50 @@ const parent2Day = ref(0);
 const conflict = ref(0);
 const shared = ref(0);
 
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i);
-  if (key != "year") {
-    console.log(key);
-    let month = key.substring(12, 13);
-    let value = localStorage.getItem(key);
-    let obj = JSON.parse(value);
-    let newState = obj.state;
-    console.log(obj.state);
-    year.months[month].days[obj.id].state = newState;
-  }
-}
+
 
 if (localStorage.getItem("year") === null) {
-  localStorage.setItem("year", "1");
+  localStorage.setItem("year", "2");
 };
 
 let retrieveYear = localStorage.getItem('year');
 yearSelection.value = retrieveYear;
 
+// retrieve stored state
+for (let i = 0; i < localStorage.length; i++) {
+  let key = localStorage.key(i);
+  if (key != "year") {
+    let month = key.substring(12, 13);
+    let value = localStorage.getItem(key);
+    let obj = JSON.parse(value);
+    let newState = obj.state;
+    year.months[month].days[obj.id].state = newState;
+  }
+}
+
+//update holiday selection
 watch(
   () => yearSelection.value,
   (newYear, oldYear) => {
     console.log(newYear);
-
-    switch (newYear) {
-      case 1:
-        selectedYear.value = year;
-        localStorage.setItem('year', '1');
-        break;
-      case 2:
-        selectedYear.value = year_fr_enfantine_primaire_co_2022;
-        localStorage.setItem('year', '2');
-        break;
-      case 3:
-        selectedYear.value = year_fr_enfantine_primaire_co_2023;
-        localStorage.setItem('year', '3');
-        break;
-    
-      default:
-        break;
+    if (newYear == 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+    } else if (newYear == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+    } else if (newYear == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
     }
+      countDayState();
   }
 );
-
-
 
 //print
 let print = () => window.print();
 
-//clear day
+//clear day 
 let clear = ref(false);
 let clearDay = () => {
   clear.value = true;
@@ -101,11 +94,9 @@ let updateDayState = (
   newActivity,
   comment
 ) => {
-  let day = dayClicked.value;
-  let month = monthNumber.value;
-  selectedYear.value.months[month].days[dayId.value].state = newState;
-  selectedYear.value.months[month].days[dayId.value].activity = newActivity;
-  selectedYear.value.months[month].days[dayId.value].comment = comment;
+  selectedYear.value.months[monthNumber.value].days[dayId.value].state = newState;
+  selectedYear.value.months[monthNumber.value].days[dayId.value].activity = newActivity;
+  selectedYear.value.months[monthNumber.value].days[dayId.value].comment = comment;
   countDayState();
   setTimeout(() => {
     countDayState();
@@ -157,10 +148,7 @@ window.addEventListener("keydown", function (e) {
   }
 });
 
-// reset comment to false
-let resetComment = () => {
-  console.log("reset comment");
-};
+
 </script>
 
 <template>
@@ -253,7 +241,6 @@ let resetComment = () => {
           <div class="month">
             <template v-for="(days, indexDay) in month.days">
               <Day
-                :clear="clear"
                 :day-id="month.days[indexDay].id"
                 :day-number="month.days[indexDay].day"
                 :month-number="parseInt(month.id)"
@@ -262,12 +249,12 @@ let resetComment = () => {
                 :state="month.days[indexDay].state"
                 :has-activity="month.days[indexDay].activity"
                 :comment="month.days[indexDay].comment"
-                @state-change="updateDayState"
-                @reset-comment="resetComment"
-                @reset-clear="resetClear"
                 :is-displayed="month.days[indexDay].displayed"
                 :showCommentModal="showCommentModal"
+                :clear="clear"
                 :localeProp="locale"
+                @state-change="updateDayState"
+                @reset-clear="resetClear"
               />
             </template>
           </div>
