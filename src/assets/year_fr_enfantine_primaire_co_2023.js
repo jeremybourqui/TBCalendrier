@@ -875,6 +875,7 @@ export let year_fr_enfantine_primaire_co_2023 = {
           holiday: false,
           activity: false,
           comment: "",
+          displayed: false,
         },
         {
           id: 5,

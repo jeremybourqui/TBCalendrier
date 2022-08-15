@@ -364,10 +364,10 @@ let slide = () => {
       @mousedown="toggleColor(), addComment()"
       @mouseenter="slide()"
     >
-      <p>{{ dayNumber }}</p>
-      <div v-if="showActivity">
-        <div class="activity"></div>
+      <div class="activity" v-if="showActivity">
+        <div class="activity-bullet"></div>
       </div>
+      <p>{{ dayNumber }}</p>
     </div>
   </template>
 </template>
@@ -419,11 +419,15 @@ let slide = () => {
   visibility: hidden;
 }
 
-.activity {
+.activity-bullet {
   background-color: black;
   height: 10px;
   width: 10px;
   border-radius: 100%;
+}
+
+.activity {
+  float: left;
 }
 
 button {
