@@ -46,7 +46,7 @@ watch(
       localStorage.setItem('year', '3');
       console.log(selectedYear.value);
     }
-      countDayState();
+      // countDayState();
   }
 );
 
@@ -62,8 +62,7 @@ let clearDay = () => {
   parent2Day.value = 0;
   conflict.value = 0;
   shared.value = 0;
-  countDayState();
-  selectedYear.value = year;
+  // countDayState();
 };
 
 let resetClear = () => {
