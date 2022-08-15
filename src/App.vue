@@ -34,6 +34,18 @@ if (localStorage.getItem("year") === null) {
 let retrieveYear = localStorage.getItem('year');
 yearSelection.value = retrieveYear;
 
+if (yearSelection.value === 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+    } else if (yearSelection.value == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+    } else if (yearSelection.value == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
+    }
+
+
 // retrieve stored state
 for (let i = 0; i < localStorage.length; i++) {
   let key = localStorage.key(i);
