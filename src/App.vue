@@ -26,37 +26,7 @@ const conflict = ref(0);
 const shared = ref(0);
 
 
-//retrieve holiday
-if (localStorage.getItem("year") === null) {
-  localStorage.setItem("year", "1");
-};
 
-let retrieveYear = localStorage.getItem('year');
-yearSelection.value = retrieveYear;
-
-if (yearSelection.value === 1) {
-      selectedYear.value = year;
-      localStorage.setItem('year', '1');
-    } else if (yearSelection.value == 2) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2022;
-      localStorage.setItem('year', '2');	
-    } else if (yearSelection.value == 3) {
-      selectedYear.value = year_fr_enfantine_primaire_co_2023;
-      localStorage.setItem('year', '3');
-    }
-
-
-// retrieve stored state
-for (let i = 0; i < localStorage.length; i++) {
-  let key = localStorage.key(i);
-  if (key != "year") {
-    let month = key.substring(12, 13);
-    let value = localStorage.getItem(key);
-    let obj = JSON.parse(value);
-    let newState = obj.state;
-    year.months[month].days[obj.id].state = newState;
-  }
-}
 
 //update holiday selection
 watch(
@@ -66,12 +36,15 @@ watch(
     if (newYear == 1) {
       selectedYear.value = year;
       localStorage.setItem('year', '1');
+      console.log(selectedYear.value);
     } else if (newYear == 2) {
       selectedYear.value = year_fr_enfantine_primaire_co_2022;
       localStorage.setItem('year', '2');	
+      console.log(selectedYear.value);
     } else if (newYear == 3) {
       selectedYear.value = year_fr_enfantine_primaire_co_2023;
       localStorage.setItem('year', '3');
+      console.log(selectedYear.value);
     }
       countDayState();
   }
@@ -160,6 +133,42 @@ window.addEventListener("keydown", function (e) {
   }
 });
 
+
+//retrieve holiday
+if (localStorage.getItem("year") === null) {
+  localStorage.setItem("year", "1");
+};
+
+let retrieveYear = localStorage.getItem('year');
+yearSelection.value = retrieveYear;
+
+if (yearSelection.value === 1) {
+      selectedYear.value = year;
+      localStorage.setItem('year', '1');
+        countDayState();
+    } else if (yearSelection.value == 2) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2022;
+      localStorage.setItem('year', '2');	
+        countDayState();
+    } else if (yearSelection.value == 3) {
+      selectedYear.value = year_fr_enfantine_primaire_co_2023;
+      localStorage.setItem('year', '3');
+        countDayState();
+    }
+
+
+// retrieve stored state
+for (let i = 0; i < localStorage.length; i++) {
+  let key = localStorage.key(i);
+  if (key != "year") {
+    let month = key.substring(15, 16);
+    console.log(month);
+    let value = localStorage.getItem(key);
+    let obj = JSON.parse(value);
+    let newState = obj.state;
+    year.months[month].days[obj.id].state = newState;
+  }
+}
 
 </script>
 
@@ -265,6 +274,7 @@ window.addEventListener("keydown", function (e) {
                 :showCommentModal="showCommentModal"
                 :clear="clear"
                 :localeProp="locale"
+                :year="parseInt(yearSelection)"
                 @state-change="updateDayState"
                 @reset-clear="resetClear"
               />

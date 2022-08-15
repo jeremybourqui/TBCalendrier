@@ -16,6 +16,7 @@ const props = defineProps({
   dayId: Number,
   comment: String,
   localeProp: String,
+  year: Number,
 });
 
 const { hasActivity } = toRefs(props);
@@ -30,6 +31,7 @@ const { clear } = toRefs(props);
 const { showCommentModal } = toRefs(props);
 const { comment } = toRefs(props);
 const { localeProp } = toRefs(props);
+const { year } = toRefs(props);
 
 const { t, locale } = useI18n({
   inheritLocale: true,
@@ -44,13 +46,46 @@ watch(
   }
 );
 
+//update year
+watch(
+  () => props.year,
+  (newYear, oldYear) => {
+    console.log(newYear);
+    let storedState = localStorage.getItem(
+      `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`
+    );
+    if (storedState === null ) {
+      colorDay.value = 'neutral';
+    }
+    let jsonState = JSON.parse(storedState);
+    if (jsonState !== null) {
+      colorDay.value = jsonState.state;
+      textComment.value = jsonState.comment;
+      // emit(
+      //   "stateChange",
+      //   state.value,
+      //   dayId,
+      //   dayNumber,
+      //   monthNumber,
+      //   false,
+      //   textComment.value
+      // );
+      if (typeof jsonState.activity == "undefined") {
+        showActivity.value = false;
+      } else {
+        showActivity.value = jsonState.activity;
+      }
+    }
+  }
+);
+
 const colorDay = ref("");
 const showActivity = ref(false);
 const textComment = ref("");
 
 //retrieve state of the day
 let storedState = localStorage.getItem(
-  `year.months[${monthNumber.value}].days[${dayNumber.value}]`
+  `year[${year}].months[${monthNumber.value}].days[${dayNumber.value}]`
 );
 let jsonState = JSON.parse(storedState);
 if (jsonState !== null) {
@@ -76,32 +111,31 @@ if (jsonState !== null) {
 watch(
   () => props.clear,
   (clear, prevClear) => {
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    if (key != "year") {
-      localStorage.removeItem(key);
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      if (key != "year") {
+        localStorage.removeItem(key);
+      }
     }
-  }
-  colorDay.value = "";
-  showActivity.value = "";
-  textComment.value = "";
-  if (state.value != "neutral" || comment.value != "") {
-    emit(
-      "stateChange",
-      "neutral",
-      dayId,
-      dayNumber,
-      monthNumber,
-      showActivity.value,
-      ""
-    );
-  }
-  emit("resetClear");
+    colorDay.value = "";
+    showActivity.value = "";
+    textComment.value = "";
+    if (state.value != "neutral" || comment.value != "") {
+      emit(
+        "stateChange",
+        "neutral",
+        dayId,
+        dayNumber,
+        monthNumber,
+        showActivity.value,
+        ""
+      );
+    }
+    emit("resetClear");
   }
 );
 
 const emit = defineEmits(["stateChange", "resetClear"]);
-
 
 //update state of the day
 let toggleColor = () => {
@@ -109,7 +143,7 @@ let toggleColor = () => {
     case 1:
       colorDay.value = "parent1";
       localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
           id: dayId.value,
           day: dayNumber.value,
@@ -142,7 +176,7 @@ let toggleColor = () => {
         comment
       );
       localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
           id: dayId.value,
           day: dayNumber.value,
@@ -166,7 +200,7 @@ let toggleColor = () => {
         comment
       );
       localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
           id: dayId.value,
           day: dayNumber.value,
@@ -190,7 +224,7 @@ let toggleColor = () => {
         comment
       );
       localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
           id: dayId.value,
           day: dayNumber.value,
@@ -214,7 +248,7 @@ let toggleColor = () => {
         comment
       );
       localStorage.setItem(
-        `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+        `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
         JSON.stringify({
           id: dayId.value,
           day: dayNumber.value,
@@ -246,7 +280,7 @@ let deleteComment = () => {
   emit("stateChange", state, dayId, dayNumber, monthNumber, false, textComment);
   emit("resetComment");
   localStorage.setItem(
-    `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+    `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
     JSON.stringify({
       id: dayId.value,
       day: dayNumber.value,
@@ -271,7 +305,7 @@ let saveComment = () => {
     textComment.value
   );
   localStorage.setItem(
-    `year.months[${monthNumber.value}].days[${dayNumber.value}]`,
+    `year[${year.value}].months[${monthNumber.value}].days[${dayNumber.value}]`,
     JSON.stringify({
       id: dayId.value,
       day: dayNumber.value,
